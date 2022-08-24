@@ -1,0 +1,172 @@
+
+
+.backdrop {
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: $black, $alpha: 0.25);
+}
+
+.modal {
+    position: relative;
+    width: 280px;
+    height: 940px;
+    padding: 48px 20px 40px 20px;
+    background-color: $white;
+    margin: 0 auto;
+
+    @media screen and (min-width: $tablet) {
+        display: flex;
+        justify-content: space-between;
+        padding: 40px 72px 40px 36px;
+        width: 704px;
+        height: 552px;
+    }
+
+    @media screen and (min-width: $desktop) {
+        display: flex;
+        justify-content: space-between;
+        padding: 40px 12px;
+        width: 806px;
+        height: 558px;
+    }
+
+    &__preview {
+        width: 240px;
+        height: 357px;
+        margin-bottom: 20px;
+        background-color: red;
+
+        @media screen and (min-width: $tablet) {
+            min-width: 264px;
+            height: 374px;
+            margin-right: 68px;
+        }
+
+        @media screen and (min-width: $desktop) {
+            min-width: 375px;
+            height: 478px;
+            margin-right: 16px;
+        }
+    }
+
+    &__close-btn{
+        position: absolute;
+        right: 16px;
+        top: 16px;
+    }
+}
+
+.discription {
+    width: 240px;
+
+    &__mvi{
+        margin-bottom: 20px;
+    }
+
+    &__title {
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 1.15;
+        margin-bottom: 20px;
+
+        @media screen and (min-width: $desktop) {
+            font-size: 30px;
+            line-height: 1.17;
+        }
+    }
+
+    &__about{
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 1.33;
+        margin-bottom: 8px;
+        &-text{
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 1.67;
+            margin-bottom: 20px;
+        }
+    }
+
+}
+
+.mvi {
+    display: flex;
+    &:not(:last-child) {
+        margin-bottom: 8px;
+    }
+    &__key {
+        width: 108px;
+        font-size: 12px;
+        line-height: 1.33;
+        color: #8C8C8C;   
+        
+        @media screen and (min-width: $desktop) {
+            width: 152px;
+        }
+    }
+
+    &__val{
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 1.17;
+    }
+    &__rait{
+        color: $white;
+        display: inline-block;
+        padding: 1px 10px 1px 9px;
+        background: #FF6B01;
+        border-radius: 5px;
+    }
+    &__slash{
+        color: #8C8C8C;
+        margin-right: 7px;
+        margin-left: 3px;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 1.33;
+    }
+}
+
+.button{
+    display: flex;
+    justify-content: space-between;
+
+    @media screen and (min-width: $desktop) {
+        justify-content: flex-start;
+        margin-left: 8px;
+        gap: 15px;
+    }
+
+    &__add{
+        width: 110px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 1.33;
+
+        @media screen and (min-width: $tablet) {
+            width: 125px;
+            height: 44px;
+        }
+    }
+}
+
+.add-btn{
+    &__watched {
+        background-color: #FF6B01;
+        border: 1px solid #FF6B01;
+        border-radius: 5px;
+        color: $white;
+        }
+    &__queue{
+        border: 1px solid $black;
+        border-radius: 5px;
+        background-color: $white;
+    }
+    
+}
