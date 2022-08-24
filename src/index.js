@@ -1,1 +1,2 @@
-import './js/apiService/apiExample'
+import './js/apiService/apiExample';
+import './js/authFirebase/firebase';
