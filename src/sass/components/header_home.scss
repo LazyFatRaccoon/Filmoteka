@@ -46,9 +46,9 @@
     height: 35px;
     font-family: 'Roboto';
     font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 14px;
+    font-weight: $font_weight_m;
+    font-size: $font_size_s;
+    line-height: $font_height_s;
     color: $white;
     text-decoration: none;
     background: transparent;
