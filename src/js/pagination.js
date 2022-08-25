@@ -1,6 +1,6 @@
 import { Pagination } from "tui-pagination";
 
-//----EXAMPLES---
+//----EXAMPLES---Browser
 const options = {
     totalItems: 0,
     itemsPerPage: 20,
@@ -13,4 +13,5 @@ const container = document.getElementById('tui-pagination-container');
 const pagination = new Pagination(container, options);
 
 const page = pagination.getCurrentPage();
+
 
