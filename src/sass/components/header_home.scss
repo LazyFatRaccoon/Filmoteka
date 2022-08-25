@@ -5,25 +5,24 @@
     background-position: center;
     background-size: cover;
     opacity: 0.9;
-    background-image: url("../images/mobile320@1px.jpg"), linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56));
+    background-image: url("../images/mobile320@1px.jpg");
     
     @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
-        background-image: url("../images/mobile320@2px.jpg"), linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56));
+        background-image: url("../images/mobile320@2px.jpg");
     }
 
     @media screen and (min-width: $tablet) {
-        background-image: url("../images/tablet768@1px.jpg"), linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56));
-        ;
+        background-image: url("../images/tablet768@1px.jpg");
         height: 216px;
         @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
-            background-image: url("../images/tablet768@2px.jpg"), linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), ;
+            background-image: url("../images/tablet768@2px.jpg");
         }
     }
 
     @media screen and (min-width: $desktop) {
-        background-image: url("../images/desktop1280@1px.jpg"),linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)); 
+        background-image: url("../images/desktop1280@1px.jpg"); 
         @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
-            background-image: url("../images/desktop1280@2px.jpg"),linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56));;
+            background-image: url("../images/desktop1280@2px.jpg");
         }
     }  
 }
@@ -42,6 +41,11 @@
     justify-content: space-between;
 }
 
+.header__pages {
+    display: flex;
+    flex-direction: row;
+}
+
 .header__pages-link {
     height: 35px;
     font-family: 'Roboto';
@@ -51,10 +55,6 @@
     line-height: $font_height_s;
     color: $white;
     text-decoration: none;
-    background: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
 }
 
 .header__pages-link:last-child {
@@ -77,9 +77,9 @@
     color: $white;
     font-family: 'Roboto';
     font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
+    font-weight: $font_weight_m;
+    font-size: $font_size_m;
+    line-height: $font_height_s;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -98,9 +98,9 @@
     color: $white;
     font-family: 'Roboto';
     font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
+    font-weight: $font_weight_m;
+    font-size: $font_size_m;
+    line-height: $font_height_s;
 }
 
 .header__button {
@@ -114,8 +114,8 @@
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 500;
-    font-size: 30px;
-    line-height: 35px;
+    font-size: $font_size_xxl;
+    line-height: $font_height_m;
     color: $white;
     margin-left: 8px;
 
