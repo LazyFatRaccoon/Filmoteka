@@ -1,8 +1,10 @@
-import API from './movieAPI'
+import API from './apiService/movieAPI'
 
 const backdrop = document.querySelector('.backdrop')
 
+
 const cart = document.querySelector('.header__pages-link')
+
 
 cart.addEventListener('click', onOpenModal)
 

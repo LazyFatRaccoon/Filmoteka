@@ -1,4 +1,4 @@
-import API from './movieAPI';
+import API from './apiService/movieAPI';
 const refs = {
   popularBtn: document.querySelector('#popular_request'),
 };
