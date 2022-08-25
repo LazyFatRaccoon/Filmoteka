@@ -7,7 +7,6 @@ refs.popularBtn.addEventListener('click', consolePopular);
 
 async function consolePopular() {
   const data = await API.getPopularMovies(1);
-  console.log(data.results);
   createGallery(data.results);
 }
 const filmsListEl = document.querySelector('.films__list');
