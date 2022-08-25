@@ -1,5 +1,6 @@
 import { Pagination } from "tui-pagination";
 
+//----EXAMPLES---
 const options = {
     totalItems: 0,
     itemsPerPage: 20,
@@ -8,7 +9,8 @@ const options = {
     centerAlign: true,
 }
 
-//const container = document.getElementById('tui-pagination-container');
-//const instance = new Pagination(container, { ... });
+const container = document.getElementById('tui-pagination-container');
+const pagination = new Pagination(container, options);
 
-//instance.getCurrentPage();
+const page = pagination.getCurrentPage();
+
