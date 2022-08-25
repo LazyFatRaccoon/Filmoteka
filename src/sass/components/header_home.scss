@@ -43,11 +43,12 @@
 
 .header__pages {
     display: flex;
-    flex-direction: row;
 }
 
 .header__pages-link {
-    height: 35px;
+    display: flex;
+    align-items: center;
+    height: 24px;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 500;
@@ -55,6 +56,10 @@
     line-height: 14px;
     color: $white;
     text-decoration: none;
+
+    @media screen and (min-width: $tablet){ 
+        height: 35px;
+    }
 }
 
 .header__pages-link:last-child {
@@ -62,10 +67,14 @@
 }
 
 .header__form {
-    margin-top: 60px;
+    margin-top: 54px;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media screen and (min-width: $tablet){ 
+        margin-top: 40px;
+    }
 }
 
 .header__input {
@@ -109,6 +118,14 @@
     margin-left: -20px;
 }
 
+.header__logo {
+    height: 24px;
+
+    @media screen and (min-width: $tablet){ 
+        height: 35px;
+    }
+}
+
 .header__logo-name {
     display: none;
     font-family: 'Roboto';
@@ -131,7 +148,13 @@
 .current_page::after {
     content: '';
     display: block;
-    width: 100%;
+    width: 34px;
     height: 3px;
     background-color: $warning;
+    position: absolute;
+    top: 58px;
+
+    @media screen and (min-width: $tablet){ 
+        top: 64px;
+    }
   }
