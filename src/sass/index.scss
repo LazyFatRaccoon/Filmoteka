@@ -1,11 +1,12 @@
 @import './utils/variables';
 @import './utils/normalize';
 @import './utils/common';
+
 @import './base/container';
 
+@import './components/auth-form';
 @import './components/header_home.scss';
 @import './components/modal';
-@import './components/filmsgallery'
+@import './components/filmsgallery';
 
-
-
+@import './utils/hide-form-class';

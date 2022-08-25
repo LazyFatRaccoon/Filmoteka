@@ -13,15 +13,38 @@
           <button type="button" class="header__pages-link">MY LIBRARY</button>
         </div>
       </nav>
-      <form class="auth-form">
+      <div class="auth-wrapper">
+        <svg width="40" height="40" id="auth-icon" class="auth-icon">
+          <use href="/src/images/auth-icon/login-icon.svg#icon-user"></use>
+        </svg>
+        <button type="button" class="btn-signout hide-form" id="btn-signout">
+          SignOut
+        </button>
+      </div>
+      <form class="auth-form hide-form">
         <label title="email">
-          <input type="email" name="userEmail" id="emailInput" />
+          <input
+            type="email"
+            name="userEmail"
+            id="emailInput"
+            placeholder="email"
+          />
         </label>
         <label title="password">
-          <input type="password" name="userPassword" id="passwordInput" />
+          <input
+            type="password"
+            name="userPassword"
+            id="passwordInput"
+            minlength="6"
+            placeholder="password"
+          />
         </label>
-        <button type="submit" class="btn-enter">enter</button>
-        <button type="submit" class="btn-register">register</button>
+        <div>
+          <button type="submit" class="btn-enter" value="enter">enter</button>
+          <button type="submit" class="btn-register" value="register">
+            register
+          </button>
+        </div>
       </form>
       <form class="header__form">
         <input
