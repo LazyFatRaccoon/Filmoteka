@@ -1,0 +1,26 @@
+.back-to-top {
+    display: flex;
+    background: $accent;
+    border-radius: 50%;
+    position: fixed;
+    bottom: -50px;
+    padding: 10px 12px;
+    right: 10px;
+    cursor: pointer;
+    transition: 0.3s all;
+    z-index: 1;
+}
+
+.scroll {
+    fill: $white;
+}
+
+.back-to-top.active {
+    bottom: 10px;
+    transition: 0.3s all;
+}
+
+.back-to-top:focus .scroll,
+.back-to-top:hover .scroll {
+    fill: $primaryGray;
+}

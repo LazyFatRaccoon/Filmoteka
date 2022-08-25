@@ -4,22 +4,28 @@
     width: 100%;
     height: 100%;
     background-color: rgba($color: $black, $alpha: 0.25);
+    position: absolute;
+    top: 0;
 }
 
 .modal {
     position: relative;
+    z-index: 100;
     width: 280px;
-    height: 940px;
+    height: auto;
     padding: 48px 20px 40px 20px;
     background-color: $white;
     margin: 0 auto;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
 
     @media screen and (min-width: $tablet) {
         display: flex;
         justify-content: space-between;
         padding: 40px 72px 40px 36px;
         width: 704px;
-        height: 552px;
+        // height: 552px;
     }
 
     @media screen and (min-width: $desktop) {
@@ -27,24 +33,23 @@
         justify-content: space-between;
         padding: 40px 12px;
         width: 806px;
-        height: 558px;
+        // height: 558px;
     }
 
     &__preview {
         width: 240px;
-        height: 357px;
         margin-bottom: 20px;
-        background-color: red;
 
         @media screen and (min-width: $tablet) {
             min-width: 264px;
-            height: 374px;
+            // height: 374px;
             margin-right: 68px;
+            margin-bottom: 0;
         }
 
         @media screen and (min-width: $desktop) {
             min-width: 375px;
-            height: 478px;
+            // height: 478px;
             margin-right: 16px;
         }
     }
@@ -110,6 +115,9 @@
         font-weight: 500;
         font-size: 12px;
         line-height: 1.17;
+        &-title{
+            text-transform: uppercase;
+        }
     }
     &__rait{
         color: $white;
@@ -169,4 +177,15 @@
         background-color: $white;
     }
     
+}
+
+button.disabl{
+    background-color: #8C8C8C;
+}
+
+
+.isHidden{
+    opacity: 1;
+    visibility: hidden;
+    display: none;
 }
