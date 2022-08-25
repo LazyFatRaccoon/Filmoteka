@@ -1,7 +1,7 @@
 body {
     margin: 0;
   
-    background-color: var(--white);
+    background-color: $white;
     
     font-family: 'Roboto', sans-serif;
     
@@ -33,5 +33,9 @@ body {
   }
   
   a {
+    
     text-decoration: none;
+    color: $black;
+    cursor: pointer;
+    
   }
