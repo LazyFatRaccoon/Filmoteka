@@ -1,2 +1,4 @@
 import './js/apiService/apiExample';
-import './js/authFirebase/firebase';
+
+import './js/firebase/firebaseAuth';
+import './js/firebase/dataBase';

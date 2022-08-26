@@ -20,32 +20,32 @@
         <button type="button" class="btn-signout hide-form" id="btn-signout">
           SignOut
         </button>
+        <form class="auth-form hide-form">
+          <label title="email">
+            <input
+              type="email"
+              name="userEmail"
+              id="emailInput"
+              placeholder="email"
+            />
+          </label>
+          <label title="password">
+            <input
+              type="password"
+              name="userPassword"
+              id="passwordInput"
+              minlength="6"
+              placeholder="password"
+            />
+          </label>
+          <div>
+            <button type="submit" class="btn-enter" value="enter">enter</button>
+            <button type="submit" class="btn-register" value="register">
+              register
+            </button>
+          </div>
+        </form>
       </div>
-      <form class="auth-form hide-form">
-        <label title="email">
-          <input
-            type="email"
-            name="userEmail"
-            id="emailInput"
-            placeholder="email"
-          />
-        </label>
-        <label title="password">
-          <input
-            type="password"
-            name="userPassword"
-            id="passwordInput"
-            minlength="6"
-            placeholder="password"
-          />
-        </label>
-        <div>
-          <button type="submit" class="btn-enter" value="enter">enter</button>
-          <button type="submit" class="btn-register" value="register">
-            register
-          </button>
-        </div>
-      </form>
       <form class="header__form">
         <input
           class="header__input"

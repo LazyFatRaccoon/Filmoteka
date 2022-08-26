@@ -20,13 +20,13 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const filmotecaApp = initializeApp(firebaseConfig);
-const auth = getAuth();
+export const filmotecaApp = initializeApp(firebaseConfig);
+export const auth = getAuth();
 const user = auth.currentUser;
 
 // ------------------------
 
-const refs = {
+const authRefs = {
   iconForm: document.getElementById('auth-icon'),
   formRegister: document.querySelector('.auth-form'),
   emailInput: document.getElementById('emailInput'),
@@ -36,9 +36,9 @@ const refs = {
 
 // ------------ show hide form -----------
 
-refs.iconForm.addEventListener('click', showForm);
+authRefs.iconForm.addEventListener('click', showForm);
 function showForm() {
-  refs.formRegister.classList.toggle('hide-form');
+  authRefs.formRegister.classList.toggle('hide-form');
 }
 
 // -------------- check user status -------------
@@ -47,41 +47,30 @@ onAuthStateChanged(auth, user => {
   if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
-    // const uid = user.uid;
     // ...
-
-    // refs.iconForm.insertAdjacentHTML(
-    //   'afterbegin',
-    //   `<use href="/src/images/auth-icon/login-icon.svg#icon-user-check"></use>`
-    // );
-
-    refs.iconForm.insertAdjacentHTML(
+    authRefs.iconForm.insertAdjacentHTML(
       'afterend',
       `<p class ="user-name" style="color: white;">${user.email}</p>`
     );
 
-    console.log('in user check status: ', user);
-    refs.btnSignout.classList.remove('hide-form');
-    refs.iconForm.removeEventListener('click', showForm);
+    // console.log('in user check status: ', user);
+    authRefs.btnSignout.classList.remove('hide-form');
+    authRefs.iconForm.removeEventListener('click', showForm);
   } else {
     // User is signed out
     // ...
-    // refs.iconForm.insertAdjacentHTML(
-    //   'afterbegin',
-    //   `<use href="/src/images/auth-icon/login-icon.svg#icon-user"></use>`
-    // );
   }
 });
 
 // ---------- submit form -----------
 
-refs.formRegister.addEventListener('submit', createUser);
+authRefs.formRegister.addEventListener('submit', createUser);
 
 function createUser(event) {
   event.preventDefault();
 
-  const userEmail = refs.emailInput.value;
-  const userPassword = refs.passwordInput.value;
+  const userEmail = authRefs.emailInput.value;
+  const userPassword = authRefs.passwordInput.value;
 
   // ---------------  create Users -----------------------
 
@@ -89,19 +78,18 @@ function createUser(event) {
     createUserWithEmailAndPassword(auth, userEmail, userPassword)
       .then(userCredential => {
         // Signed in
-        const user = userCredential.user;
+        // const user = userCredential.user;
         // ...
       })
       .catch(error => {
         const errorCode = error.code;
-        // const errorMessage = error.message;
         // ..
         if (errorCode === 'auth/email-already-in-use') {
           Notify.failure('Email already in use. Please sign in.');
         }
       });
 
-    refs.formRegister.classList.toggle('hide-form');
+    authRefs.formRegister.classList.toggle('hide-form');
   }
 
   // ----------------- sign in Users ----------------------
@@ -112,7 +100,7 @@ function createUser(event) {
         // Signed in
         const user = userCredential.user;
         // ...
-        console.log('user sign in: ', user);
+        // console.log('user sign in: ', user);
         console.log('welcome to your accaunt');
       })
       .catch(error => {
@@ -125,12 +113,12 @@ function createUser(event) {
         }
       });
 
-    refs.formRegister.classList.toggle('hide-form');
+    authRefs.formRegister.classList.toggle('hide-form');
   }
 
   // -------------clear form ----------
-  refs.emailInput.value = '';
-  refs.passwordInput.value = '';
+  authRefs.emailInput.value = '';
+  authRefs.passwordInput.value = '';
 }
 
 // --------------- user signout --------------
@@ -141,8 +129,8 @@ function logOut() {
     .then(() => {
       // Sign-out successful.
       console.log('You are sign out');
-      refs.btnSignout.classList.add('hide-form');
-      refs.iconForm.addEventListener('click', showForm);
+      authRefs.btnSignout.classList.add('hide-form');
+      authRefs.iconForm.addEventListener('click', showForm);
       userName.remove();
     })
     .catch(error => {
@@ -151,4 +139,4 @@ function logOut() {
     });
 }
 
-refs.btnSignout.addEventListener('click', logOut);
+authRefs.btnSignout.addEventListener('click', logOut);
