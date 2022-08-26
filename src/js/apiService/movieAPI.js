@@ -23,9 +23,9 @@ export default {
       console.error(error);
     }
   },
-  async getSearchMovies(query, page) {
+  async getSearchMovies(page, query) {
     try {
-      const {data} = await axios.get(
+      const { data } = await axios.get(
         `${SEARCH_URL}?api_key=${API_KEY}&query=${query}&page=${page}`
       );
       return data;
@@ -35,7 +35,9 @@ export default {
   },
   async getMovieById(id) {
     try {
-      const {data} = await axios.get(`${MOVIE_ID_URL}${id}?api_key=${API_KEY}`);
+      const { data } = await axios.get(
+        `${MOVIE_ID_URL}${id}?api_key=${API_KEY}`
+      );
       return data;
     } catch (error) {
       console.error(error);
@@ -43,7 +45,7 @@ export default {
   },
   async getGenres() {
     try {
-      const {data} = await axios.get(`${GENRES_URL}?api_key=${API_KEY}`);
+      const { data } = await axios.get(`${GENRES_URL}?api_key=${API_KEY}`);
       return data;
     } catch (error) {
       console.error(error);
@@ -51,10 +53,64 @@ export default {
   },
   async getMovieTrailers(id) {
     try {
-      const {data} = await axios.get(
+      const { data } = await axios.get(
         `${MOVIE_ID_URL}${id}/videos?api_key=${API_KEY}`
       );
-      return data;
+      return data.results;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  //Modified functions
+  async getModifiedMoviesList(page, query) {
+    try {
+      let movies;
+      if (!query) movies = await this.getPopularMovies(page);
+      if (query) movies = await this.getSearchMovies(page, query);
+      
+      const genres = await this.getGenres();  
+      const genresObj = genres.genres.reduce(
+        (acc, elem) => ((acc[elem.id] = elem.name), acc),
+        {}
+      );
+
+      const watchedList = JSON.parse(localStorage.getItem('watchedList')) || [];
+      const queueList = JSON.parse(localStorage.getItem('queueList')) || [];
+      
+      const dataWithGenres = await Promise.all(movies.results.map(async (movie) => ({     
+        ...movie,
+        watched: watchedList ? watchedList.includes(movie.id) ? true : false : false,
+        queque: queueList ? queueList.includes(movie.id) ? true : false : false,
+        trailers: await this.getMovieTrailers(movie.id),
+        genre_ids: movie.genre_ids.map(id => genresObj[id]),
+      })));
+      return {...movies, results: dataWithGenres};
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  async getModifiedSingleMovie(id) {
+    try {
+      const movie = await this.getMovieById(id)
+      console.log(movie)
+      const trailers = await this.getMovieTrailers(id)
+      const genres = await this.getGenres();  
+      const genresObj = genres.genres.reduce(
+        (acc, elem) => ((acc[elem.id] = elem.name), acc),
+        {}
+      );
+
+      const watchedList = JSON.parse(localStorage.getItem('watchedList')) || [];
+      const queueList = JSON.parse(localStorage.getItem('queueList')) || [];
+      
+      const modifiedData = {     
+        ...movie,
+        watched: watchedList ? watchedList.includes(movie.id) ? true : false : false,
+        queque: queueList ? queueList.includes(movie.id) ? true : false : false,
+        trailers: trailers,
+        genres: movie.genres.map(id => genresObj[id.id]),
+      };
+      return modifiedData;
     } catch (error) {
       console.error(error);
     }
