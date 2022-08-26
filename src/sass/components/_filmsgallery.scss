@@ -8,7 +8,7 @@
     margin-top: 20px;
 }
 
-.films__link {
+.films__shell {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -17,9 +17,19 @@
 .films__decor {
     padding-top: 10px;
 }
-
 .films__title {
+    font-weight: $font_weight_l;
+    font-size: $font_size_s;
+    line-height: $font_height_l;
     text-transform: uppercase;
+    color: $black;
+    
+}
+.films__description {
+    font-weight: $font_weight_l;
+    font-size: $font_size_s;
+    line-height: $font_height_l;
+     color: $accent;
 }
 
 
@@ -37,6 +47,7 @@
         margin-bottom: 32px;
         margin-top: 0px;
     }
+
 }
 
 @media screen and (min-width: 1280px) {
@@ -49,4 +60,19 @@
         flex-basis: calc((100% - 48px) / 3);
         margin-left: 16px;
     }
+    .films__title {
+        font-weight: $font_weight_l;
+         font-size: $font_size_xl;
+        line-height: $font_height_m;
+        text-transform: uppercase;
+        color: $black;
+    
+     }
+    
+    .films__description {
+         font-weight: $font_weight_l;
+         font-size: $font_size_xl;
+        line-height: $font_height_m;
+        color: $accent;
+     }
 }
