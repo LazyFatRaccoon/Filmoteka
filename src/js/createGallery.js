@@ -37,10 +37,10 @@ function createYearFilm(year) {
   return `No year`;
 }
 function createPosterFilm(posterLink) {
-  // if (posterLink) {
-  //   return `https://image.tmdb.org/t/p/w600_and_h900_bestv2${posterLink}`;
-  // }
-  return `/src/images/no-poster-available.jpg`;
+  if (posterLink) {
+    return `https://image.tmdb.org/t/p/w600_and_h900_bestv2${posterLink}`;
+  }
+  return `https://pixabay.com/get/g38c80999780e72f41614762ea85744e6fc1749406d780e484dc5eb28fd6e7ca88a98a855524e2651c863236da730ba61b90382a86f9f40e825f45319957b262d_1280.jpg`;
 }
 
 const filmsListEl = document.querySelector('.films__list');
@@ -52,9 +52,9 @@ export function createGallery(filmsArry) {
       (acc += `
             <li class="films__item" id="${item.id}">
               <div class="films__shell">
-                <img src="${createPosterFilm(item.poster_path)}" alt="${
-        item.overview
-      }" />
+                <img class="films__img" src="${createPosterFilm(
+                  item.poster_path
+                )}" alt="${item.overview}" />
                 <div class="films__decor">
                   <h2 class="films__title">${item.title}</h2>
                   <p class="films__description">${createGanresFilmArray(
