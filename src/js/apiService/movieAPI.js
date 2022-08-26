@@ -92,7 +92,6 @@ export default {
   async getModifiedSingleMovie(id) {
     try {
       const movie = await this.getMovieById(id)
-      console.log(movie)
       const trailers = await this.getMovieTrailers(id)
       const genres = await this.getGenres();  
       const genresObj = genres.genres.reduce(
