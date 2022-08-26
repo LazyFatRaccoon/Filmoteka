@@ -1,6 +1,5 @@
 import  Pagination  from "tui-pagination";
 import API from './apiService/movieAPI';
-import sprite from '../images/symbol-defs.svg';
 import {createGallery} from './createGallery';
 
 const paginationContainer = document.getElementById('pagination');
@@ -28,21 +27,22 @@ export const paginationSettings = {
   };
 
 
-export const initPagination = ({ page, itemsPerPage, totalItems }) => {
+export const initPagination = ({ page, itemsPerPage, totalItems, data, query }) => {
     const options = {
       page,
       itemsPerPage,
       totalItems,
       visiblePages: 5,
       centerAlign: true,
-      usageStatistics: false,    
+      data,   
+      query,
     };
   
     const pagination = new Pagination(paginationContainer, options);
     paginationSettings.pagination = pagination;
-  
+    if (options.data === "popular") {
     pagination.on('afterMove', async ({ page }) => {
-   
+        console.log(pagination)
         try {
           const response = await API.getModifiedMoviesList(page);
           createGallery(response.results);
@@ -51,7 +51,19 @@ export const initPagination = ({ page, itemsPerPage, totalItems }) => {
           console.log(error);
         }
  
-    });
+    })}
+    if (options.data === "search") {
+        pagination.on('afterMove', async ({ page }) => {
+            console.log(pagination)
+            try {
+              const response = await API.getModifiedMoviesList(page, options.query);
+              createGallery(response.results);
+             
+            } catch (error) {
+              console.log(error);
+            }
+     
+        })}
     return pagination;
   };
 
