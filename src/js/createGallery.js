@@ -1,13 +1,22 @@
 import API from './apiService/movieAPI';
+import {initPagination} from './pagination-try'
 consolePopular();
 async function consolePopular() {
   const data = await API.getPopularMovies(1);
-  console.log(data.results);
+  const {page, results, total_results} = data
+
+  console.log(data);
   createGallery(data.results);
+  initPagination({
+    page,
+    itemsPerPage: results.length,
+    totalItems: total_results,
+  });
 }
 const filmsListEl = document.querySelector('.films__list');
 
-function createGallery(filmsArry) {
+export function createGallery(filmsArry) {
+  filmsListEl.innerHTML = ''  
   const result = filmsArry.reduce(
     (acc, item) =>
       (acc += `
