@@ -7,12 +7,13 @@ async function consolePopular() {
   const {page, results, total_results} = data
 
   console.log(data);
-  createGallery(data.results);
+  //createGallery(data.results);
   initPagination({
     page,
     itemsPerPage: results.length,
     totalItems: total_results,
     data: 'popular',
+    firstTime: true,
   });
 }
 const filmsListEl = document.querySelector('.films__list');
