@@ -34,11 +34,12 @@ async function consoleSearch(event) {
                 Notify.info('Your request is successfull.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
                 console.log(data)
                 initPagination({
-                    page: `${page}`,
+                    page,
                     itemsPerPage: data.results.length,
                     totalItems: data.total_results,
-                    data: data.results,
+                    data: 'search',
                     query: `${searchQuery}`,
+                    firstTime: true,
                   });
                   inputArea.value = "";
             }
