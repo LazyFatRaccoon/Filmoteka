@@ -7,6 +7,18 @@ const inputArea = document.querySelector('.header__input');
 
 submitForm.addEventListener('submit', consoleSearch);
 
+
+inputСontrol();
+
+function inputСontrol() {
+    if(document.documentElement.clientWidth >= 768) {
+        inputArea.setAttribute('maxlength', 40);
+        if(document.documentElement.clientWidth >= 1280) {
+            inputArea.setAttribute('maxlength', 47);
+        };
+    };
+};
+
 async function consoleSearch(event) {
     event.preventDefault();
     let page = 1;
@@ -28,6 +40,7 @@ async function consoleSearch(event) {
                     data: data.results,
                     query: `${searchQuery}`,
                   });
+                  inputArea.value = "";
             }
             catch(error) {
                 console.log(error);
