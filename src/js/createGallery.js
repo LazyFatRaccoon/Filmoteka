@@ -1,6 +1,7 @@
 import API from './apiService/movieAPI';
 import {initPagination} from './pagination-try'
 consolePopular();
+
 async function consolePopular() {
   const data = await API.getPopularMovies(1);
   const {page, results, total_results} = data
@@ -11,6 +12,7 @@ async function consolePopular() {
     page,
     itemsPerPage: results.length,
     totalItems: total_results,
+    data: 'popular',
   });
 }
 const filmsListEl = document.querySelector('.films__list');

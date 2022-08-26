@@ -16,7 +16,7 @@ async function consoleSearch(event) {
         } 
         else {
             try { 
-                const data = await API.getSearchMovies(`${searchQuery}`, `${page}`);
+                const data = await API.getSearchMovies(`${page}`, `${searchQuery}`);
                 if (data.total_results === 0) {
                     return Notify.failure("Sorry, but there is no films with this name. Please try again.", {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
                 }
