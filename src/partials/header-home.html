@@ -2,23 +2,24 @@
   <div class="header">
     <div class="header__container">
       <nav class="header__navigation">
-        <a href="#" class="header__logo">
+        <a href="./index.html" class="header__logo">
           <svg width="24px" height="24px" aria-label="Logo">
             <use href="/src/images/symbol-defs.svg#icon-logo"></use>
           </svg>
           <span class="header__logo-name">Filmoteka</span>
         </a>
         <div class="header__pages">
-          <a class="header__pages-link current_page">HOME</a>
-          <a class="header__pages-link">MY LIBRARY</button>
+          <a class="header__pages-link current_page" href="./index.html">HOME</a>
+          <a class="header__pages-link" href="./library.html">MY LIBRARY</button>
         </div>
       </nav>
-      <form id="header__form" class="header__form">
+      <form class="header__form">
         <input
           class="header__input"
           type="text"
           placeholder="Movie search"
           autocomplete="off"
+          maxlength="32"
         />
         <button class="header__button" type="submit">
           <svg width="14px" height="14px" aria-label="Search">

@@ -139,10 +139,6 @@
     @media screen and (min-width: $tablet){ 
         display: inline-block;
     }
-
-    @media screen and (min-width: $desktop){ 
-        margin-right: 10px;
-    }
 }
 
 .current_page::after {
