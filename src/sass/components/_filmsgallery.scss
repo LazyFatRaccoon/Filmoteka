@@ -2,22 +2,34 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+
 }
 
 .films__item {
+    display: flex;
     margin-top: 20px;
+    overflow: hidden; /* Скрываем всё за контуром */
+        transition: 500ms;
+            /* Время эффекта */
+            display: block;
+        &:hover,
+        &:focus {
+            cursor: pointer;
+            transform: scale(1.01);
+            box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+                }
 }
 
-.films__shell {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
+
+
 .films__img{
     object-fit: cover;
     height: 402px;
+
 }
 .films__decor {
+    display: flex;
+    flex-direction: column;
     padding-top: 10px;
 }
 .films__title {
@@ -58,6 +70,7 @@
 
 @media screen and (min-width: 1280px) {
     .films__list {
+        min-height: 634px;
         margin-left: -16px;
 
     }

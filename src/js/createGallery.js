@@ -51,16 +51,14 @@ export function createGallery(filmsArry) {
     (acc, item) =>
       (acc += `
             <li class="films__item" id="${item.id}">
-              <div class="films__shell">
-                <img class="films__img" src="${createPosterFilm(
-                  item.poster_path
-                )}" alt="${item.overview}" />
+              <img class="films__img" src="${createPosterFilm(
+                item.poster_path
+              )}" alt="${item.overview}" />
                 <div class="films__decor">
                   <h2 class="films__title">${item.title}</h2>
                   <p class="films__description">${createGanresFilmArray(
                     item.genre_ids
                   )} | ${createYearFilm(item.release_date.slice(0, 4))}</p>
-                </div>
              </div>
             </li>`),
     ''
