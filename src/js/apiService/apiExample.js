@@ -1,5 +1,6 @@
 import API from './movieAPI'
 
+
 const refs = {
     popularBtn: document.querySelector("#popular_request"),
     searchBtn: document.querySelector("#search_request"), 
