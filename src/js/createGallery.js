@@ -1,13 +1,12 @@
 import API from './apiService/movieAPI';
-import {initPagination} from './pagination-try'
-consolePopular();
+import { initPagination } from './pagination-try';
+consoleModifiedPopular();
 
-async function consolePopular() {
-  const data = await API.getPopularMovies(1);
-  const {page, results, total_results} = data
-
+async function consoleModifiedPopular() {
+  const data = await API.getModifiedMoviesList(1);
+  const { page, results, total_results } = data;
   console.log(data);
-  //createGallery(data.results);
+
   initPagination({
     page,
     itemsPerPage: results.length,
@@ -16,15 +15,16 @@ async function consolePopular() {
     firstTime: true,
   });
 }
+
 const filmsListEl = document.querySelector('.films__list');
 
 export function createGallery(filmsArry) {
-  filmsListEl.innerHTML = ''  
+  filmsListEl.innerHTML = '';
   const result = filmsArry.reduce(
     (acc, item) =>
       (acc += `
-            <li class="films__item">
-              <a class="films__link" href="">
+            <li class="films__item" id="${item.id}">
+              <div class="films__shell">
                 <img src="https://image.tmdb.org/t/p/w600_and_h900_bestv2${
                   item.poster_path
                 }" alt="" />
@@ -35,7 +35,7 @@ export function createGallery(filmsArry) {
                     4
                   )}</p>
                 </div>
-             </a>
+             </div>
             </li>`),
     ''
   );
