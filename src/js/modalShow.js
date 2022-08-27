@@ -10,25 +10,30 @@ const refs = {
     mviGenre: document.querySelector('.mvi__genre'),
     discText: document.querySelector('.discription__about-text'),
     backdrop: document.querySelector('.backdrop'),
-    cart: document.querySelector('.header__pages-link'),
-
+    cart: document.querySelector('.pages-link'),
+    body: document.querySelector('body'),
 }
 
 const closeBtn = document.querySelector('.modal__close-btn')
-
 
 refs.cart.addEventListener('click', onOpenModal)
 closeBtn.addEventListener('click', closeModal)
 refs.backdrop.addEventListener('click', onBackdropCloseModal)
 
-
 function onOpenModal() {
     insertMarkup(756999)
     refs.backdrop.classList.remove('isHidden')
+    refs.body.classList.add('scroll')
+    document.addEventListener('keydown', onEscClose)
+}
+
+function onEscClose(e) {
+    if(e.code === "Escape") closeModal()
 }
 
 function closeModal() {
     refs.backdrop.classList.add('isHidden')
+    refs.body.classList.remove('scroll')
 }
     
 function onBackdropCloseModal(e) {
@@ -40,7 +45,6 @@ function onBackdropCloseModal(e) {
 async function insertMarkup(idForSearch) {
     const url = "https://image.tmdb.org/t/p/w500"
     const serchMove = await API.getMovieById(idForSearch)
-    console.log(serchMove)
     const {original_title, poster_path, vote_average, vote_count, popularity, overview} = serchMove
 
     const genre = serchMove.genres.reduce((acc, a) => [...acc, a.name], [])
