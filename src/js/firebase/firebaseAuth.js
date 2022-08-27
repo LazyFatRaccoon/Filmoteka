@@ -158,3 +158,9 @@ function logOut() {
 
 authRefs.btnSignout.addEventListener('click', logOut);
 
+<<<<<<< Updated upstream
+=======
+
+
+
+>>>>>>> Stashed changes
