@@ -61,7 +61,7 @@
         transition: rotate 500ms linear, transform 300ms ease-in-out;
 
         &-svg {
-            fill: black;
+            fill: $black;
         }
 
         &:hover,
@@ -212,4 +212,13 @@ button.disabl {
     opacity: 1;
     visibility: hidden;
     display: none;
+}
+
+.pages-link{
+    display: block;
+    background-color: red;
+}
+
+.scroll {
+    overflow: hidden;
 }
