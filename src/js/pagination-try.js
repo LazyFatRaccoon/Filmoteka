@@ -27,7 +27,7 @@ export const paginationSettings = {
   };
 
 
-export const initPagination = ({ page, itemsPerPage, totalItems, data, query }) => {
+export const initPagination = async ({ page, itemsPerPage, totalItems, data, query, firstTime }) => {
     const options = {
       page,
       itemsPerPage,
@@ -36,25 +36,38 @@ export const initPagination = ({ page, itemsPerPage, totalItems, data, query }) 
       centerAlign: true,
       data,   
       query,
+      firstTime
     };
-  
+    
     const pagination = new Pagination(paginationContainer, options);
     paginationSettings.pagination = pagination;
-    if (options.data === "popular") {
-    pagination.on('afterMove', async ({ page }) => {
-        console.log(pagination)
-        try {
-          const response = await API.getModifiedMoviesList(page);
-          createGallery(response.results);
-         
-        } catch (error) {
-          console.log(error);
+
+
+        if (options.firstTime) {
+            if (options.data.toString() === "search") {
+                try {
+                    const response = await API.getModifiedMoviesList(page, options.query);
+                    createGallery(response.results);
+                    options.firstTime = false;
+                   
+                  } catch (error) {
+                    console.log(error);
+                  }
+            }
+            if (options.data.toString() === "popular") {
+                try {
+                    const response = await API.getModifiedMoviesList(page);
+                    createGallery(response.results);
+                    options.firstTime = false;
+
+                  } catch (error) {
+                    console.log(error);
+                  }
+            }
         }
- 
-    })}
-    if (options.data === "search") {
+
         pagination.on('afterMove', async ({ page }) => {
-            console.log(pagination)
+            if (options.data.toString() === "search") {
             try {
               const response = await API.getModifiedMoviesList(page, options.query);
               createGallery(response.results);
@@ -63,7 +76,19 @@ export const initPagination = ({ page, itemsPerPage, totalItems, data, query }) 
               console.log(error);
             }
      
-        })}
+        }
+        if (options.data.toString() === "popular") {
+            try {
+                const response = await API.getModifiedMoviesList(page);
+                createGallery(response.results);
+               
+              } catch (error) {
+                console.log(error);
+              }
+        }
+        
+    })
+
     return pagination;
   };
 

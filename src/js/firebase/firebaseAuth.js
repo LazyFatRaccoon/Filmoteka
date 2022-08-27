@@ -158,3 +158,4 @@ function logOut() {
 
 authRefs.btnSignout.addEventListener('click', logOut);
 
+
