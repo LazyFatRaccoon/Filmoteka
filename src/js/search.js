@@ -4,10 +4,11 @@ import { initPagination } from "./pagination-try";
 
 const submitForm = document.querySelector('.header__form');
 const inputArea = document.querySelector('.header__input');
+const navigationPage = document.querySelector('.header__pages')
 
 submitForm.addEventListener('submit', consoleSearch);
 
-
+hiddenNavigation();
 inputСontrol();
 
 function inputСontrol() {
@@ -32,7 +33,6 @@ async function consoleSearch(event) {
                     return Notify.failure("Sorry, but there is no films with this name. Please try again.", {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
                 }
                 Notify.info('Your request is successfull.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
-                console.log(data)
                 initPagination({
                     page,
                     itemsPerPage: data.results.length,
@@ -47,3 +47,7 @@ async function consoleSearch(event) {
                 console.log(error);
             };
 };
+
+function hiddenNavigation() {
+    navigationPage.classList.add('hidden_nav')
+}
