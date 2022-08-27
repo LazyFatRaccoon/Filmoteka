@@ -1,4 +1,8 @@
 import './js/apiService/apiExample';
+
+import './js/firebase/firebaseAuth';
+import './js/firebase/dataBase';
+
 import './js/createGallery';
 // import './js/modal';
 import './js/modalShow';
