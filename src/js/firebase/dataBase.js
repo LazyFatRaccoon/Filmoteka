@@ -26,9 +26,10 @@ const db = getFirestore(filmotecaApp);
 const WATCHED = 'watched';
 const QUEUE = 'queue';
 
-const value = 2;
+const value = 5;
 // ----------------------------------- ADD TO WATCHED---------------------
-async function addToWatchedList() {
+
+export async function addToWatchedList() {
   filmId = value;
   try {
     const filmWatchedList = await getDoc(
@@ -38,6 +39,7 @@ async function addToWatchedList() {
       await updateDoc(doc(db, auth.currentUser.uid, WATCHED), {
         filmsId: arrayUnion(filmId),
       });
+      console.log(filmWatchedList.data().filmsId);
       // --------------------------- DELETE FROM WATCHED
       if (filmWatchedList.data().filmsId.includes(filmId)) {
         await updateDoc(doc(db, auth.currentUser.uid, WATCHED), {
@@ -61,7 +63,7 @@ async function addToWatchedList() {
 
 // ----------------------------- GET WATCHED ----------------
 
-async function getWatchedList() {
+export async function getWatchedList() {
   try {
     const watchedList = await getDoc(doc(db, auth.currentUser.uid, WATCHED));
     console.log('watchedList: ', watchedList.data().filmsId);
@@ -76,7 +78,7 @@ async function getWatchedList() {
 // ---------------------------------------------------------------------
 // ----------------------------------- ADD TO QUEUE---------------------
 
-async function addToQueueList() {
+export async function addToQueueList() {
   filmId = value;
   try {
     const filmQueueList = await getDoc(doc(db, auth.currentUser.uid, QUEUE));
@@ -107,7 +109,7 @@ async function addToQueueList() {
 
 // ----------------------------- GET QUEUE ----------------
 
-async function getQueueList() {
+export async function getQueueList() {
   try {
     const queueList = await getDoc(doc(db, auth.currentUser.uid, QUEUE));
     console.log('queueList: ', queueList.data().filmsId);
