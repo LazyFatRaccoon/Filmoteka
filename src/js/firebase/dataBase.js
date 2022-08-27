@@ -1,5 +1,15 @@
-import { collection, addDoc, getDocs, setDoc, doc } from 'firebase/firestore';
+import { Notify } from 'notiflix';
+import {
+  setDoc,
+  getDoc,
+  doc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+} from 'firebase/firestore';
 import { getFirestore } from 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 import { filmotecaApp } from './firebaseAuth';
 import { auth } from './firebaseAuth';
@@ -7,55 +17,106 @@ import { auth } from './firebaseAuth';
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(filmotecaApp);
 
-const tryForm = document.querySelector('.try-form');
-const tryInput = document.querySelector('.try-input');
-const tryBtn = document.querySelector('.try-btn');
-const objBtn1 = document.querySelector('.obj-btn1');
-const objBtn2 = document.querySelector('.obj-btn2');
+// const objBtn1 = document.querySelector('.obj-btn1');
+// const objBtn2 = document.querySelector('.obj-btn2');
+// const objBtn3 = document.querySelector('.obj-btn3');
+// const objBtn4 = document.querySelector('.obj-btn4');
+// const objBtn5 = document.querySelector('.obj-btn5');
 
-// tryForm.addEventListener('submit', pushToDB);
+const WATCHED = 'watched';
+const QUEUE = 'queue';
 
-async function pushToDB(event) {
-  event.preventDefault();
-
+const value = 2;
+// ----------------------------------- ADD TO WATCHED---------------------
+async function addToWatchedList() {
+  filmId = value;
   try {
-    const docRef = await addDoc(collection(db, 'users'), {
-      first: 'Ada',
-      last: 'Loe',
-      born: 1815,
-    });
-    console.log('Document written with ID: ', docRef.id);
-  } catch (e) {
-    console.error('Error adding document: ', e);
+    const filmWatchedList = await getDoc(
+      doc(db, auth.currentUser.uid, WATCHED)
+    );
+    if (filmWatchedList.exists()) {
+      await updateDoc(doc(db, auth.currentUser.uid, WATCHED), {
+        filmsId: arrayUnion(filmId),
+      });
+      // --------------------------- DELETE FROM WATCHED
+      if (filmWatchedList.data().filmsId.includes(filmId)) {
+        await updateDoc(doc(db, auth.currentUser.uid, WATCHED), {
+          filmsId: arrayRemove(filmId),
+        });
+      }
+    } else {
+      const createFilmList = await setDoc(
+        doc(db, auth.currentUser.uid, WATCHED),
+        {
+          filmsId: arrayUnion(filmId),
+        }
+      );
+    }
+  } catch (error) {
+    console.log('error: ', error);
   }
 }
 
-// objBtn1.addEventListener('click', getprprp);
+// objBtn1.addEventListener('click', addToWatchedList);
 
-async function getprprp() {
-  const querySnapshot = await getDocs(collection(db, 'users'));
-  querySnapshot.forEach(doc => {
-    console.log(`${doc.id} => ${doc.data()}`);
-    console.log(doc);
-  });
+// ----------------------------- GET WATCHED ----------------
+
+async function getWatchedList() {
+  try {
+    const watchedList = await getDoc(doc(db, auth.currentUser.uid, WATCHED));
+    console.log('watchedList: ', watchedList.data().filmsId);
+    return watchedList.data();
+  } catch (error) {
+    console.log('error: ', error.code, error.message);
+  }
 }
 
-const docData = {
-  stringExample: 'Hello world!',
-  booleanExample: true,
-  numberExample: 3.14159265,
-  arrayExample: [5, true, 'hello'],
-  nullExample: null,
-  objectExample: {
-    a: 5,
-    b: {
-      nested: 'foo',
-    },
-  },
-};
+// objBtn2.addEventListener('click', getWatchedList);
 
-// objBtn2.addEventListener('click', getprprp2);
+// ---------------------------------------------------------------------
+// ----------------------------------- ADD TO QUEUE---------------------
 
-async function getprprp2() {
-  await setDoc(doc(db, `${auth.currentUser.uid}`, 'wathed'), docData);
+async function addToQueueList() {
+  filmId = value;
+  try {
+    const filmQueueList = await getDoc(doc(db, auth.currentUser.uid, QUEUE));
+    if (filmQueueList.exists()) {
+      await updateDoc(doc(db, auth.currentUser.uid, QUEUE), {
+        filmsId: arrayUnion(filmId),
+      });
+      // --------------------------- DELETE FROM QUEUE
+      if (filmQueueList.data().filmsId.includes(filmId)) {
+        await updateDoc(doc(db, auth.currentUser.uid, QUEUE), {
+          filmsId: arrayRemove(filmId),
+        });
+      }
+    } else {
+      const createFilmList = await setDoc(
+        doc(db, auth.currentUser.uid, QUEUE),
+        {
+          filmsId: arrayUnion(filmId),
+        }
+      );
+    }
+  } catch (error) {
+    console.log('error: ', error);
+  }
 }
+
+// objBtn3.addEventListener('click', addToQueueList);
+
+// ----------------------------- GET QUEUE ----------------
+
+async function getQueueList() {
+  try {
+    const queueList = await getDoc(doc(db, auth.currentUser.uid, QUEUE));
+    console.log('queueList: ', queueList.data().filmsId);
+    return queueList.data();
+  } catch (error) {
+    console.log('error: ', error.code, error.message);
+  }
+}
+
+// objBtn4.addEventListener('click', getQueueList);
+
+// ------------------------------------------------------------------------------------------
