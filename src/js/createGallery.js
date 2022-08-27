@@ -28,13 +28,13 @@ function createGanresFilmArray(ganresArray) {
     }
     return ganresFilm;
   }
-  return `No ganre`;
+  return `No genre`;
 }
 function createYearFilm(year) {
   if (year) {
     return year;
   }
-  return `No year`;
+  return `N/A`;
 }
 function createPosterFilm(posterLink) {
   if (posterLink) {
@@ -50,7 +50,7 @@ export function createGallery(filmsArry) {
   const result = filmsArry.reduce(
     (acc, item) =>
       (acc += `
-            <li class="films__item" id="${item.id}">
+            <li class="films__item" data-id="${item.id}">
               <img class="films__img" src="${createPosterFilm(
                 item.poster_path
               )}" alt="${item.overview}" />
