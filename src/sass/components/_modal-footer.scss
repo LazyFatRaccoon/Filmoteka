@@ -222,3 +222,153 @@
 //                     overflow: scroll;
 //                 }
 // }
+
+.list-developer{
+    margin: 10px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.developer-foto{
+    height: 444px;
+    width: 374px;
+    object-fit: cover;
+    border-radius: 25px;
+}
+
+.developer-list{
+    margin-bottom: 10px;
+}
+
+.developer-list:nth-last-child(-n+3){
+    margin-bottom: 0;
+}
+
+.developer-list:nth-child(-n+3) {
+    margin-top: 10px;
+}
+
+.developer-name{
+    color: $accent;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.developer-work{
+    color: $black;
+    margin-top: 5px;
+}
+
+
+.modal-footer.open-footer{
+    opacity: 1;
+    visibility: visible;
+    transition: all 1s ease 0s;
+    
+}
+
+.box-list {
+    list-style: none;
+}
+
+.footer-logo{
+    width: 30px;
+    height: 30px;
+}
+
+.developer-diskription{
+    display: flex;
+    justify-content: space-between;
+}
+
+.git-hub {
+    display: flex;
+    align-items: center;
+}
+
+.box-list:focus .footer-logo,
+.box-list:hover .footer-logo {
+    scale: 1.5;
+}
+
+
+
+.modal-close-btn{
+    border-radius: 50%;
+    display: flex;
+}
+
+.modal-close-btn{
+    cursor: pointer;
+    position: fixed;
+    top: 22px;
+    right: 50px;
+}
+
+.close-icon{
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 48px;
+}
+
+.backdrop-footer.open-footer{
+    position: fixed;
+    background-color: rgba(255, 255, 255);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transition: all 1s ease 0s;
+    opacity: 1;
+}
+
+
+// .backdrop-footer {
+//         position: fixed;
+//         top: 0;
+//         left: 0;
+//         width: 100vw;
+//         height: 100vh;
+//         background-color: rgba(0, 0, 0, 0.8);
+//         transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+//             visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+//             opacity: 1;
+//     }
+
+//     .backdrop-footer.open-footer{
+//         opacity: 0;
+//         visibility: hidden;
+//         pointer-events: none;
+//     }
+
+//     .modal-footer.open-footer {
+//         opacity: 0;
+//         visibility: hidden;
+//         pointer-events: none;
+//     }
+
+//     .modal-footer {
+//         opacity: 1;
+//         position: fixed;
+//         top: 50%;
+//         left: 50%;
+//         transform: translate(-50%, -50%);
+//         box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+//             0px 2px 1px rgba(0, 0, 0, 0.2);
+//         border-radius: 4px;
+//         padding: 10px;
+//         transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+//                 visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+//     }
+    .modal-footer{
+        width: 1270px;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    overflow-y: auto;
+    transition: all 1s ease 0s;
+}
