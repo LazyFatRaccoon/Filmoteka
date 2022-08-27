@@ -8,6 +8,7 @@
           </svg>
           <span class="header__logo-name">Filmoteka</span>
         </a>
+<<<<<<< Updated upstream
         <div class="header__pages">
           <a class="header__pages-link current_page" href="./index.html">HOME</a>
           <a class="header__pages-link" href="./library.html">MY LIBRARY</button>
@@ -43,9 +44,44 @@
             <button type="submit" class="btn-register" value="register">
               register
             </button>
+=======
+        <div class="header__navigation-auth">
+          <div class="header__pages">
+            <a class="header__pages-link current_page" href="./index.html">HOME</a>
+            <a class="header__pages-link" href="./library.html">MY LIBRARY</button>
           </div>
-        </form>
+          <div class="auth-wrapper">
+              <svg width="24px" height="24px" id="auth-icon" class="auth-icon">
+              <use href="/src/images/auth-icon/login-icon.svg#icon-user"></use>
+              </svg>
+              <form class="auth-form hide-form">
+              <label title="email">
+                <input
+                  type="email"
+                  name="userEmail"
+                  id="emailInput"
+                  placeholder="Email"
+                />
+              </label>
+              <label title="password">
+                <input
+                  type="password"
+                  name="userPassword"
+                  id="passwordInput"
+                  minlength="6"
+                  placeholder="Password"
+                />
+              </label>
+              <div class="header__buttons-auth">
+                <button type="submit" class="btn-enter" value="enter">Sign in</button>
+                <span class="header__decor" >/</span>
+                <button type="submit" class="btn-register" value="register">Sign Up</button>
+              </div>
+              </form>
+>>>>>>> Stashed changes
+          </div>
       </div>
+      </nav>
       <form class="header__form">
         <input
           class="header__input"
@@ -60,6 +96,9 @@
           </svg>
         </button>
       </form>
+      <div class="user-account is-hidden-account">
+      <button type="button" class="btn-signout hide-form" id="btn-signout">Sign out</button>
+      </div>
     </div>
   </div>
 </header>

@@ -35,6 +35,15 @@
     }
 }
 
+.account-on {
+    padding: 40px 20px 28px 20px;
+
+    @media screen and (min-width: $tablet){ 
+    padding: 40px 32px 17px 32px;    
+    }
+
+}
+
 .header__navigation {
     display: flex;
     align-items: center;
@@ -94,6 +103,7 @@
     border-left: none;
     border-right: none;
     border-bottom: 0.5px solid #fff;
+    border-radius: 0px;
 
     @media screen and (min-width: $tablet){ 
         width: 336px;
@@ -114,9 +124,12 @@
 }
 
 .header__submit {
+    width: 14px;
+    height: 14px;
     background: transparent;
     border: none;
     margin-left: -20px;
+
 }
 
 .header__logo {
@@ -239,4 +252,16 @@
             background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url("../images/library-desktop1280@2px.jpg");
         }
     }  
+<<<<<<< Updated upstream
+=======
+}
+
+.hidden_nav {
+    display: none;
+}
+
+
+.header__decor {
+    color: $white;
+>>>>>>> Stashed changes
 }
