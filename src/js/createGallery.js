@@ -62,13 +62,7 @@ export function createGallery(filmsArry) {
                   <p class="films__description">${createGenresFilmArray(
                     item.genre_ids ?? item.genres
                   )} | ${createYearFilm(item.release_date.slice(0, 4))}</p>
-                  <svg class="films__svg " width="30" height="30">
-                    <use href="/Filmoteka/login-icon.2e0a9156.svg#icon-watched"></use>
-                  </svg>
-
-                  <svg class="films__svg hide-form" width="30" height="30">
-                    <use href="/Filmoteka/login-icon.2e0a9156.svg#icon-queue"></use>
-                  </svg>
+                ${createSvg(item.id)}  
              </div>
             </li>`),
     ''
@@ -76,4 +70,30 @@ export function createGallery(filmsArry) {
 
   filmsListEl.insertAdjacentHTML('beforeend', result);
   scrollTopTop();
+}
+
+const KEY_WATCHED = 'watchedList';
+const KEY_QUEUE = 'queueList';
+
+function loadStorage(KEY) {
+  try {
+    const savedSettings = localStorage.getItem(KEY);
+    const parsedSettings = JSON.parse(savedSettings);
+    return parsedSettings;
+  } catch (error) {
+    console.error('Get state error: ', error.message);
+  }
+}
+function createSvg(idFilm) {
+  if (loadStorage(KEY_WATCHED).find(id => id === idFilm)) {
+    return `<svg class="films__svg" width="30" height="30">
+                    <use href="/Filmoteka/login-icon.2e0a9156.svg#icon-watched"></use>
+                  </svg>`;
+  } else if (loadStorage(KEY_QUEUE).find(id => id === idFilm)) {
+    return `<svg class="films__svg" width="30" height="30">
+                    <use href="/Filmoteka/login-icon.2e0a9156.svg#icon-queue"></use>
+                  </svg>`;
+  } else {
+    return ``;
+  }
 }
