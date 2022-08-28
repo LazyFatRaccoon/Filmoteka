@@ -1,77 +1,11 @@
 import API from './apiService/movieAPI'
+import {refs} from './modalShow'
 
 const watchedList = document.querySelector('.add-btn__watched')
 const queueList = document.querySelector('.add-btn__queue')
 
-watchedList.addEventListener('click', changeWatchedStatus)
-queueList.addEventListener('click', changeQueueStatus)
-
-
-const removeFromWatchedList = (e) => {
-    const queryId = e.currentTarget.id;
-    const storageList = loadList('watchedList');
-    const newStorageList = storageList.filter((movie) => movie != parseInt(queryId));
-    saveList('watchedList', newStorageList);
-}
-
-const addToWatchedList = (e) => {
-    const queryId = e.currentTarget.id
-    const storageList = loadList('watchedList')
-    storageList.push(parseInt(queryId))
-    saveList('watchedList', storageList)
-
-}
-
-const removeFromQueueList = (e) => {
-    const queryId = e.currentTarget.id;
-    const storageList = loadList('queueList');
-    const newStorageList = storageList.filter((movie) => movie != parseInt(queryId));
-    saveList('queueList', newStorageList);
-}
-
-const addToQueueList = (e) => {
-    const queryId = e.currentTarget.id
-    const storageList = loadList('queueList')
-    storageList.push(parseInt(queryId))
-    saveList('queueList', storageList)
-
-}
-
-function changeWatchedStatus(e) {
-    
-    
-    
-        
-        if (watchedList.classList.contains('disabl')) {
-           
-            addToWatchedList(e);
-            watchedList.innerText = "Remove from watched"
-            removeFromQueueList(e);
-            queueList.innerHTML = " Add to queue"
-            queueList.classList.add('disabl')
-
-        } else { removeFromWatchedList(e); watchedList.innerText = "Add to watched"}
-        watchedList.classList.toggle('disabl')
-    
-
-}
-
-function changeQueueStatus(e) {
-    
-        
-        if (queueList.classList.contains('disabl')) {
-           
-            addToQueueList(e);
-            queueList.innerText = "Remove from queue"
-            removeFromWatchedList(e);
-            watchedList.innerHTML = "Add to watched"
-            watchedList.classList.add('disabl')
-
-        } else { removeFromQueueList(e); queueList.innerText = "Add to queue"; }
-        queueList.classList.toggle('disabl')
-    
-
-}
+watchedList.addEventListener('click', addToWatchedList)
+queueList.addEventListener('click', addToQueueList)
 
 function saveList (key, value){
 try {
@@ -91,56 +25,68 @@ try {
 }
 }
 
-// function removeFromWatchedList(e) {
-    
-// }   
+async function addToWatchedList(e) {
+    const queryId = e.currentTarget.id
+    console.log(queryId)
+    const serchMove = await API.getModifiedSingleMovie(queryId)
+    const storageList = loadList('moveList')
+    const indexOfDublicateObj = storageList.findIndex(option => option.id === parseInt(queryId))
 
-// function addToWatchedList(e) {
+    console.log(indexOfDublicateObj)
 
-//     const queryId = e.currentTarget.id
-    
-//     //const serchMove = await API.getModifiedSingleMovie(queryId)
-//     const storageList = loadList('watchedList')
-    
-//     //const indexOfDublicateObj = storageList.findIndex(option => option.id === queryId)
-//     storageList.push(parseInt(queryId))
-//     saveList('watchedList', storageList)
 
-//     //watchedList.classList.toggle('disabl')
-//     // const dis = watchedList.classList.contains('disabl')
-//     // serchMove.watched = dis
-//     // serchMove.queque = false
-    
-//     // if (dis) queueList.classList.remove('disabl')
+    watchedList.classList.toggle('disabl')
+    const dis = watchedList.classList.contains('disabl')
+    serchMove.watched = dis
+    serchMove.queque = false
 
-//     // if (indexOfDublicateObj === -1) {
-//     //     pushNewMove(serchMove)
-//     // } else {
-//     //     storageList[indexOfDublicateObj] = serchMove
-//     //     saveList('moveList', storageList)
-//     // }
-// }
+    if (dis) {
+        queueList.classList.remove('disabl')
+        refs.btnQ.innerHTML = 'add to quequ'
+        refs.btnW.innerHTML = 'remove from watched'
+    } else {
+        refs.btnW.innerHTML = 'add to watched'
+    }
 
-// async function addToQueueList(e) {
-//     const queryId = e.currentTarget.id
-//     const serchMove = await API.getModifiedSingleMovie(queryId)
-//     const storageList = loadList('moveList')
-//     const indexOfDublicateObj = storageList.findIndex(option => option.id === queryId)
+    if (indexOfDublicateObj === -1) {
+        const newlist = storageList
+        newlist.push(serchMove)
+        saveList('moveList', newlist)
+    } else {
+        storageList[indexOfDublicateObj] = serchMove
+        saveList('moveList', storageList)
+    }
+}
 
-//     queueList.classList.toggle('disabl')
-//     const dis = queueList.classList.contains('disabl')
-//     serchMove.watched = false
-//     serchMove.queque = dis
+async function addToQueueList(e) {
+    const queryId = e.currentTarget.id
+    const serchMove = await API.getModifiedSingleMovie(queryId)
+    const storageList = loadList('moveList')
+    const indexOfDublicateObj = storageList.findIndex(option => option.id === parseInt(queryId))
 
-//     if (dis) watchedList.classList.remove('disabl')
+    queueList.classList.toggle('disabl')
+    const dis = queueList.classList.contains('disabl')
+    serchMove.watched = false
+    serchMove.queque = dis
 
-//     if (indexOfDublicateObj === -1) {
-//         pushNewMove(serchMove)
-//     } else {
-//         storageList[indexOfDublicateObj] = serchMove
-//         saveList('moveList', storageList)
-//     }
-// }
+    if (dis) {
+        watchedList.classList.remove('disabl')
+        refs.btnW.innerHTML = 'add to watched'
+        refs.btnQ.innerHTML = 'remove from queque'
+    } else {
+        refs.btnQ.innerHTML = 'add to queque'
+
+    }
+
+    if (indexOfDublicateObj === -1) {
+        const newlist = storageList
+        newlist.push(serchMove)
+        saveList('moveList', newlist)
+    } else {
+        storageList[indexOfDublicateObj] = serchMove
+        saveList('moveList', storageList)
+    }
+}
 
 // function pushNewMove(serchMove) {
 //     const newlist = []
@@ -183,6 +129,66 @@ try {
 
 
 
+
+
+
+
+
+
+// async function addToWatchedList() {
+//     const serchMove = await API.getMovieById(queryId)
+//     const storageList = loadList('watchedList')
+//     if (storageList === undefined || storageList.length === 0) {
+//         const listWatchedFilm = []
+//         listWatchedFilm.push(serchMove)
+//         saveList('watchedList', listWatchedFilm)
+//         watchedList.classList.add('disabl')
+//     } else if (storageList.includes(serchMove)) {
+//         const newListWatchedFilm = storageList.filter(value => value !== id)
+//         saveList('watchedList', newListWatchedFilm)
+//         watchedList.classList.remove('disabl')
+//     } else {
+//         storageList.push(serchMove)
+//         saveList('watchedList', storageList)
+//         watchedList.classList.add('disabl')
+//     }
+// } 
+
+// function findMoveInddexOnStorage(storageList) {
+//     let indexOfDublicateObj
+//     if(storageList){
+//     indexOfDublicateObj = storageList.findIndex(option => option.id === queryId)
+//     }
+//     return indexOfDublicateObj
+// }
+
+// function checkAndRewrite(indexDubl, storageList, serchMove, list){
+//      if (storageList === undefined || storageList.length === 0) {
+//         const listQueueFilm = []
+
+//         listQueueFilm.push(serchMove)
+//         saveList(list, listQueueFilm)
+//         queueList.classList.add('disabl')
+//     } else if (indexDubl >= 0) {
+//         storageList.splice(indexDubl, 1)
+//         saveList(list, storageList)
+//         queueList.classList.remove('disabl')            
+//     } else {
+//         storageList.push(serchMove)
+//         saveList(list, storageList)
+//         queueList.classList.add('disabl')
+//     }
+// }
+
+// async function addToQueueList() {
+//     const serchMove = await API.getMovieById(queryId)
+//     const list = 'queueList'
+//     const storageList = loadList(list)
+//     const indexDubl = findMoveInddexOnStorage(storageList)
+
+//     checkAndRewrite(indexDubl, storageList, serchMove, list)
+   
+// }
 
 
 
