@@ -2,7 +2,7 @@
 export const devolopers = [
   { name: "Raccoon", image: "https://raw.githubusercontent.com/LazyFatRaccoon/Filmoteka/main/src/images/Raccoon3.webp", work: "Tim-Lid", media:"https://github.com/LazyFatRaccoon" },
   { name: "Станіслав Тищенко", image: "https://raw.githubusercontent.com/LazyFatRaccoon/Filmoteka/main/src/images/Stanislav-Tishchenko.webp", work: "Tim-Lid", media:"https://github.com/Stanislav2022" },
-  { name: "Олександо Горжій", image: "https://raw.githubusercontent.com/LazyFatRaccoon/Filmoteka/main/src/images/Raccoon3.webp", work: "Tim-Lid", media:"" },
+  { name: "Олександо Горжій", image: "https://raw.githubusercontent.com/LazyFatRaccoon/Filmoteka/main/src/images/Raccoon3.webp", work: "Tim-Lid", media:"https://github.com/AlexHorzhij" },
   { name: "Андрій Бачинский", image: "https://github.com/LazyFatRaccoon/Filmoteka/blob/main/src/images/Andriy-Bachynskyi.jpg?raw=true", work: "Tim-Lid", media:"https://github.com/Bachynckyi" },
   { name: "Євгеній Медяник", image: "https://ca.slack-edge.com/T03FC3278EP-U03GGA6TRDF-efd5d59a9f30-512", work: "Tim-Lid", media:"https://github.com/roowdy" },
   { name: "Олексадр Кравцов", image: "https://raw.githubusercontent.com/LazyFatRaccoon/Filmoteka/main/src/images/Oleksandr-Kravtsov.webp", work: "Tim-Lid", media:"https://github.com/Kravtsov9983" },
