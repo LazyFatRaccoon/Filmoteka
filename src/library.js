@@ -10,6 +10,7 @@ const watchedBtn = document.querySelector('#watchedBtn')
 const queueBtn = document.querySelector('#queueBtn')
 const emptyGallery = document.querySelector('.empty')
 const pagination = document.querySelector('#pagination')
+const galleryLibrary = document.querySelector('.films__list')
 
 if (document.title === 'Filmoteka-library') {console.log('I here'); galleryRender(queueList);}
 
@@ -17,6 +18,7 @@ queueBtn.addEventListener('click', function(){
     if (queueBtn.classList.contains('selected')) return;
     queueBtn.classList.add('selected')
     watchedBtn.classList.remove('selected')
+
     queueList = JSON.parse(localStorage.getItem('queueList')) || []; 
     console.log(queueList)
     galleryRender(queueList)
@@ -36,6 +38,7 @@ watchedBtn.addEventListener('click', function(){
 function galleryRender(moviesList) {
     (moviesList.length === 0) ? emptyGallery.classList.remove("hide") : emptyGallery.classList.add("hide");
     (moviesList.length === 0) ? pagination.classList.add("hide") : pagination.classList.remove("hide");
+    (moviesList.length === 0) ? galleryLibrary.classList.add("hide") : galleryLibrary.classList.remove("hide");
 
     let page = 1; 
     initPagination({
