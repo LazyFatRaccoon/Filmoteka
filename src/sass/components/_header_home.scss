@@ -130,6 +130,7 @@
     border: none;
     margin-left: -20px;
     cursor: pointer;
+    outline: none;
 }
 
 .header__icon-submit {
@@ -225,6 +226,7 @@
         background-color: #ff6b01;
         border: none;
         transform: scale(1.05);
+        cursor: pointer; 
     }
 
     &:focus {

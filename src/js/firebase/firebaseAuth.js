@@ -1,4 +1,5 @@
 import { Notify } from 'notiflix';
+import { notiflixLoading, notiflixLoadingRemove } from '../loading';
 
 import { initializeApp } from 'firebase/app';
 import {
@@ -48,6 +49,7 @@ function showForm() {
   authRefs.iconForm.classList.add('hidden_nav');
 }
 
+notiflixLoading();
 // -------------- check user status -------------
 
 onAuthStateChanged(auth, user => {
@@ -57,14 +59,13 @@ onAuthStateChanged(auth, user => {
     // ...
     authRefs.userAccount.insertAdjacentHTML('afterbegin',
       `<p class ="user-name" style="color: white;">Your email is: ${user.email}</p>`);
-
     // console.log('in user check status: ', user);
     authRefs.isHiddenForm.classList.add('is-hidden');
     authRefs.userAccount.classList.remove('is-hidden-account');
     authRefs.btnSignout.classList.remove('hide-form');
     authRefs.formRegister.classList.add('hide-form');
     authRefs.navigationPages.classList.remove('hidden_nav');
-    
+    notiflixLoadingRemove();
   }
   else {
     authRefs.userAccount.classList.add('is-hidden-account');
@@ -73,6 +74,7 @@ onAuthStateChanged(auth, user => {
     authRefs.formRegister.classList.add('hide-form');
     authRefs.iconForm.classList.remove('hidden_nav');
     authRefs.isHiddenForm.classList.remove('is-hidden');
+    notiflixLoadingRemove();
   }
 });
 
