@@ -1,6 +1,8 @@
 import './js/foter-scrolltop';
-//import './js/modalBtn';
+import './js/modalBtn';
 import './js/modalShow';
+import './js/modal-footer';
+
 
 import API from './js/apiService/movieAPI'
 import {initPagination} from './js/pagination-try'
