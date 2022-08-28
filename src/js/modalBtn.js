@@ -1,4 +1,5 @@
 import API from './apiService/movieAPI'
+import {refs} from './modalShow'
 
 const watchedList = document.querySelector('.add-btn__watched')
 const queueList = document.querySelector('.add-btn__queue')
@@ -26,19 +27,31 @@ try {
 
 async function addToWatchedList(e) {
     const queryId = e.currentTarget.id
+    console.log(queryId)
     const serchMove = await API.getModifiedSingleMovie(queryId)
     const storageList = loadList('moveList')
-    const indexOfDublicateObj = storageList.findIndex(option => option.id === queryId)
+    const indexOfDublicateObj = storageList.findIndex(option => option.id === parseInt(queryId))
+
+    console.log(indexOfDublicateObj)
+
 
     watchedList.classList.toggle('disabl')
     const dis = watchedList.classList.contains('disabl')
     serchMove.watched = dis
     serchMove.queque = false
-    
-    if (dis) queueList.classList.remove('disabl')
+
+    if (dis) {
+        queueList.classList.remove('disabl')
+        refs.btnQ.innerHTML = 'add to quequ'
+        refs.btnW.innerHTML = 'remove from watched'
+    } else {
+        refs.btnW.innerHTML = 'add to watched'
+    }
 
     if (indexOfDublicateObj === -1) {
-        pushNewMove(serchMove)
+        const newlist = storageList
+        newlist.push(serchMove)
+        saveList('moveList', newlist)
     } else {
         storageList[indexOfDublicateObj] = serchMove
         saveList('moveList', storageList)
@@ -49,28 +62,37 @@ async function addToQueueList(e) {
     const queryId = e.currentTarget.id
     const serchMove = await API.getModifiedSingleMovie(queryId)
     const storageList = loadList('moveList')
-    const indexOfDublicateObj = storageList.findIndex(option => option.id === queryId)
+    const indexOfDublicateObj = storageList.findIndex(option => option.id === parseInt(queryId))
 
     queueList.classList.toggle('disabl')
     const dis = queueList.classList.contains('disabl')
     serchMove.watched = false
     serchMove.queque = dis
 
-    if (dis) watchedList.classList.remove('disabl')
+    if (dis) {
+        watchedList.classList.remove('disabl')
+        refs.btnW.innerHTML = 'add to watched'
+        refs.btnQ.innerHTML = 'remove from queque'
+    } else {
+        refs.btnQ.innerHTML = 'add to queque'
+
+    }
 
     if (indexOfDublicateObj === -1) {
-        pushNewMove(serchMove)
+        const newlist = storageList
+        newlist.push(serchMove)
+        saveList('moveList', newlist)
     } else {
         storageList[indexOfDublicateObj] = serchMove
         saveList('moveList', storageList)
     }
 }
 
-function pushNewMove(serchMove) {
-    const newlist = []
-    newlist.push(serchMove)
-    saveList('moveList', newlist)
-}
+// function pushNewMove(serchMove) {
+//     const newlist = []
+//     newlist.push(serchMove)
+//     saveList('moveList', newlist)
+// }
 
 
 

@@ -1,8 +1,9 @@
 import { limit } from 'firebase/firestore'
 import API from './apiService/movieAPI'
-import {loadList} from './modalBtn'
+import { loadList } from './modalBtn'
+// import { notiflixLoading, notiflixLoadingRemove } from './loading';
 
-const refs = {
+export const refs = {
     img: document.querySelector('.modal__preview-img'),
     discTitle: document.querySelector('.discription__title'),
     rait: document.querySelector('.mvi__rait'),
@@ -24,7 +25,7 @@ refs.gallery.addEventListener('click', openCart)
 refs.closeBtn.addEventListener('click', closeModal)
 refs.backdrop.addEventListener('click', onBackdropCloseModal)
 
-let serchId = 0
+// let serchId = 0
 
 function openCart(e) {
     const liItem = e.path.filter(a => a.nodeName === 'LI')[0]
@@ -86,20 +87,41 @@ function clearMarkup() {
     refs.mviName.innerHTML = ''
     refs.mviGenre.innerHTML = ''
     refs.discText.innerHTML = ''
+
+    refs.btnW.innerHTML = ""
+    refs.btnW.classList.remove("disabl")
+    refs.btnQ.innerHTML = ""
+    refs.btnQ.classList.remove("disabl")
 }
 
 function checkStatus(id) {
-    const storageList = loadList('moveList')
+
+   const storageList = loadList('moveList')
     console.log(id)
-        console.log(storageList)
+    console.log(storageList)
 
-    const chooseFilm = storageList.findIndex(option => {
-        console.log("kdkckdckmcm", Number(option.id))
-        console.log("kdkckdckmcm", Number(id))
+let chooseFilm = -1
 
-     option.id === id})
-            console.log(chooseFilm)
 
+    for (let i = 0; i < storageList.length; i += 1) {
+         chooseFilm = i
+        if (Number(storageList[i].id) === Number(id)) {
+            break
+        } else {
+            chooseFilm = -1
+        }
+
+    }
+        console.log(chooseFilm)
+    // const chooseFilm = storageList.find((item, index) => {Number(item.id) === Number(id)
+
+    //     console.log(Number(item.id) === Number(id))
+    //     console.log(item.id)
+    //     console.log(id)}
+    // )
+    // console.log(chooseFilm)
+
+    
     const watched = chooseFilm < 0 ? false : storageList[chooseFilm].watched
     const queque = chooseFilm < 0 ? false : storageList[chooseFilm].queque
     return {watched, queque}
