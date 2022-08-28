@@ -1,6 +1,7 @@
 import { Notify } from "notiflix";
 import API from "./apiService/movieAPI";
 import { initPagination } from "./pagination-try";
+import { notiflixLoading, notiflixLoadingRemove } from './loading';
 
 const submitForm = document.querySelector('.header__form');
 const inputArea = document.querySelector('.header__input');
@@ -26,8 +27,10 @@ async function consoleSearch(event) {
             return Notify.failure("Please enter name of the film.", {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
         } 
             try { 
+                notiflixLoading();
                 const data = await API.getSearchMovies(`${page}`, `${searchQuery}`);
                 if (data.total_results === 0) {
+                    inputArea.value = "";
                     return Notify.failure("Sorry, but there is no films with this name. Please try again.", {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
                 }
                 Notify.info('Your request is successfull.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
@@ -40,6 +43,7 @@ async function consoleSearch(event) {
                     firstTime: true,
                   });
                   inputArea.value = "";
+                  notiflixLoadingRemove();
             }
             catch(error) {
                 console.log(error);

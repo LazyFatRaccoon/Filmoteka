@@ -63,6 +63,7 @@ onAuthStateChanged(auth, user => {
     authRefs.userAccount.classList.remove('is-hidden-account');
     authRefs.btnSignout.classList.remove('hide-form');
     authRefs.formRegister.classList.add('hide-form');
+    authRefs.navigationPages.classList.remove('hidden_nav');
     
   }
   else {
@@ -70,6 +71,8 @@ onAuthStateChanged(auth, user => {
     authRefs.btnSignout.classList.add('hide-form');
     authRefs.navigationPages.classList.add('hidden_nav');
     authRefs.formRegister.classList.add('hide-form');
+    authRefs.iconForm.classList.remove('hidden_nav');
+    authRefs.isHiddenForm.classList.remove('is-hidden');
   }
 });
 
@@ -152,6 +155,9 @@ function createUser(event) {
 }
 
 // --------------- user signout --------------
+
+authRefs.btnSignout.addEventListener('click', logOut);
+
 function logOut() {
   const userName = document.querySelector('.user-name');
 
@@ -174,6 +180,6 @@ function logOut() {
     });
 }
 
-authRefs.btnSignout.addEventListener('click', logOut);
+
 
 
