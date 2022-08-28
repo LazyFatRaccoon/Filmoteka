@@ -1,6 +1,7 @@
 import API from './apiService/movieAPI';
 import { initPagination } from './pagination-try';
-consoleModifiedPopular();
+
+if (document.title === 'Filmoteka') consoleModifiedPopular();
 
 async function consoleModifiedPopular() {
   const data = await API.getModifiedMoviesList(1);
@@ -47,6 +48,7 @@ const filmsListEl = document.querySelector('.films__list');
 
 export function createGallery(filmsArry) {
   filmsListEl.innerHTML = '';
+  console.log(filmsArry)
   const result = filmsArry.reduce(
     (acc, item) =>
       (acc += `
@@ -57,7 +59,7 @@ export function createGallery(filmsArry) {
                 <div class="films__decor">
                   <h2 class="films__title">${item.title}</h2>
                   <p class="films__description">${createGanresFilmArray(
-                    item.genre_ids
+                    item.genre_ids ?? item.genres
                   )} | ${createYearFilm(item.release_date.slice(0, 4))}</p>
              </div>
             </li>`),

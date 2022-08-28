@@ -17,11 +17,11 @@ import { auth } from './firebaseAuth';
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(filmotecaApp);
 
-// const objBtn1 = document.querySelector('.obj-btn1');
-// const objBtn2 = document.querySelector('.obj-btn2');
-// const objBtn3 = document.querySelector('.obj-btn3');
-// const objBtn4 = document.querySelector('.obj-btn4');
-// const objBtn5 = document.querySelector('.obj-btn5');
+//  const objBtn1 = document.querySelector('.obj-btn1');
+//  const objBtn2 = document.querySelector('.obj-btn2');
+//  const objBtn3 = document.querySelector('.obj-btn3');
+//  const objBtn4 = document.querySelector('.obj-btn4');
+//  const objBtn5 = document.querySelector('.obj-btn5');
 
 const WATCHED = 'watched';
 const QUEUE = 'queue';
@@ -59,7 +59,7 @@ export async function addToWatchedList() {
   }
 }
 
-// objBtn1.addEventListener('click', addToWatchedList);
+ //objBtn1.addEventListener('click', addToWatchedList);
 
 // ----------------------------- GET WATCHED ----------------
 
@@ -105,7 +105,7 @@ export async function addToQueueList() {
   }
 }
 
-// objBtn3.addEventListener('click', addToQueueList);
+ //objBtn3.addEventListener('click', addToQueueList);
 
 // ----------------------------- GET QUEUE ----------------
 
@@ -119,6 +119,6 @@ export async function getQueueList() {
   }
 }
 
-// objBtn4.addEventListener('click', getQueueList);
+ //objBtn4.addEventListener('click', getQueueList);
 
 // ------------------------------------------------------------------------------------------
