@@ -1,14 +1,20 @@
 .back-to-top {
     display: flex;
+    justify-content: center;
+    align-items: center;
     background: $accent;
     border-radius: 50%;
     position: fixed;
-    bottom: -50px;
-    padding: 10px 12px;
-    right: 10px;
+    bottom: -60px;
+
+    width: 50px;
+    height: 50px;
+    right: 26px;
+
     cursor: pointer;
     transition: 0.3s all;
     z-index: 1;
+    transform: scale(1)
 }
 
 .scroll {
@@ -18,9 +24,10 @@
 .back-to-top.active {
     bottom: 10px;
     transition: 0.3s all;
+    transform: scale(-1, 1);
+
+
+    
 }
 
-.back-to-top:focus .scroll,
-.back-to-top:hover .scroll {
-    fill: $primaryGray;
-}
+

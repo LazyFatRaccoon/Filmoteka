@@ -27,7 +27,7 @@ export const paginationSettings = {
   };
 
 
-export const initPagination = ({ page, itemsPerPage, totalItems, data, query }) => {
+export const initPagination = async ({ page, itemsPerPage, totalItems, data, query, firstTime, list }) => {
     const options = {
       page,
       itemsPerPage,
@@ -36,25 +36,55 @@ export const initPagination = ({ page, itemsPerPage, totalItems, data, query }) 
       centerAlign: true,
       data,   
       query,
+      firstTime,
+      list
     };
-  
+    
     const pagination = new Pagination(paginationContainer, options);
     paginationSettings.pagination = pagination;
-    if (options.data === "popular") {
-    pagination.on('afterMove', async ({ page }) => {
-        console.log(pagination)
-        try {
-          const response = await API.getModifiedMoviesList(page);
-          createGallery(response.results);
-         
-        } catch (error) {
-          console.log(error);
+   
+
+        if (options.firstTime) {
+            if (options.data.toString() === "search") {
+                try {
+                    const response = await API.getModifiedMoviesList(page, options.query);
+                    createGallery(response.results);
+                    options.firstTime = false;
+                   
+                  } catch (error) {
+                    console.log(error);
+                  }
+            }
+            if (options.data.toString() === "popular") {
+                try {
+                    const response = await API.getModifiedMoviesList(page);
+                    createGallery(response.results);
+                    options.firstTime = false;
+
+                  } catch (error) {
+                    console.log(error);
+                  }
+            }
+            if (options.data.toString() === "library") {
+                
+                try {
+                    if (options.list) {
+                    const newList =  options.list.slice(0, options.itemsPerPage)
+                    const response = await Promise.all(newList.map(async (movie) => (API.getModifiedSingleMovie(movie)))) 
+                    createGallery(response);
+                }
+                    //console.log(response)
+                    
+                    options.firstTime = false;
+
+                  } catch (error) {
+                    console.log(error);
+                  }
+            }
         }
- 
-    })}
-    if (options.data === "search") {
+
         pagination.on('afterMove', async ({ page }) => {
-            console.log(pagination)
+            if (options.data.toString() === "search") {
             try {
               const response = await API.getModifiedMoviesList(page, options.query);
               createGallery(response.results);
@@ -63,7 +93,37 @@ export const initPagination = ({ page, itemsPerPage, totalItems, data, query }) 
               console.log(error);
             }
      
-        })}
+        }
+        if (options.data.toString() === "popular") {
+            try {
+                const response = await API.getModifiedMoviesList(page);
+                createGallery(response.results);
+               
+              } catch (error) {
+                console.log(error);
+              }
+        }
+        if (options.data.toString() === "library") {
+            try {
+
+                const newList =  options.list.slice((page-1)*options.itemsPerPage, page*options.itemsPerPage)
+                console.log(newList)
+                console.log(options.itemsPerPage)
+                const response = await Promise.all(newList.map(async (movie) => (API.getModifiedSingleMovie(movie))))
+
+                console.log(options.list)
+                console.log(page)
+                
+                createGallery(response);
+               
+              } catch (error) {
+                console.log(error);
+              }
+        }
+
+        
+    })
+
     return pagination;
   };
 

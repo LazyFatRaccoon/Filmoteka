@@ -1,4 +1,9 @@
-
+.footer {
+    margin-top: 40px;
+    @media screen and (min-width:$tablet) {
+        margin-top: 60px;
+    }
+}
 .footer_text {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;

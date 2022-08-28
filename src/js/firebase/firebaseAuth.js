@@ -182,9 +182,4 @@ function logOut() {
 
 
 
-<<<<<<< Updated upstream
-=======
 
-
-
->>>>>>> Stashed changes
