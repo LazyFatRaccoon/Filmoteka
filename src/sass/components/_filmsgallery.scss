@@ -6,6 +6,7 @@
 }
 
 .films__item {
+    position: relative;
     border-radius: 5px;
     margin-top: 20px;
     overflow: hidden;
@@ -47,6 +48,14 @@
     line-height: $font_height_l;
      color: $accent;
 }
+.films__svg{
+    position: absolute;
+        right: 8px;
+        top: 8px;
+        display: flex;
+        fill: $accent;
+        border-radius: 50%;
+        background-color: rgba($color: white, $alpha: 0.5);}
 
 
 @media screen and (min-width: 768px) {

@@ -61,9 +61,10 @@ export function createGallery(filmsArry) {
                   <p class="films__description">${createGenresFilmArray(
                     item.genre_ids ?? item.genres
                   )} | ${createYearFilm(item.release_date.slice(0, 4))}</p>
-                  <svg class="films__svg hide-form" width="30" height="30">
+                  <svg class="films__svg " width="30" height="30">
                     <use href="/login-icon.e91ce56e.svg#icon-watched"></use>
                   </svg>
+
                   <svg class="films__svg hide-form" width="30" height="30">
                     <use href="/login-icon.e91ce56e.svg#icon-queue"></use>
                   </svg>
