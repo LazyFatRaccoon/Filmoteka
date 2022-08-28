@@ -4,11 +4,9 @@ import { initPagination } from "./pagination-try";
 
 const submitForm = document.querySelector('.header__form');
 const inputArea = document.querySelector('.header__input');
-const navigationPage = document.querySelector('.header__pages')
 
 submitForm.addEventListener('submit', consoleSearch);
 
-hiddenNavigation();
 inputСontrol();
 
 function inputСontrol() {
@@ -47,7 +45,3 @@ async function consoleSearch(event) {
                 console.log(error);
             };
 };
-
-function hiddenNavigation() {
-    navigationPage.classList.add('hidden_nav')
-}

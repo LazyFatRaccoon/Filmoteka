@@ -36,6 +36,8 @@ const authRefs = {
   isHiddenForm: document.querySelector('.auth-wrapper'),
   userAccount: document.querySelector('.user-account'),
   onAccount: document.querySelector('.header__container-home'),
+  btnEnter: document.querySelector('.btn-enter'),
+  btnRegister: document.querySelector('.btn-register')
 };
 
 // ------------ show hide form -----------
@@ -53,18 +55,18 @@ onAuthStateChanged(auth, user => {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
     // ...
-    authRefs.userAccount.insertAdjacentHTML(
-      'afterbegin',
-      `<p class ="user-name" style="color: white;">Your email is: ${user.email}</p>`
-    );
+    authRefs.userAccount.insertAdjacentHTML('afterbegin',
+      `<p class ="user-name" style="color: white;">Your email is: ${user.email}</p>`);
 
     // console.log('in user check status: ', user);
+    authRefs.isHiddenForm.classList.add('is-hidden');
+    authRefs.userAccount.classList.remove('is-hidden-account');
     authRefs.btnSignout.classList.remove('hide-form');
-    authRefs.iconForm.removeEventListener('click', showForm);
-      
-  } else {
-    // User is signed out
-    // ...
+  }
+  else {
+    authRefs.userAccount.classList.add('is-hidden-account');
+    authRefs.btnSignout.classList.add('hide-form');
+    authRefs.navigationPages.classList.add('hidden_nav');
   }
 });
 
@@ -81,51 +83,64 @@ function createUser(event) {
   // ---------------  create Users -----------------------
 
   if (event.submitter.value === 'register') {
-    createUserWithEmailAndPassword(auth, userEmail, userPassword)
+      createUserWithEmailAndPassword(auth, userEmail, userPassword)
       .then(userCredential => {
         // Signed in
         // const user = userCredential.user;
         // ...
+        Notify.info('Registration is successfull.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
+        authRefs.formRegister.classList.toggle('hide-form');
+        authRefs.navigationPages.classList.remove('hidden_nav');
+        authRefs.isHiddenForm.classList.add('is-hidden');
+        authRefs.onAccount.classList.add('account-on');
+        authRefs.userAccount.classList.remove('is-hidden-account');
       })
       .catch(error => {
         const errorCode = error.code;
         // ..
-        if (errorCode === 'auth/email-already-in-use') {
+        if (userEmail === "" || userPassword === "") {
+          Notify.failure('Please enter your email and password', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
+          return;
+        } 
+
+        else if (errorCode === 'auth/email-already-in-use') {
           Notify.failure('Email already in use. Please sign in.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
+          return;
         }
       });
-
-    authRefs.formRegister.classList.toggle('hide-form');
-    authRefs.navigationPages.classList.remove('hidden_nav');
-    authRefs.isHiddenForm.classList.add('is-hidden');
   }
 
   // ----------------- sign in Users ----------------------
 
-  if (event.submitter.value === 'enter') {
+  else if (event.submitter.value === 'enter') {
     signInWithEmailAndPassword(auth, userEmail, userPassword)
       .then(userCredential => {
         // Signed in
         const user = userCredential.user;
         // ...
         // console.log('user sign in: ', user);
-        console.log('welcome to your accaunt');
+        // console.log('welcome to your account');
+        authRefs.formRegister.classList.toggle('hide-form');
+        authRefs.navigationPages.classList.remove('hidden_nav');
+        authRefs.isHiddenForm.classList.add('is-hidden');
+        authRefs.onAccount.classList.add('account-on');
+        authRefs.userAccount.classList.remove('is-hidden-account');
+        Notify.info('Welcome to your account.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
       })
       .catch(error => {
         const errorCode = error.code;
-        if (errorCode === 'auth/wrong-password') {
-          Notify.failure('Wrong password. Try again.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
+        if (userEmail === "" || userPassword === ""){
+          Notify.failure('Please enter your email and password', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
         }
-        if (errorCode === 'auth/user-not-found') {
+        else if (errorCode === 'auth/wrong-password') {
+          Notify.failure('Wrong password. Try again.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
+          return;
+        }
+        else if (errorCode === 'auth/user-not-found') {
           Notify.failure('User not found. Check your email.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
+          return;  
         }
       });
-
-    authRefs.formRegister.classList.toggle('hide-form');
-    authRefs.navigationPages.classList.remove('hidden_nav');
-    authRefs.isHiddenForm.classList.add('is-hidden');
-    authRefs.onAccount.classList.add('account-on');
-    authRefs.userAccount.classList.remove('is-hidden-account')
   }
 
   // -------------clear form ----------
@@ -140,7 +155,7 @@ function logOut() {
   signOut(auth)
     .then(() => {
       // Sign-out successful.
-      console.log('You are sign out');
+      Notify.info('You are sign out.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
       authRefs.btnSignout.classList.add('hide-form');
       authRefs.iconForm.addEventListener('click', showForm);
       authRefs.navigationPages.classList.add('hidden_nav');
