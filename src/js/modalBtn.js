@@ -6,8 +6,6 @@ const queueList = document.querySelector('.add-btn__queue')
 watchedList.addEventListener('click', addToWatchedList)
 queueList.addEventListener('click', addToQueueList)
 
-const queryId = 756999
-
 function saveList (key, value){
 try {
     const serializedState = JSON.stringify(value);
@@ -17,7 +15,7 @@ try {
 }
 }
 
-function loadList (key){
+export function loadList (key){
 try {
     const serializedState = localStorage.getItem(key);
     return serializedState === null ? [] : JSON.parse(serializedState);
@@ -26,7 +24,8 @@ try {
 }
 }
 
-async function addToWatchedList() {
+async function addToWatchedList(e) {
+    const queryId = e.currentTarget.id
     const serchMove = await API.getModifiedSingleMovie(queryId)
     const storageList = loadList('moveList')
     const indexOfDublicateObj = storageList.findIndex(option => option.id === queryId)
@@ -46,7 +45,8 @@ async function addToWatchedList() {
     }
 }
 
-async function addToQueueList() {
+async function addToQueueList(e) {
+    const queryId = e.currentTarget.id
     const serchMove = await API.getModifiedSingleMovie(queryId)
     const storageList = loadList('moveList')
     const indexOfDublicateObj = storageList.findIndex(option => option.id === queryId)
