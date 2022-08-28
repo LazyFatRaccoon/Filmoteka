@@ -1,4 +1,4 @@
-import { Loading } from 'Notiflix';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
 export function notiflixLoading() {
     Loading.dots({
