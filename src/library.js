@@ -1,3 +1,5 @@
+
+import './js/loaderGIF-library';
 import './js/foter-scrolltop';
 import './js/modalBtn';
 import './js/modalShow';

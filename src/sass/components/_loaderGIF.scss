@@ -1,0 +1,41 @@
+#loading-home {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    text-align: center;
+    opacity: 0.9;
+    background-color: #fff;
+    z-index: 99;
+  }
+  
+  #loading-image-home {
+    z-index: 100;
+  }
+
+  #loading-library {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    text-align: center;
+    opacity: 0.9;
+    background-color: #fff;
+    z-index: 99;
+  }
+  
+  #loading-image-library {
+    z-index: 100;
+  }

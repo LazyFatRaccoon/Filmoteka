@@ -40,6 +40,7 @@
 
 
 .modal-footer.open-footer{
+    //display:block;
     opacity: 1;
     visibility: visible;
     transition: all 1s ease 0s;
@@ -92,8 +93,11 @@
     width: 40px;
     height: 48px;
 }
-
+.backdrop-footer {
+    display: none;
+}
 .backdrop-footer.open-footer{
+    display:block;
     z-index: 9;
     position: fixed;
     background-color: darkgray;
@@ -106,11 +110,12 @@
 }
 
     .modal-footer{
+        //display:none;
         z-index: 10;
     background-color: $white;
     border-radius: 2px;
     position: fixed;
-    display: flex;
+    //display: flex;
     justify-content: center;
     align-items: center;
     //height: 100%;
@@ -119,9 +124,11 @@
     left: 0;
     right: 0;
     margin: 0 auto;
+
     opacity: 0;
     visibility: hidden;
-    transition: all 1s ease 0s;
+
+    transition: opcity 1s ease 0s;
 }
 @media screen and (min-width: 1280px){}
 @media screen and (min-width: 769px) and (max-width: 1279px){

@@ -13,6 +13,9 @@ const refs = {
   refs.openModalBtn.addEventListener("click", toggleModal);
   refs.Background.addEventListener("click", escapeBackground);
 
+  refs.modal.classList.remove("open-footer");
+  refs.Background.classList.remove("open-footer");
+
   function toggleModal() {
     refs.modal.classList.toggle("open-footer");
     refs.Background.classList.toggle("open-footer");

@@ -1,5 +1,6 @@
 
-
+ 
+import './js/loaderGIF-home';
 import './js/devolopers';
 
 import './js/firebase/firebaseAuth';
