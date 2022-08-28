@@ -41,7 +41,7 @@ function createPosterFilm(posterLink) {
   if (posterLink) {
     return `https://image.tmdb.org/t/p/w600_and_h900_bestv2${posterLink}`;
   }
-  return `/src/images/camera.jpg`;
+  return `/camera.16990362.jpg`;
 }
 
 const filmsListEl = document.querySelector('.films__list');
@@ -61,9 +61,12 @@ export function createGallery(filmsArry) {
                   <p class="films__description">${createGenresFilmArray(
                     item.genre_ids ?? item.genres
                   )} | ${createYearFilm(item.release_date.slice(0, 4))}</p>
-                  <svg class="svg" width="30" height="30">
-          <use href="/src/images/auth-icon/login-icon.svg#icon-watched"></use>
-        </svg>
+                  <svg class="films__svg hide-form" width="30" height="30">
+                    <use href="/login-icon.e91ce56e.svg#icon-watched"></use>
+                  </svg>
+                  <svg class="films__svg hide-form" width="30" height="30">
+                    <use href="/login-icon.e91ce56e.svg#icon-queue"></use>
+                  </svg>
              </div>
             </li>`),
     ''
