@@ -1,5 +1,6 @@
 import API from './apiService/movieAPI';
 import { initPagination } from './pagination-try';
+import { scrollTopTop } from './foter-scrolltop';
 
 if (document.title === 'Filmoteka') consoleModifiedPopular();
 
@@ -47,6 +48,7 @@ function createPosterFilm(posterLink) {
 const filmsListEl = document.querySelector('.films__list');
 
 export function createGallery(filmsArry) {
+
   filmsListEl.innerHTML = '';
   console.log(filmsArry)
   const result = filmsArry.reduce(
@@ -67,4 +69,5 @@ export function createGallery(filmsArry) {
   );
 
   filmsListEl.insertAdjacentHTML('beforeend', result);
+  scrollTopTop();
 }
