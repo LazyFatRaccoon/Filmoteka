@@ -1,0 +1,49 @@
+import './js/foter-scrolltop';
+
+import API from './js/apiService/movieAPI'
+import {initPagination} from './js/pagination-try'
+
+let watchedList = JSON.parse(localStorage.getItem('wathedList')) || [];
+let queueList =  JSON.parse(localStorage.getItem('queueList')) || [];
+
+const watchedBtn = document.querySelector('#watchedBtn')
+const queueBtn = document.querySelector('#queueBtn')
+const emptyGallery = document.querySelector('.empty')
+const pagination = document.querySelector('#pagination')
+
+if (document.title === 'Filmoteka-library') {console.log('I here'); galleryRender(queueList);}
+
+queueBtn.addEventListener('click', function(){
+    if (queueBtn.classList.contains('selected')) return;
+    queueBtn.classList.add('selected')
+    watchedBtn.classList.remove('selected')
+    queueList = JSON.parse(localStorage.getItem('queueList')) || []; 
+    console.log(queueList)
+    galleryRender(queueList)
+})
+
+watchedBtn.addEventListener('click', function(){
+    if (watchedBtn.classList.contains('selected')) return;
+    watchedBtn.classList.add('selected')
+    queueBtn.classList.remove('selected')
+    watchedList = JSON.parse(localStorage.getItem('watchedList')) || [];
+    console.log(watchedList)
+    galleryRender(watchedList)
+})
+
+
+
+function galleryRender(moviesList) {
+    (moviesList.length === 0) ? emptyGallery.classList.remove("hide") : emptyGallery.classList.add("hide");
+    (moviesList.length === 0) ? pagination.classList.add("hide") : pagination.classList.remove("hide");
+
+    let page = 1; 
+    initPagination({
+      page,
+      itemsPerPage: 20,
+      totalItems: moviesList.length,
+      data: 'library',
+      firstTime: true,
+      list: moviesList,
+    });
+  }

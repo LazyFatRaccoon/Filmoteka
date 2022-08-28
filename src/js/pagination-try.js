@@ -27,7 +27,7 @@ export const paginationSettings = {
   };
 
 
-export const initPagination = async ({ page, itemsPerPage, totalItems, data, query, firstTime }) => {
+export const initPagination = async ({ page, itemsPerPage, totalItems, data, query, firstTime, list }) => {
     const options = {
       page,
       itemsPerPage,
@@ -36,12 +36,13 @@ export const initPagination = async ({ page, itemsPerPage, totalItems, data, que
       centerAlign: true,
       data,   
       query,
-      firstTime
+      firstTime,
+      list
     };
     
     const pagination = new Pagination(paginationContainer, options);
     paginationSettings.pagination = pagination;
-
+   
 
         if (options.firstTime) {
             if (options.data.toString() === "search") {
@@ -58,6 +59,20 @@ export const initPagination = async ({ page, itemsPerPage, totalItems, data, que
                 try {
                     const response = await API.getModifiedMoviesList(page);
                     createGallery(response.results);
+                    options.firstTime = false;
+
+                  } catch (error) {
+                    console.log(error);
+                  }
+            }
+            if (options.data.toString() === "library") {
+                
+                try {
+                    const newList =  options.list.slice(0, options.itemsPerPage)
+
+                    const response = await Promise.all(newList.map(async (movie) => (API.getModifiedSingleMovie(movie)))) 
+                    console.log(response)
+                    createGallery(response);
                     options.firstTime = false;
 
                   } catch (error) {
@@ -86,6 +101,24 @@ export const initPagination = async ({ page, itemsPerPage, totalItems, data, que
                 console.log(error);
               }
         }
+        if (options.data.toString() === "library") {
+            try {
+
+                const newList =  options.list.slice((page-1)*options.itemsPerPage, page*options.itemsPerPage)
+                console.log(newList)
+                console.log(options.itemsPerPage)
+                const response = await Promise.all(newList.map(async (movie) => (API.getModifiedSingleMovie(movie))))
+
+                console.log(options.list)
+                console.log(page)
+                
+                createGallery(response);
+               
+              } catch (error) {
+                console.log(error);
+              }
+        }
+
         
     })
 
