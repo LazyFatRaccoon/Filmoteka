@@ -42,7 +42,7 @@ function createPosterFilm(posterLink) {
   if (posterLink) {
     return `https://image.tmdb.org/t/p/w600_and_h900_bestv2${posterLink}`;
   }
-  return `/Filmoteka/camera.69eaffdd.jpg`;
+  return `/Filmoteka/camera.29a7bb66.jpg`;
 }
 
 const filmsListEl = document.querySelector('.films__list');
@@ -63,11 +63,11 @@ export function createGallery(filmsArry) {
                     item.genre_ids ?? item.genres
                   )} | ${createYearFilm(item.release_date.slice(0, 4))}</p>
                   <svg class="films__svg " width="30" height="30">
-                    <use href="/login-icon.e91ce56e.svg#icon-watched"></use>
+                    <use href="/Filmoteka/login-icon.2e0a9156.svg#icon-watched"></use>
                   </svg>
 
                   <svg class="films__svg hide-form" width="30" height="30">
-                    <use href="/login-icon.e91ce56e.svg#icon-queue"></use>
+                    <use href="/Filmoteka/login-icon.2e0a9156.svg#icon-queue"></use>
                   </svg>
              </div>
             </li>`),
