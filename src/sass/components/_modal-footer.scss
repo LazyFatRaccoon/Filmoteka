@@ -42,7 +42,7 @@
 .modal-footer.open-footer{
     opacity: 1;
     visibility: visible;
-    transition: all 1s ease 0s;
+    transition: opcity 1s ease 0s;
     
 }
 
@@ -79,9 +79,9 @@
 
 .modal-close-btn{
     cursor: pointer;
-    position: fixed;
-    top: 46px;
-    right: 20;
+    position: absolute;
+        top: -6px;
+        right: -6px;
     border: 0;
     background-color: rgba(0, 0, 0, 0);
 }
@@ -97,12 +97,13 @@
     z-index: 9;
     position: fixed;
     background-color: darkgray;
-    top: 0;
+    top: -30;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    transition: all 1s ease 0s;
+    width: 110vw;
+    height: 112vh;
+    transition: opcity 1s ease 0s;
     opacity: 1;
+        border-radius: 22px;
 }
 
     .modal-footer{
@@ -110,7 +111,6 @@
     background-color: $white;
     border-radius: 2px;
     position: fixed;
-    display: flex;
     justify-content: center;
     align-items: center;
     //height: 100%;
@@ -121,19 +121,27 @@
     margin: 0 auto;
     opacity: 0;
     visibility: hidden;
-    transition: all 1s ease 0s;
+    transition: opcity 1s ease 0s;
 }
-@media screen and (min-width: 1280px){}
+@media screen and (min-width: 1280px){
+    .developer-foto{
+            width: 202px;
+            height: 188px;
+        }
+
+        .modal-footer{
+            top: calc(50% - 30vh);
+        }
+}
 @media screen and (min-width: 769px) and (max-width: 1279px){
     .modal-footer{
         width: 770px;
     }
 
-    // .developer-foto{
-    //     width: 158px;
-    //     height: 158px;
-    // }
-
+        .developer-foto {
+            width: 202px;
+            height: 188px;
+        }
     
 
 }
