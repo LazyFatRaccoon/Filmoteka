@@ -79,7 +79,6 @@ function loadStorage(KEY) {
   try {
     const savedSettings = localStorage.getItem(KEY);
     const parsedSettings = JSON.parse(savedSettings);
-    console.log(parsedSettings);
     return parsedSettings;
   } catch (error) {
     console.error('Get state error: ', error.message);
