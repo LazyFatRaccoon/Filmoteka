@@ -37,6 +37,7 @@ function openCart(e) {
     }
     serchId = liItem.dataset.id
     onOpenModal(serchId)
+    return serchId
 }
 
 function onOpenModal(serchId) {
