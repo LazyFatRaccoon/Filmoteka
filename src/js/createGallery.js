@@ -18,17 +18,17 @@ async function consoleModifiedPopular() {
   });
 }
 
-function createGanresFilmArray(ganresArray) {
-  if (ganresArray.length !== 0) {
-    let ganresFilm = [];
-    const ganresName = ganresArray.reduce((acc, item) => {
-      ganresFilm.push(` ${item}`);
+function createGenresFilmArray(genresArray) {
+  if (genresArray.length !== 0) {
+    let genresFilm = [];
+    const genresName = genresArray.reduce((acc, item) => {
+      genresFilm.push(` ${item}`);
     }, 0);
-    if (ganresFilm.length > 2) {
-      ganresFilm.push(' Other');
-      ganresFilm.splice(2, ganresFilm.length - 3);
+    if (genresFilm.length > 2) {
+      genresFilm.push(' Other');
+      genresFilm.splice(2, genresFilm.length - 3);
     }
-    return ganresFilm;
+    return genresFilm;
   }
   return `No genre`;
 }
@@ -42,7 +42,7 @@ function createPosterFilm(posterLink) {
   if (posterLink) {
     return `https://image.tmdb.org/t/p/w600_and_h900_bestv2${posterLink}`;
   }
-  return `https://pixabay.com/get/g38c80999780e72f41614762ea85744e6fc1749406d780e484dc5eb28fd6e7ca88a98a855524e2651c863236da730ba61b90382a86f9f40e825f45319957b262d_1280.jpg`;
+  return `/camera.16990362.jpg`;
 }
 
 const filmsListEl = document.querySelector('.films__list');
@@ -50,7 +50,7 @@ const filmsListEl = document.querySelector('.films__list');
 export function createGallery(filmsArry) {
 
   filmsListEl.innerHTML = '';
-  console.log(filmsArry)
+  console.log(filmsArry);
   const result = filmsArry.reduce(
     (acc, item) =>
       (acc += `
@@ -60,9 +60,16 @@ export function createGallery(filmsArry) {
               )}" alt="${item.overview}" />
                 <div class="films__decor">
                   <h2 class="films__title">${item.title}</h2>
-                  <p class="films__description">${createGanresFilmArray(
+                  <p class="films__description">${createGenresFilmArray(
                     item.genre_ids ?? item.genres
                   )} | ${createYearFilm(item.release_date.slice(0, 4))}</p>
+                  <svg class="films__svg " width="30" height="30">
+                    <use href="/login-icon.e91ce56e.svg#icon-watched"></use>
+                  </svg>
+
+                  <svg class="films__svg hide-form" width="30" height="30">
+                    <use href="/login-icon.e91ce56e.svg#icon-queue"></use>
+                  </svg>
              </div>
             </li>`),
     ''

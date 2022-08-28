@@ -6,24 +6,26 @@
 }
 
 .films__item {
-    display: flex;
+    position: relative;
+    border-radius: 5px;
     margin-top: 20px;
-    overflow: hidden; /* Скрываем всё за контуром */
+    overflow: hidden;
+    display: block;
+
+    &:hover,
+    &:focus {
         transition: 500ms;
-            /* Время эффекта */
-            display: block;
-        &:hover,
-        &:focus {
-            cursor: pointer;
-            transform: scale(1.01);
-            box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
-                }
+        cursor: pointer;
+        transform: scale(1.01);
+        box-shadow: 0px 5px 20px 5px rgba(255, 107, 8, 0.2);
+    }
 }
 
 
 
-.films__img{
+.films__img {
     object-fit: cover;
+    border-radius: 5px;
     height: 402px;
 
 }
@@ -46,6 +48,14 @@
     line-height: $font_height_l;
      color: $accent;
 }
+.films__svg{
+    position: absolute;
+        right: 8px;
+        top: 8px;
+        display: flex;
+        fill: $accent;
+        border-radius: 50%;
+        background-color: rgba($color: white, $alpha: 0.7);}
 
 
 @media screen and (min-width: 768px) {
