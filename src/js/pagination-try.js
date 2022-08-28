@@ -68,11 +68,13 @@ export const initPagination = async ({ page, itemsPerPage, totalItems, data, que
             if (options.data.toString() === "library") {
                 
                 try {
+                    if (options.list) {
                     const newList =  options.list.slice(0, options.itemsPerPage)
-
                     const response = await Promise.all(newList.map(async (movie) => (API.getModifiedSingleMovie(movie)))) 
-                    console.log(response)
                     createGallery(response);
+                }
+                    //console.log(response)
+                    
                     options.firstTime = false;
 
                   } catch (error) {
