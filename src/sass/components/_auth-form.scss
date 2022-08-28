@@ -19,6 +19,10 @@
     width: 35px;
     height: 35px; 
   }
+
+  &:hover {
+    fill: #ff6b01;
+  }
 }
 
 .auth-form {
@@ -31,8 +35,6 @@
   & input {
     width: 100%;
     margin-bottom: 5px;
-    border: 0.5px solid $white;
-    border-radius: 5px;
     background-color: transparent;
     color: $white;
     font-family: 'Roboto';
@@ -56,6 +58,10 @@
       font-size: $font_size_m;
       line-height: $font_height_s;
     }
+
+    &:focus {
+      border-bottom: 1px solid #ff6b01;
+    }
   }
 }
 
@@ -77,6 +83,10 @@
   font-size: $font_size_m;
   line-height: $font_height_s;
   cursor: pointer;
+
+  &:hover {
+  color: #ff6b01
+  }
 }
 
 .btn-register {
@@ -90,6 +100,10 @@
   font-size: $font_size_m;
   line-height: $font_height_s;
   cursor: pointer;
+
+  &:hover {
+    color: #ff6b01
+    }
 }
 
 .is-hidden {

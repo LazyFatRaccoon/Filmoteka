@@ -79,7 +79,7 @@
 .header__form {
     margin-top: 54px;
     display: flex;
-    align-items: center;
+    align-content: center;
     justify-content: center;
 
     @media screen and (min-width: $tablet){ 
@@ -124,12 +124,16 @@
 }
 
 .header__submit {
-    width: 14px;
-    height: 14px;
+    width: 18px;
+    height: 18px;
     background: transparent;
     border: none;
     margin-left: -20px;
+    cursor: pointer;
+}
 
+.header__icon-submit {
+    margin-left: -3px;
 }
 
 .header__logo {
@@ -137,6 +141,10 @@
 
     @media screen and (min-width: $tablet){ 
         height: 35px;
+
+        &:focus {
+            outline: none;
+        }
     }
 }
 
@@ -146,7 +154,7 @@
     font-style: normal;
     font-weight: 500;
     font-size: $font_size_xxl;
-    line-height: $font_height_m;
+    line-height: $font_height_s;
     color: $white;
     margin-left: 8px;
 
@@ -263,5 +271,14 @@
 
 .header__decor {
     color: $white;
+<<<<<<< Updated upstream:src/sass/components/header_home.scss
 >>>>>>> Stashed changes
+=======
+}
+
+
+.selected {
+    background-color: #ff6b01;
+    border: none;
+>>>>>>> Stashed changes:src/sass/components/_header_home.scss
 }
