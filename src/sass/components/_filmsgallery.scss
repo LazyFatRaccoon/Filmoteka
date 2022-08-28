@@ -2,25 +2,60 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+
 }
 
 .films__item {
+    position: relative;
+    border-radius: 5px;
     margin-top: 20px;
+    overflow: hidden;
+    display: block;
+
+    &:hover,
+    &:focus {
+        transition: 500ms;
+        cursor: pointer;
+        transform: scale(1.01);
+        box-shadow: 0px 5px 20px 5px rgba(255, 107, 8, 0.2);
+    }
 }
 
-.films__link {
+
+
+.films__img {
+    object-fit: cover;
+    border-radius: 5px;
+    height: 402px;
+
+}
+.films__decor {
     display: flex;
     flex-direction: column;
-    height: 100%;
-}
-
-.films__decor {
     padding-top: 10px;
 }
-
 .films__title {
+    font-weight: $font_weight_l;
+    font-size: $font_size_s;
+    line-height: $font_height_l;
     text-transform: uppercase;
+    color: $black;
+    
 }
+.films__description {
+    font-weight: $font_weight_l;
+    font-size: $font_size_s;
+    line-height: $font_height_l;
+     color: $accent;
+}
+.films__svg{
+    position: absolute;
+        right: 8px;
+        top: 8px;
+        display: flex;
+        fill: $accent;
+        border-radius: 50%;
+        background-color: rgba($color: white, $alpha: 0.7);}
 
 
 @media screen and (min-width: 768px) {
@@ -37,10 +72,15 @@
         margin-bottom: 32px;
         margin-top: 0px;
     }
+        .films__img {
+            height: 455px;
+        }
+
 }
 
 @media screen and (min-width: 1280px) {
     .films__list {
+        min-height: 634px;
         margin-left: -16px;
 
     }
@@ -49,4 +89,22 @@
         flex-basis: calc((100% - 48px) / 3);
         margin-left: 16px;
     }
+    .films__img {
+        height: 574px;
+    }
+    .films__title {
+        font-weight: $font_weight_l;
+         font-size: $font_size_xl;
+        line-height: $font_height_m;
+        text-transform: uppercase;
+        color: $black;
+    
+     }
+    
+    .films__description {
+         font-weight: $font_weight_l;
+         font-size: $font_size_xl;
+        line-height: $font_height_m;
+        color: $accent;
+     }
 }

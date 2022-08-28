@@ -4,7 +4,7 @@
   "description": "",
   "homepage": "https://LazyFatRaccoon.github.io/Filmoteka",
   "scripts": {
-    "start": "parcel src/*.html --port 3334",
+    "start": "parcel src/*.html --port 3340",
     "build": "parcel build src/*.html --public-url /Filmoteka/"
   },
   "repository": {
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "firebase": "^9.9.3",
     "modern-normalize": "^1.1.0",
     "notiflix": "^3.2.5",
     "tui-pagination": "^3.4.1"
