@@ -25,7 +25,7 @@ refs.gallery.addEventListener('click', openCart)
 refs.closeBtn.addEventListener('click', closeModal)
 refs.backdrop.addEventListener('click', onBackdropCloseModal)
 
-// let serchId = 0
+let serchId = 0
 
 function openCart(e) {
     const liItem = e.path.filter(a => a.nodeName === 'LI')[0]
