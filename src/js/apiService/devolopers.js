@@ -1,6 +1,6 @@
 
 export const devolopers = [
-  { name: "Raccoon", image: "https://raw.githubusercontent.com/LazyFatRaccoon/Filmoteka/main/src/images/Raccoon3.webp", work: "Tim-Lid", media:"https://github.com/LazyFatRaccoon" },
+  { name: "Володимиор Тодоров", image: "https://raw.githubusercontent.com/LazyFatRaccoon/Filmoteka/main/src/images/Raccoon3.webp", work: "Tim-Lid", media:"https://github.com/LazyFatRaccoon" },
   { name: "Станіслав Тищенко", image: "https://raw.githubusercontent.com/LazyFatRaccoon/Filmoteka/main/src/images/Stanislav-Tishchenko.webp", work: "Tim-Lid", media:"https://github.com/Stanislav2022" },
   { name: "Олександо Горжій", image: "https://raw.githubusercontent.com/LazyFatRaccoon/Filmoteka/main/src/images/Raccoon3.webp", work: "Tim-Lid", media:"https://github.com/AlexHorzhij" },
   { name: "Андрій Бачинский", image: "https://github.com/LazyFatRaccoon/Filmoteka/blob/main/src/images/Andriy-Bachynskyi.jpg?raw=true", work: "Tim-Lid", media:"https://github.com/Bachynckyi" },
