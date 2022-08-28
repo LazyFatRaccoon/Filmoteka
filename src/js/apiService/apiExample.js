@@ -21,9 +21,9 @@ refs.modifiedPopularBtn.addEventListener('click', consoleModifiedPopular)
 refs.modifiedSearchBtn.addEventListener('click', consoleModifiedSearch)
 refs.modifiedSingleMoviehBtn.addEventListener('click', consoleModifiedSingleMovie)
 
-const watchedList = JSON.parse(localStorage.getItem('wachedList')) || [];
-watchedList.push(756999);
-localStorage.setItem('watchedList', JSON.stringify(watchedList));
+// const watchedList = JSON.parse(localStorage.getItem('wachedList')) || [];
+// watchedList.push(756999);
+// localStorage.setItem('watchedList', JSON.stringify(watchedList));
 
 async function consolePopular() {
     const data = await API.getPopularMovies(1)

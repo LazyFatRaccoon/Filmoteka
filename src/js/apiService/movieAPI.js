@@ -80,7 +80,7 @@ export default {
       const dataWithGenres = await Promise.all(movies.results.map(async (movie) => ({     
         ...movie,
         watched: watchedList ? watchedList.includes(movie.id) ? true : false : false,
-        queque: queueList ? queueList.includes(movie.id) ? true : false : false,
+        queue: queueList ? queueList.includes(movie.id) ? true : false : false,
         trailers: await this.getMovieTrailers(movie.id),
         genre_ids: movie.genre_ids.map(id => genresObj[id]),
       })));
@@ -105,7 +105,7 @@ export default {
       const modifiedData = {     
         ...movie,
         watched: watchedList ? watchedList.includes(movie.id) ? true : false : false,
-        queque: queueList ? queueList.includes(movie.id) ? true : false : false,
+        queue: queueList ? queueList.includes(movie.id) ? true : false : false,
         trailers: trailers,
         genres: movie.genres.map(id => genresObj[id.id]),
       };
