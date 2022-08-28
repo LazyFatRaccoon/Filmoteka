@@ -4,7 +4,6 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    opacity: 0.9;
     background-image: url("../images/mobile320@1px.jpg");
     
     @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
@@ -242,24 +241,24 @@
     background-position: center;
     background-size: cover;
     opacity: 0.9;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url("../images/library-mobile320@1px.jpg");
+    background-image: url("../images/library-mobile320@1px.jpg");
     
     @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url("../images/library-mobile320@2px.jpg");
+        background-image: url("../images/library-mobile320@2px.jpg");
     }
 
     @media screen and (min-width: $tablet) {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url("../images/library-tablet768@1px.jpg");
+        background-image: url("../images/library-tablet768@1px.jpg");
         height: 216px;
         @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url("../images/library-tablet768@2px.jpg");
+            background-image: url("../images/library-tablet768@2px.jpg");
         }
     }
 
     @media screen and (min-width: $desktop) {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url("../images/library-desktop1280@1px.jpg"); 
+        background-image: url("../images/library-desktop1280@1px.jpg"); 
         @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url("../images/library-desktop1280@2px.jpg");
+            background-image: url("../images/library-desktop1280@2px.jpg");
         }
     }  
 }
