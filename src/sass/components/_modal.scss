@@ -2,8 +2,9 @@
     width: 100%;
     height: 100%;
     background-color: rgba($color: $black, $alpha: 0.25);
-    position: absolute;
+    position: fixed;
     top: 0;
+    z-index: 200;
 }
 
 .modal {
@@ -174,6 +175,10 @@
         line-height: 1.33;
         transition: scale 500ms linear, transform 300ms ease-in-out;
 
+        border: 1px solid $black;
+        border-radius: 5px;
+        background-color: $white;
+
         &:hover,
         &:focus {
             transform: scale(1.05);
@@ -186,37 +191,18 @@
     }
 }
 
-.add-btn {
-    &__watched {
-        background-color: #FF6B01;
+button.disabl {
+    background-color: #FF6B01;
         border: 1px solid #FF6B01;
         border-radius: 5px;
         color: $white;
-
-    }
-
-    &__queue {
-        border: 1px solid $black;
-        border-radius: 5px;
-        background-color: $white;
-    }
-
 }
-
-button.disabl {
-    background-color: #8C8C8C;
-}
-
 
 .isHidden {
     opacity: 1;
     visibility: hidden;
     display: none;
-}
-
-.pages-link{
-    display: block;
-    background-color: red;
+    pointer-events: none;
 }
 
 .scroll {
