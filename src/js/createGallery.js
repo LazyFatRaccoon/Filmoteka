@@ -67,7 +67,7 @@ export function createGallery(filmsArry) {
                   </svg>
 
                   <svg class="films__svg hide-form" width="30" height="30">
-                    <use href="/Filmoteka/login-icon.2e0a9156.svg#icon-watched"></use>
+                    <use href="/Filmoteka/login-icon.2e0a9156.svg#icon-queue"></use>
                   </svg>
              </div>
             </li>`),
