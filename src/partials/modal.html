@@ -40,3 +40,50 @@
     </div>
   </div>
 </div>
+
+<!-- 
+const markup = `
+<button class="modal__close-btn">
+  <svg class="modal__close-btn-svg" width="30" height="30">
+    <use href="./images/symbol-defs.a8b2e413.svg#icon-close"></use>
+  </svg>
+</button>
+<div class="modal__preview">
+  <img src="${createPoster(poster_path)}" />
+</div>
+<div class="modal__discription">
+  <h2 class="discription__title">${original_title}</h2>
+  <ul class="discription__mvi">
+    <li class="mvi">
+      <p class="mvi__key">Vote / Votes</p>
+      <p class="mvi__val">
+        <span class="mvi__rait">${vote_average.toFixed(2)}</span
+        ><span class="mvi__slash">/</span
+        ><span class="mvi__watch">${vote_count}</span>
+      </p>
+    </li>
+    <li class="mvi">
+      <p class="mvi__key">Popularity</p>
+      <p class="mvi__val mvi__pop">${popularity.toFixed(1)}</p>
+    </li>
+    <li class="mvi">
+      <p class="mvi__key">Original Title</p>
+      <p class="mvi__val mvi__name">${original_title}</p>
+    </li>
+    <li class="mvi">
+      <p class="mvi__key">Genre</p>
+      <p class="mvi__val mvi__genre">${genre.join(", ")}</p>
+    </li>
+  </ul>
+  <h3 class="discription__about">About</h3>
+  <p class="discription__about-text">${overview}</p>
+  <div class="button">
+    <button class="button__add add-btn__watched">
+      ${marckupBtn(idForSearch)[0]}
+    </button>
+    <button class="button__add add-btn__queue">
+      ${marckupBtn(idForSearch)[1]}
+    </button>
+  </div>
+</div>
+` refs.modal.insertAdjacentHTML('afterbegin', markup) -->
