@@ -54,9 +54,6 @@ notiflixLoading();
 
 onAuthStateChanged(auth, user => {
   if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    // ...
     authRefs.userAccount.insertAdjacentHTML('afterbegin',
       `<p class ="user-name" style="color: white;">Your email is: ${user.email}</p>`);
     // console.log('in user check status: ', user);
@@ -93,9 +90,6 @@ function createUser(event) {
   if (event.submitter.value === 'register') {
       createUserWithEmailAndPassword(auth, userEmail, userPassword)
       .then(userCredential => {
-        // Signed in
-        // const user = userCredential.user;
-        // ...
         Notify.info('Registration is successfull.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
         authRefs.formRegister.classList.toggle('hide-form');
         authRefs.navigationPages.classList.remove('hidden_nav');
@@ -105,7 +99,6 @@ function createUser(event) {
       })
       .catch(error => {
         const errorCode = error.code;
-        // ..
         if (userEmail === "" || userPassword === "") {
           Notify.failure('Please enter your email and password', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
           return;
@@ -125,9 +118,6 @@ function createUser(event) {
       .then(userCredential => {
         // Signed in
         const user = userCredential.user;
-        // ...
-        // console.log('user sign in: ', user);
-        // console.log('welcome to your account');
         authRefs.formRegister.classList.toggle('hide-form');
         authRefs.navigationPages.classList.remove('hidden_nav');
         authRefs.isHiddenForm.classList.add('is-hidden');
@@ -165,7 +155,6 @@ function logOut() {
 
   signOut(auth)
     .then(() => {
-      // Sign-out successful.
       Notify.info('You are sign out.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
       authRefs.btnSignout.classList.add('hide-form');
       authRefs.iconForm.addEventListener('click', showForm);
@@ -177,7 +166,6 @@ function logOut() {
       userName.remove();
     })
     .catch(error => {
-      // An error happened.
       console.log('error: ', error);
     });
 }
