@@ -62,11 +62,14 @@ onAuthStateChanged(auth, user => {
     authRefs.isHiddenForm.classList.add('is-hidden');
     authRefs.userAccount.classList.remove('is-hidden-account');
     authRefs.btnSignout.classList.remove('hide-form');
+    authRefs.formRegister.classList.add('hide-form');
+    
   }
   else {
     authRefs.userAccount.classList.add('is-hidden-account');
     authRefs.btnSignout.classList.add('hide-form');
     authRefs.navigationPages.classList.add('hidden_nav');
+    authRefs.formRegister.classList.add('hide-form');
   }
 });
 
