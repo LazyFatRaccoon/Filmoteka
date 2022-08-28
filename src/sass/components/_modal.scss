@@ -9,11 +9,14 @@
 
 .modal {
     position: relative;
+    justify-content: flex-start;
     z-index: 100;
     width: 280px;
     height: auto;
     padding: 48px 20px 40px 20px;
     background-color: $white;
+    border: 1px solid transparent;
+    border-radius: 5px;
     margin: 0 auto;
     left: 0;
     top: 50%;
@@ -21,7 +24,7 @@
 
     @media screen and (min-width: $tablet) {
         display: flex;
-        justify-content: space-between;
+        // justify-content: space-between;
         padding: 40px 72px 40px 36px;
         width: 704px;
         // height: 552px;
@@ -29,7 +32,7 @@
 
     @media screen and (min-width: $desktop) {
         display: flex;
-        justify-content: space-between;
+        // justify-content: space-between;
         padding: 40px 12px;
         width: 806px;
         // height: 558px;
@@ -38,6 +41,9 @@
     &__preview {
         width: 240px;
         margin-bottom: 20px;
+        overflow: hidden;
+        border: 1px solid transparent;
+        border-radius: 5px;
 
         @media screen and (min-width: $tablet) {
             min-width: 264px;
@@ -51,13 +57,17 @@
             // height: 478px;
             margin-right: 16px;
         }
+        &-img{
+            height: 100%;
+            object-fit: cover;
+        }
     }
 
     &__close-btn {
         position: absolute;
         right: 16px;
         top: 16px;
-        background-color: $white;
+        background-color: transparent;
         border: none;
         transition: rotate 500ms linear, transform 300ms ease-in-out;
 
@@ -156,6 +166,7 @@
 .button {
     display: flex;
     justify-content: space-between;
+    gap: 15px;
 
     @media screen and (min-width: $desktop) {
         justify-content: flex-start;
@@ -193,9 +204,9 @@
 
 button.disabl {
     background-color: #FF6B01;
-        border: 1px solid #FF6B01;
-        border-radius: 5px;
-        color: $white;
+    border: 1px solid #FF6B01;
+    border-radius: 5px;
+    color: $white;
 }
 
 .isHidden {
