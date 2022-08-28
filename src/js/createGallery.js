@@ -1,6 +1,8 @@
 import API from './apiService/movieAPI';
 import { initPagination } from './pagination-try';
 import { scrollTopTop } from './foter-scrolltop';
+const KEY_WATCHED = 'watchedList';
+const KEY_QUEUE = 'queueList';
 
 if (document.title === 'Filmoteka') consoleModifiedPopular();
 
@@ -72,14 +74,10 @@ export function createGallery(filmsArry) {
   scrollTopTop();
 }
 
-const KEY_WATCHED = 'watchedList';
-const KEY_QUEUE = 'queueList';
-
 function loadStorage(KEY) {
   try {
     const savedSettings = localStorage.getItem(KEY);
-    const parsedSettings = JSON.parse(savedSettings);
-    return parsedSettings;
+    return savedSettings === null ? [] : JSON.parse(savedSettings);
   } catch (error) {
     console.error('Get state error: ', error.message);
   }
@@ -94,6 +92,6 @@ function createSvg(idFilm) {
                     <use href="/Filmoteka/login-icon.2e0a9156.svg#icon-queue"></use>
                   </svg>`;
   } else {
-    return ``;
+    return;
   }
 }
