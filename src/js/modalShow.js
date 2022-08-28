@@ -29,8 +29,12 @@ let serchId = 0
 
 function openCart(e) {
     const liItem = e.path.filter(a => a.nodeName === 'LI')[0]
-    notiflixLoading()
+    console.log(liItem)
 
+    notiflixLoading()
+    if (liItem === 'LI') {
+        console.log('OK')
+    }
     serchId = liItem.dataset.id
     onOpenModal(serchId)
 }

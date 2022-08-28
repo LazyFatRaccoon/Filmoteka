@@ -5,7 +5,7 @@ import { refs } from './modalShow'
 //=========================================
 
 // watchedList.addEventListener('click', changeWatchedStatus)
-// queueList.addEventListener('click', changeQueueStatus)
+// quequeList.addEventListener('click', changeQueueStatus)
 
 
 const removeFromWatchedList = (e) => {
@@ -23,23 +23,23 @@ const addToWatchedListV = (e) => {
  }
  const removeFromQueueList = (e) => {
     const queryId = e.currentTarget.id;
-    const storageList = loadList('queueList');
+    const storageList = loadList('quequeList');
     const newStorageList = storageList.filter((movie) => movie != parseInt(queryId));
-    saveList('queueList', newStorageList);
+    saveList('quequeList', newStorageList);
 }
  const addToQueueListV = (e) => {
     const queryId = e.currentTarget.id
-    const storageList = loadList('queueList')
+    const storageList = loadList('quequeList')
     storageList.push(parseInt(queryId))
-    saveList('queueList', storageList)
+    saveList('quequeList', storageList)
 }
  //=================================================
 
 const watchedList = document.querySelector('.add-btn__watched')
-const queueList = document.querySelector('.add-btn__queue')
+const quequeList = document.querySelector('.add-btn__queue')
 
 watchedList.addEventListener('click', addToWatchedList)
-queueList.addEventListener('click', addToQueueList)
+quequeList.addEventListener('click', addToQueueList)
 
 function saveList (key, value){
 try {
@@ -131,22 +131,27 @@ try {
 
 
 async function addToWatchedList(e) {
-    addToWatchedListV(e)
-    removeFromQueueList(e)
+    watchedList.classList.toggle('disabl')
+    const dis = watchedList.classList.contains('disabl')
+    if (dis) {
+        addToWatchedListV(e)
+        removeFromQueueList(e)
+    } else {
+        removeFromWatchedList(e)
+    }
     
     const queryId = e.currentTarget.id
     const serchMove = await API.getModifiedSingleMovie(queryId)
     const storageList = loadList('moveList')
     const indexOfDublicateObj = storageList.findIndex(option => option.id === parseInt(queryId))
 
-    watchedList.classList.toggle('disabl')
-    const dis = watchedList.classList.contains('disabl')
+
     serchMove.watched = dis
     serchMove.queque = false
 
     if (dis) {
-        queueList.classList.remove('disabl')
-        refs.btnQ.innerHTML = 'add to quequ'
+        quequeList.classList.remove('disabl')
+        refs.btnQ.innerHTML = 'add to queque'
         refs.btnW.innerHTML = 'remove from watched'
     } else {
         refs.btnW.innerHTML = 'add to watched'
@@ -163,16 +168,21 @@ async function addToWatchedList(e) {
 }
 
 async function addToQueueList(e) {
+    quequeList.classList.toggle('disabl')
+    const dis = quequeList.classList.contains('disabl')
+
+    if (dis) {
     addToQueueListV(e)
     removeFromWatchedList(e)
+    } else {
+    removeFromQueueList(e)
+    }
 
     const queryId = e.currentTarget.id
     const serchMove = await API.getModifiedSingleMovie(queryId)
     const storageList = loadList('moveList')
     const indexOfDublicateObj = storageList.findIndex(option => option.id === parseInt(queryId))
 
-    queueList.classList.toggle('disabl')
-    const dis = queueList.classList.contains('disabl')
     serchMove.watched = false
     serchMove.queque = dis
 
