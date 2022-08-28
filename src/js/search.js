@@ -31,6 +31,7 @@ async function consoleSearch(event) {
                 const data = await API.getSearchMovies(`${page}`, `${searchQuery}`);
                 if (data.total_results === 0) {
                     inputArea.value = "";
+                    notiflixLoadingRemove();
                     return Notify.failure("Sorry, but there is no films with this name. Please try again.", {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
                 }
                 Notify.info('Your request is successfull.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
