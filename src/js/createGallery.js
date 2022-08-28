@@ -42,7 +42,7 @@ function createPosterFilm(posterLink) {
   if (posterLink) {
     return `https://image.tmdb.org/t/p/w600_and_h900_bestv2${posterLink}`;
   }
-  return `/Filmoteka/camera.69eaffdd.jpg`;
+  return `/Filmoteka/camera.29a7bb66.jpg`;
 }
 
 const filmsListEl = document.querySelector('.films__list');
