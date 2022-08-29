@@ -6,19 +6,36 @@ const refs = {
     Background: document.querySelector(".backdrop-footer"),
     modal: document.querySelector(".modal-footer"),
     list: document.querySelector(".list-developer"),
-    body: document.querySelector("body")
+    body: document.body
 };
 
-  refs.closeModalBtn.addEventListener("click", toggleModal);
+  
   refs.openModalBtn.addEventListener("click", toggleModal);
-  refs.Background.addEventListener("click", escapeBackground);
+  
 
-  refs.modal.classList.remove("open-footer");
-  refs.Background.classList.remove("open-footer");
+  // refs.modal.classList.remove("open-footer");
+  // refs.Background.classList.remove("open-footer");
+
+
+function disableScroll() {
+    refs.body.classList.add("disable-scroll")
+}
+  
+function enableScroll() {
+    refs.body.classList.remove("disable-scroll")
+  }
 
   function toggleModal() {
     refs.modal.classList.toggle("open-footer");
     refs.Background.classList.toggle("open-footer");
+    disableScroll()
+    refs.closeModalBtn.addEventListener("click", toggleModal);
+    refs.Background.addEventListener("click", escapeBackground);
+    if (!refs.modal.classList.contains("open-footer")) {
+      enableScroll()
+      refs.closeModalBtn.removeEventListener("click", toggleModal);
+      refs.Background.removeEventListener("click", escapeBackground);
+    }
     return
 }
 
@@ -29,6 +46,9 @@ function keypressCounter(event) {
   if (code === "Escape" && refs.modal.classList.contains("open-footer")) {
     refs.modal.classList.toggle("open-footer");
     refs.Background.classList.toggle("open-footer");
+    enableScroll()
+      refs.closeModalBtn.removeEventListener("click", toggleModal);
+      refs.Background.removeEventListener("click", escapeBackground);
     return
  }
 }
@@ -37,6 +57,9 @@ function escapeBackground() {
   if (refs.modal.classList.contains("open-footer")) {
     refs.modal.classList.toggle("open-footer");
     refs.Background.classList.toggle("open-footer");
+    enableScroll()
+      refs.closeModalBtn.removeEventListener("click", toggleModal);
+      refs.Background.removeEventListener("click", escapeBackground);
     return
   }
 }
