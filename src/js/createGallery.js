@@ -1,8 +1,6 @@
 import API from './apiService/movieAPI';
 import { initPagination } from './pagination-try';
 import { scrollTopTop } from './foter-scrolltop';
-const KEY_WATCHED = 'watchedList';
-const KEY_QUEUE = 'queueList';
 
 if (document.title === 'Filmoteka') consoleModifiedPopular();
 
@@ -64,7 +62,7 @@ export function createGallery(filmsArry) {
                   <p class="films__description">${createGenresFilmArray(
                     item.genre_ids ?? item.genres
                   )} | ${createYearFilm(item.release_date.slice(0, 4))}</p>
-                ${createSvg(item.id)}  
+                ${createSvg(item.watched, item.queue)}  
              </div>
             </li>`),
     ''
@@ -74,24 +72,18 @@ export function createGallery(filmsArry) {
   scrollTopTop();
 }
 
-function loadStorage(KEY) {
-  try {
-    const savedSettings = localStorage.getItem(KEY);
-    return savedSettings === null ? [] : JSON.parse(savedSettings);
-  } catch (error) {
-    console.error('Get state error: ', error.message);
-  }
-}
-function createSvg(idFilm) {
-  if (loadStorage(KEY_WATCHED).find(id => id === idFilm)) {
+function createSvg(w, q) {
+  if (w) {
     return `<svg class="films__svg" width="30" height="30">
                     <use href="/Filmoteka/login-icon.2e0a9156.svg#icon-watched"></use>
                   </svg>`;
-  } else if (loadStorage(KEY_QUEUE).find(id => id === idFilm)) {
+  } else if (q) {
     return `<svg class="films__svg" width="30" height="30">
                     <use href="/Filmoteka/login-icon.2e0a9156.svg#icon-queue"></use>
                   </svg>`;
   } else {
-    return;
+    return `<svg class="films__svg" width="30" height="30" opacity="0">
+                <use href=""></use>
+</svg>`;
   }
 }
