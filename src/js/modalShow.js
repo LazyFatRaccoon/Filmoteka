@@ -29,8 +29,9 @@ refs.backdrop.addEventListener('click', onBackdropCloseModal)
 let serchId = 0
 
 function openCart(e) {
-    const liItem = e.path.filter(a => a.nodeName === 'LI')[0]
-    console.log(liItem)
+  const liItem = e.path.filter(a => a.nodeName === 'LI')[0]
+  const isCard = e.target.dataset.id;
+    console.log('isCard = ', isCard)
 
     notiflixLoading()
     if (liItem === 'LI') {
