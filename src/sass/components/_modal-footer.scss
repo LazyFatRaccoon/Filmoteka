@@ -158,3 +158,19 @@
         flex-direction: column
     }
 }
+
+body.dark-theme .modal-footer{
+    background-color: #1b1b1d;
+}
+
+body.dark-theme .developer-work{
+    color: $white;
+}
+
+body.dark-theme .developer-name {
+ color: rgb(168, 67, 0);
+}
+
+body.dark-theme .modal-close-btn {
+    fill: white;
+}

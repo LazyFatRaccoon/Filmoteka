@@ -222,11 +222,11 @@ button.disabl {
 
 body.dark-theme .modal{
     color: $white;
-    background-color: $black;
+    background-color: #1b1b1d;
 }
 
 body.dark-theme .modal__close-btn {
-    background-color: black;
+    background-color: #1b1b1d;
     &-svg {
             fill: $white;
         }
