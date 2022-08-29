@@ -43,10 +43,26 @@
     
 }
 .films__description {
+    display: flex;
+    align-items: center;
+}
+
+.films__description-text {
     font-weight: $font_weight_l;
-    font-size: $font_size_s;
     line-height: $font_height_l;
+    font-size: $font_size_s;
      color: $accent;
+     }
+
+.films__description-rating {
+    margin-left: 8px;
+    padding: 1px 10px;
+    font-size: $font_size_s;
+    line-height: $font_height_s;
+    background-color: $accent;
+    text-align: center;
+    border-radius: 5px;
+    color: $white;
 }
 .films__svg{
     position: absolute;
@@ -78,6 +94,7 @@
 
 }
 
+
 @media screen and (min-width: 1280px) {
     .films__list {
         min-height: 634px;
@@ -101,7 +118,7 @@
     
      }
     
-    .films__description {
+    .films__description-text {
          font-weight: $font_weight_l;
          font-size: $font_size_xl;
         line-height: $font_height_m;
