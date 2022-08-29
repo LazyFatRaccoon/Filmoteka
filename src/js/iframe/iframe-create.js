@@ -3,7 +3,7 @@ import { Notify } from "notiflix";
 
 
 const gallery = document.querySelector('.films__list');
-const modalWindow = document.querySelector('.modal__preview');
+
 
 gallery.addEventListener('click', getTrailer);
 
@@ -18,9 +18,12 @@ async function getTrailer(event) {
             const filmKey = data.trailers[0].key;
             const ref = `<a 
             class="iframe-lightbox-link"
-            href="https://www.youtube.com/embed/${filmKey}?autoplay=0">YouTube
+            href="https://www.youtube.com/embed/${filmKey}?autoplay=0">
+            <svg width="50" height="50">
+                <use href="/Filmoteka/symbol-defs.2e0a9156.svg#icon-youtube"></use>
+            </svg>
             </a>`;
-
+            const modalWindow = document.querySelector('.modal__preview');
             modalWindow.insertAdjacentHTML('beforeend', ref);
             [].forEach.call(document.getElementsByClassName("iframe-lightbox-link"), function(el) {
               el.lightbox = new IframeLightbox(el);
@@ -34,3 +37,7 @@ async function getTrailer(event) {
         console.log(error);
     };
 };
+
+
+
+
