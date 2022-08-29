@@ -17,7 +17,12 @@
     display: none;
 }
 
-// body.dark-theme {
-//     color: $white;
-//     background-color: $black;
-// }
+body.dark-theme {
+
+    background-color: #1b1b1d;
+}
+
+body.dark-theme .empty__header {
+    color: $white;
+}
+

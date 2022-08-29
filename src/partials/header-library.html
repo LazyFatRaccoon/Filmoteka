@@ -13,6 +13,16 @@
             <a class="header__pages-link current_page" href="./library.html">MY LIBRARY</button>
           </div>
         </nav>
+        <!------------------------------ Themization --------------------------------->
+        <button class="btn-toggle toggle" id="btnToggle">
+          <svg class="toogle_sun" width="25" height="25">
+            <use href="/src/images/symbol-defs.svg#icon-sun"></use>
+          </svg>
+          <svg class="toogle_moon" width="35" height="35">
+            <use href="/src/images/symbol-defs.svg#icon-moon"></use>
+          </svg>
+        </button>
+        
         <div class="header__library-buttons">
             <button id='watchedBtn'class="header__button" type="button">WATCHED</button>
             <button id='queueBtn' class="header__button selected" type="button">QUEUE</button>   
@@ -20,3 +30,5 @@
       </div>
     </div>
 </header>
+
+<script src="./js/themization.js"></script>
