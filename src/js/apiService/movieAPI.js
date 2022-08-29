@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {getQueueListFire, getWatchedListFire} from '../firebase/firebaseAuth'
 
 const API_KEY = '824846cd36adb0fb9eb759610f56d292';
 const BASE_URL = 'https://api.themoviedb.org/3';
@@ -94,14 +95,19 @@ export default {
       const movie = await this.getMovieById(id)
       const trailers = await this.getMovieTrailers(id)
       const genres = await this.getGenres();  
+
+      const watchedList = JSON.parse(localStorage.getItem('watchedList')) || [];
+      const queueList = JSON.parse(localStorage.getItem('queueList')) || [];
+
       const genresObj = genres.genres.reduce(
         (acc, elem) => ((acc[elem.id] = elem.name), acc),
         {}
       );
 
-      const watchedList = JSON.parse(localStorage.getItem('watchedList')) || [];
-      const queueList = JSON.parse(localStorage.getItem('queueList')) || [];
       
+
+      
+
       const modifiedData = {     
         ...movie,
         watched: watchedList ? watchedList.includes(movie.id) ? true : false : false,

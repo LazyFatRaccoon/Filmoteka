@@ -2,6 +2,7 @@ import { limit } from 'firebase/firestore'
 import API from './apiService/movieAPI'
 import { loadList } from './modalBtn'
 import { notiflixLoading, notiflixLoadingRemove } from './loading';
+import { cardAddIcon } from './cardAddIcon'
 
 export const refs = {
     img: document.querySelector('.modal__preview-img'),
@@ -54,6 +55,7 @@ function onEscClose(e) {
 }
 
 function closeModal() {
+    cardAddIcon();
     refs.backdrop.classList.add('isHidden')
     refs.body.classList.remove('scroll')
     clearMarkup()
