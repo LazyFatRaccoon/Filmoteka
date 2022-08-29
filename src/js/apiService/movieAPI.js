@@ -1,5 +1,4 @@
 import axios from 'axios'
-import {getQueueListFire, getWatchedListFire} from '../firebase/firebaseAuth'
 
 const API_KEY = '824846cd36adb0fb9eb759610f56d292';
 const BASE_URL = 'https://api.themoviedb.org/3';
@@ -9,8 +8,6 @@ const SEARCH_URL = `${BASE_URL}/search/movie`;
 const MOVIE_ID_URL = `${BASE_URL}/movie/`;
 const GENRES_URL = `${BASE_URL}/genre/movie/list`;
 
-const SORT_BY_CREATED_ASC = `created_at.asc`;
-const SORT_BY_CREATED_DESC = `created_at.desc`;
 
 
 export default {
