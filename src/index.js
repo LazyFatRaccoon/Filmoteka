@@ -16,4 +16,4 @@ import './js/pagination';
 import './js/modalBtn';
 import './js/pagination-try';
 import './js/search';
-
+import './js/trailer';
