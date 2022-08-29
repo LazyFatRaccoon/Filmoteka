@@ -22,13 +22,12 @@ export function cardAddIcon() {
     console.log(watched, queue)
     if (watched) {
         svgIcon.style.opacity = "1"; 
-        useIcon.href='';
-        useIcon.href=`${watchedIcon}`;        
+        useIcon.setAttribute('href', `${watchedIcon}`);       
     }
     if (queue) {
         svgIcon.style.opacity = "1"; 
-        useIcon.href='';
-        useIcon.href=`${queueIcon}`;        
+        useIcon.setAttribute('href', `${queueIcon}`);
+               
     }
     if ((!queue) && (!watched)) {
         svgIcon.style.opacity = "0"        
