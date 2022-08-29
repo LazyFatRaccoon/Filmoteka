@@ -208,3 +208,15 @@ button.disabl {
 .scroll {
     overflow: hidden;
 }
+
+body.dark-theme .modal{
+    color: $white;
+    background-color: $black;
+}
+
+body.dark-theme .modal__close-btn {
+    background-color: black;
+    &-svg {
+            fill: $white;
+        }
+}

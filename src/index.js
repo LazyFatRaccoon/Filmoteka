@@ -8,6 +8,7 @@ import './js/firebase/dataBase';
 import './js/createGallery';
 //import './js/modal';
 
+import './js/themization';
 import './js/modalShow';
 import './js/modal-footer';
 import './js/foter-scrolltop';
