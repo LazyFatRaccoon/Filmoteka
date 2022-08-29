@@ -8,8 +8,6 @@ const SEARCH_URL = `${BASE_URL}/search/movie`;
 const MOVIE_ID_URL = `${BASE_URL}/movie/`;
 const GENRES_URL = `${BASE_URL}/genre/movie/list`;
 
-const SORT_BY_CREATED_ASC = `created_at.asc`;
-const SORT_BY_CREATED_DESC = `created_at.desc`;
 
 
 export default {
@@ -94,14 +92,19 @@ export default {
       const movie = await this.getMovieById(id)
       const trailers = await this.getMovieTrailers(id)
       const genres = await this.getGenres();  
+
+      const watchedList = JSON.parse(localStorage.getItem('watchedList')) || [];
+      const queueList = JSON.parse(localStorage.getItem('queueList')) || [];
+
       const genresObj = genres.genres.reduce(
         (acc, elem) => ((acc[elem.id] = elem.name), acc),
         {}
       );
 
-      const watchedList = JSON.parse(localStorage.getItem('watchedList')) || [];
-      const queueList = JSON.parse(localStorage.getItem('queueList')) || [];
       
+
+      
+
       const modifiedData = {     
         ...movie,
         watched: watchedList ? watchedList.includes(movie.id) ? true : false : false,

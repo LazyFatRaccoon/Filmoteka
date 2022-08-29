@@ -9,6 +9,13 @@ import './js/firebase/dataBase';
 import './js/createGallery';
 //import './js/modal';
 
+// iframe
+import './js/iframe/iframe-lightbox';
+import './js/iframe/iframe-create';
+// ------
+
+import './js/themeButton';
+import './js/cardAddIcon';
 import './js/themization';
 import './js/modalShow';
 import './js/modal-footer';
