@@ -22,11 +22,44 @@
             <use href="/src/images/symbol-defs.svg#icon-moon"></use>
           </svg>
         </button>
+        <div class="auth-wrapper">
+              <svg width="24px" height="24px" id="auth-icon" class="auth-icon hidden_nav">
+
+              <use href="/src/images/auth-icon/login-icon.svg#icon-user"></use>
+              </svg>
+              <form class="auth-form hide-form">
+              <label title="email">
+                <input
+                  type="email"
+                  name="userEmail"
+                  id="emailInput"
+                  placeholder="Email"
+                />
+              </label>
+              <label title="password">
+                <input
+                  type="password"
+                  name="userPassword"
+                  id="passwordInput"
+                  minlength="6"
+                  placeholder="Password"
+                />
+              </label>
+              <div class="header__buttons-auth">
+                <button type="submit" class="btn-enter" value="enter">Sign in</button>
+                <span class="header__decor" >/</span>
+                <button type="submit" class="btn-register" value="register">Sign Up</button>
+              </div>
+              </form>
+          </div>
         
         <div class="header__library-buttons">
             <button id='watchedBtn'class="header__button" type="button">WATCHED</button>
             <button id='queueBtn' class="header__button selected" type="button">QUEUE</button>   
         </div>
+        <div class="user-account is-hidden-account">
+      <button type="button" class="btn-signout hide-form" id="btn-signout">Sign out</button>
+      </div>
       </div>
     </div>
 </header>

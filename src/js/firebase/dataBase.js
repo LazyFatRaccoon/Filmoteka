@@ -132,20 +132,20 @@ export async function getQueueListFire() {
 
 // -----ВКЛЮЧИТЬ --------- В modalBtn.js ОТКЛЮЧИТЬ КНОПКИ И СЛУШАТЕЛИ НА НИХ-----------
 
-// const addToWatchedListBtn = document.querySelector('.add-btn__watched');
-// const addToQueueListBtn = document.querySelector('.add-btn__queue');
+const addToWatchedListBtn = document.querySelector('.add-btn__watched');
+const addToQueueListBtn = document.querySelector('.add-btn__queue');
 
 // ---------- КНОПКИ ПРИ ПЕРВОМ КЛИКЕ ДОБАВЛЯЮТ ПРИ ВТОРОМ УДАЛЯЮТ ---------------
 
-// addToWatchedListBtn.addEventListener('click', e => {
-//   const moveId = Number(e.currentTarget.id);
-//   addToWatchedListFire(moveId);
-// });
+addToWatchedListBtn.addEventListener('click', e => {
+  const moveId = Number(e.currentTarget.id);
+  addToWatchedListFire(moveId);
+});
 
-// addToQueueListBtn.addEventListener('click', e => {
-//   const moveId = Number(e.currentTarget.id);
-//   addToQueueListFire(moveId);
-// });
+addToQueueListBtn.addEventListener('click', e => {
+  const moveId = Number(e.currentTarget.id);
+  addToQueueListFire(moveId);
+});
 
 // -------------- ПОЛУЧЕНИЕ МАССИВОВ ------------------
 // ---- ДЛЯ ПРОВЕРКИ СОЗДАЙ КНОПКИ С КЛАССАМИ КАК ВНИЗУ-----

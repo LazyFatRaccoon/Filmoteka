@@ -1,62 +1,64 @@
-import API from './apiService/movieAPI'
-import { refs } from './modalShow'
-
+import API from './apiService/movieAPI';
+import { refs } from './modalShow';
 
 //=========================================
 
 // watchedList.addEventListener('click', changeWatchedStatus)
 // queueList.addEventListener('click', changeQueueStatus)
 
+const removeFromWatchedList = e => {
+  const queryId = e.currentTarget.id;
+  const storageList = loadList('watchedList');
+  const newStorageList = storageList.filter(
+    movie => movie != parseInt(queryId)
+  );
+  saveList('watchedList', newStorageList);
+};
 
-const removeFromWatchedList = (e) => {
-    const queryId = e.currentTarget.id;
-    const storageList = loadList('watchedList');
-    const newStorageList = storageList.filter((movie) => movie != parseInt(queryId));
-    saveList('watchedList', newStorageList);
-}
+const addToWatchedListV = e => {
+  const queryId = e.currentTarget.id;
+  const storageList = loadList('watchedList');
+  storageList.push(parseInt(queryId));
+  saveList('watchedList', storageList);
+};
+const removeFromQueueList = e => {
+  const queryId = e.currentTarget.id;
+  const storageList = loadList('queueList');
+  const newStorageList = storageList.filter(
+    movie => movie != parseInt(queryId)
+  );
+  saveList('queueList', newStorageList);
+};
+const addToQueueListV = e => {
+  const queryId = e.currentTarget.id;
+  const storageList = loadList('queueList');
+  storageList.push(parseInt(queryId));
+  saveList('queueList', storageList);
+};
+//=================================================
 
-const addToWatchedListV = (e) => {
-    const queryId = e.currentTarget.id
-    const storageList = loadList('watchedList')
-    storageList.push(parseInt(queryId))
-    saveList('watchedList', storageList)
- }
- const removeFromQueueList = (e) => {
-    const queryId = e.currentTarget.id;
-    const storageList = loadList('queueList');
-    const newStorageList = storageList.filter((movie) => movie != parseInt(queryId));
-    saveList('queueList', newStorageList);
-}
- const addToQueueListV = (e) => {
-    const queryId = e.currentTarget.id
-    const storageList = loadList('queueList')
-    storageList.push(parseInt(queryId))
-    saveList('queueList', storageList)
-}
- //=================================================
+// const watchedList = document.querySelector('.add-btn__watched')
+// const queueList = document.querySelector('.add-btn__queue')
 
-const watchedList = document.querySelector('.add-btn__watched')
-const queueList = document.querySelector('.add-btn__queue')
+// watchedList.addEventListener('click', addToWatchedList)
+// queueList.addEventListener('click', addToQueueList)
 
-watchedList.addEventListener('click', addToWatchedList)
-queueList.addEventListener('click', addToQueueList)
-
-function saveList (key, value){
-try {
+function saveList(key, value) {
+  try {
     const serializedState = JSON.stringify(value);
     localStorage.setItem(key, serializedState);
-} catch (error) {
-    console.error("Set state error: ", error.message);
-}
+  } catch (error) {
+    console.error('Set state error: ', error.message);
+  }
 }
 
-export function loadList (key){
-try {
+export function loadList(key) {
+  try {
     const serializedState = localStorage.getItem(key);
     return serializedState === null ? [] : JSON.parse(serializedState);
-} catch (error) {
-    console.error("Get state error: ", error.message);
-}
+  } catch (error) {
+    console.error('Get state error: ', error.message);
+  }
 }
 
 // async function addToWatchedList(e) {
@@ -69,7 +71,6 @@ try {
 //     const indexOfDublicateObj = storageList.findIndex(option => option.id === parseInt(queryId))
 
 //     console.log(indexOfDublicateObj)
-
 
 //     watchedList.classList.toggle('disabl')
 //     const dis = watchedList.classList.contains('disabl')
@@ -126,87 +127,84 @@ try {
 //     }
 // }
 
-
 // =================== ВАРИАНТ С 1 LOCALSTORAGE =======================
 
-
 async function addToWatchedList(e) {
-    watchedList.classList.toggle('disabl')
-    const dis = watchedList.classList.contains('disabl')
-    if (dis) {
-        addToWatchedListV(e)
-        removeFromQueueList(e)
-    } else {
-        removeFromWatchedList(e)
-    }
-    
-    const queryId = e.currentTarget.id
-    const serchMove = await API.getModifiedSingleMovie(queryId)
-    const storageList = loadList('moveList')
-    const indexOfDublicateObj = storageList.findIndex(option => option.id === parseInt(queryId))
+  watchedList.classList.toggle('disabl');
+  const dis = watchedList.classList.contains('disabl');
+  if (dis) {
+    addToWatchedListV(e);
+    removeFromQueueList(e);
+  } else {
+    removeFromWatchedList(e);
+  }
 
+  const queryId = e.currentTarget.id;
+  const serchMove = await API.getModifiedSingleMovie(queryId);
+  const storageList = loadList('moveList');
+  const indexOfDublicateObj = storageList.findIndex(
+    option => option.id === parseInt(queryId)
+  );
 
-    serchMove.watched = dis
-    serchMove.queque = false
+  serchMove.watched = dis;
+  serchMove.queque = false;
 
-    if (dis) {
-        queueList.classList.remove('disabl')
-        refs.btnQ.innerHTML = 'add to queque'
-        refs.btnW.innerHTML = 'remove from watched'
-    } else {
-        refs.btnW.innerHTML = 'add to watched'
-    }
+  if (dis) {
+    queueList.classList.remove('disabl');
+    refs.btnQ.innerHTML = 'add to queque';
+    refs.btnW.innerHTML = 'remove from watched';
+  } else {
+    refs.btnW.innerHTML = 'add to watched';
+  }
 
-    if (indexOfDublicateObj === -1) {
-        const newlist = storageList
-        newlist.push(serchMove)
-        saveList('moveList', newlist)
-    } else {
-        storageList[indexOfDublicateObj] = serchMove
-        saveList('moveList', storageList)
-    }
+  if (indexOfDublicateObj === -1) {
+    const newlist = storageList;
+    newlist.push(serchMove);
+    saveList('moveList', newlist);
+  } else {
+    storageList[indexOfDublicateObj] = serchMove;
+    saveList('moveList', storageList);
+  }
 }
 
 async function addToQueueList(e) {
-    queueList.classList.toggle('disabl')
-    const dis = queueList.classList.contains('disabl')
+  queueList.classList.toggle('disabl');
+  const dis = queueList.classList.contains('disabl');
 
-    if (dis) {
-    addToQueueListV(e)
-    removeFromWatchedList(e)
-    } else {
-    removeFromQueueList(e)
-    }
+  if (dis) {
+    addToQueueListV(e);
+    removeFromWatchedList(e);
+  } else {
+    removeFromQueueList(e);
+  }
 
-    const queryId = e.currentTarget.id
-    const serchMove = await API.getModifiedSingleMovie(queryId)
-    const storageList = loadList('moveList')
-    const indexOfDublicateObj = storageList.findIndex(option => option.id === parseInt(queryId))
+  const queryId = e.currentTarget.id;
+  const serchMove = await API.getModifiedSingleMovie(queryId);
+  const storageList = loadList('moveList');
+  const indexOfDublicateObj = storageList.findIndex(
+    option => option.id === parseInt(queryId)
+  );
 
-    serchMove.watched = false
-    serchMove.queue = dis
+  serchMove.watched = false;
+  serchMove.queue = dis;
 
-    if (dis) {
-        watchedList.classList.remove('disabl')
-        refs.btnW.innerHTML = 'add to watched'
-        refs.btnQ.innerHTML = 'remove from queque'
-    } else {
-        refs.btnQ.innerHTML = 'add to queue'
-    }
+  if (dis) {
+    watchedList.classList.remove('disabl');
+    refs.btnW.innerHTML = 'add to watched';
+    refs.btnQ.innerHTML = 'remove from queque';
+  } else {
+    refs.btnQ.innerHTML = 'add to queue';
+  }
 
-    if (indexOfDublicateObj === -1) {
-        const newlist = storageList
-        newlist.push(serchMove)
-        saveList('moveList', newlist)
-    } else {
-        storageList[indexOfDublicateObj] = serchMove
-        saveList('moveList', storageList)
-    }
+  if (indexOfDublicateObj === -1) {
+    const newlist = storageList;
+    newlist.push(serchMove);
+    saveList('moveList', newlist);
+  } else {
+    storageList[indexOfDublicateObj] = serchMove;
+    saveList('moveList', storageList);
+  }
 }
-
-
-
-
 
 // ======================= VOVA
 
@@ -215,7 +213,7 @@ async function addToQueueList(e) {
 // const watchedList = document.querySelector('.add-btn__watched')
 // const queueList = document.querySelector('.add-btn__queue')
 
-//  function changeWatchedStatus(e) {        
+//  function changeWatchedStatus(e) {
 //     if (watchedList.classList.contains('disabl')) {
 //         addToWatchedList(e);
 //         watchedList.innerText = "Remove from watched"
@@ -227,9 +225,9 @@ async function addToQueueList(e) {
 //     watchedList.classList.toggle('disabl')
 // }
 
-// function changeQueueStatus(e) {   
+// function changeQueueStatus(e) {
 //         if (queueList.classList.contains('disabl')) {
-           
+
 //             addToQueueList(e);
 //             queueList.innerText = "Remove from queue"
 //             removeFromWatchedList(e);
@@ -239,4 +237,3 @@ async function addToQueueList(e) {
 //         } else { removeFromQueueList(e); queueList.innerText = "Add to queue"; }
 //         queueList.classList.toggle('disabl')
 // }
-
