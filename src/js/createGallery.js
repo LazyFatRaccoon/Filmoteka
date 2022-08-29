@@ -44,6 +44,12 @@ function createPosterFilm(posterLink) {
   }
   return `/Filmoteka/camera.29a7bb66.jpg`;
 }
+function createRating(ratind) {
+  if (ratind) {
+    return ratind.toFixed(1);
+  }
+  return `0.0`;
+}
 
 const filmsListEl = document.querySelector('.films__list');
 
@@ -59,9 +65,14 @@ export function createGallery(filmsArry) {
               )}" alt="${item.overview}" />
                 <div class="films__decor">
                   <h2 class="films__title">${item.title}</h2>
-                  <p class="films__description">${createGenresFilmArray(
-                    item.genre_ids ?? item.genres
-                  )} | ${createYearFilm(item.release_date.slice(0, 4))}</p>
+                  <div class="films__description"> 
+                   <p class="films__description-text">${createGenresFilmArray(
+                     item.genre_ids ?? item.genres
+                   )} | ${createYearFilm(item.release_date.slice(0, 4))}</p>
+                   <p class="films__description-rating">${createRating(
+                     item.vote_average
+                   )}</p>
+                  </div>
                 ${createSvg(item.watched, item.queue)}  
              </div>
             </li>`),
@@ -74,10 +85,12 @@ export function createGallery(filmsArry) {
 
 function createSvg(w, q) {
   if (w) {
+    console.log((w = true));
     return `<svg class="films__svg" width="30" height="30">
                     <use href="/Filmoteka/login-icon.2e0a9156.svg#icon-watched"></use>
                   </svg>`;
   } else if (q) {
+    console.log(q);
     return `<svg class="films__svg" width="30" height="30">
                     <use href="/Filmoteka/login-icon.2e0a9156.svg#icon-queue"></use>
                   </svg>`;
