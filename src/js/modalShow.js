@@ -65,7 +65,7 @@ function onEscClose(e) {
 }
 
 function closeModal() {
-    // cardAddIcon();
+    cardAddIcon();
   refs.backdrop.classList.add('isHidden');
   refs.body.classList.remove('scroll');
   clearMarkup();
