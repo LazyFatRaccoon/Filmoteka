@@ -1,12 +1,4 @@
 import API from './apiService/movieAPI'
-import { refs } from './modalShow'
-
-
-//=========================================
-
-// watchedList.addEventListener('click', changeWatchedStatus)
-// queueList.addEventListener('click', changeQueueStatus)
-
 
 const removeFromWatchedList = (e) => {
     const queryId = e.currentTarget.id;
@@ -35,11 +27,6 @@ const addToWatchedListV = (e) => {
 }
  //=================================================
 
-const watchedList = document.querySelector('.add-btn__watched')
-const queueList = document.querySelector('.add-btn__queue')
-
-watchedList.addEventListener('click', addToWatchedList)
-queueList.addEventListener('click', addToQueueList)
 
 function saveList (key, value){
 try {
@@ -59,6 +46,156 @@ try {
 }
 }
 
+// =================== ВАРИАНТ С 1 LOCALSTORAGE =======================
+
+
+export async function addToWatchedList(e) {
+    const watchedList = document.querySelector('.add-btn__watched')
+    const queueList = document.querySelector('.add-btn__queue')
+    console.log("debug 12", watchedList)
+    watchedList.classList.toggle('disabl')
+    const dis = watchedList.classList.contains('disabl')
+    if (dis) {
+        addToWatchedListV(e)
+        removeFromQueueList(e)
+    } else {
+        removeFromWatchedList(e)
+    }
+    // const liItem = e.path.filter(a => a.nodeName === 'LI')[0]
+
+    queryId = watchedList.id
+    // const queryId = e.currentTarget.id
+    console.log(queryId)
+
+    const serchMove = await API.getModifiedSingleMovie(queryId)
+    console.log(serchMove)
+
+    const storageList = loadList('moveList')
+    const indexOfDublicateObj = storageList.findIndex(option => option.id === parseInt(queryId))
+
+    serchMove.watched = dis
+    serchMove.queue = false
+
+    if (dis) {
+        queueList.classList.remove('disabl')
+
+        queueList.innerHTML = 'add to queue'
+        watchedList.innerHTML = 'remove from watched'
+
+    } else {
+        watchedList.innerHTML = 'add to watched'
+    }
+
+    if (indexOfDublicateObj === -1) {
+        const newlist = storageList
+        newlist.push(serchMove)
+        saveList('moveList', newlist)
+    } else {
+        storageList[indexOfDublicateObj] = serchMove
+        saveList('moveList', storageList)
+    }
+}
+
+
+export async function addToQueueList(e) {
+    
+    const watchedList = document.querySelector('.add-btn__watched')
+    const queueList = document.querySelector('.add-btn__queue')
+
+
+    queueList.classList.toggle('disabl')
+    const dis = queueList.classList.contains('disabl')
+
+    if (dis) {
+    addToQueueListV(e)
+    removeFromWatchedList(e)
+    } else {
+    removeFromQueueList(e)
+    }
+
+    const queryId = e.currentTarget.id
+    const serchMove = await API.getModifiedSingleMovie(queryId)
+    const storageList = loadList('moveList')
+    const indexOfDublicateObj = storageList.findIndex(option => option.id === parseInt(queryId))
+
+    serchMove.watched = false
+    serchMove.queue = dis
+
+    if (dis) {
+        watchedList.classList.remove('disabl')
+        watchedList.innerHTML = 'add to watched'
+        queueList.innerHTML = 'remove from queue'
+    } else {
+
+        queueList.innerHTML = 'add to queue'
+
+    }
+
+    if (indexOfDublicateObj === -1) {
+        const newlist = storageList
+        newlist.push(serchMove)
+        saveList('moveList', newlist)
+    } else {
+        storageList[indexOfDublicateObj] = serchMove
+        saveList('moveList', storageList)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // ======================= VOVA
+
+// // import API from './apiService/movieAPI'
+
+// // const watchedList = document.querySelector('.add-btn__watched')
+// // const queueList = document.querySelector('.add-btn__queue')
+
+// //  function changeWatchedStatus(e) {
+// //     if (watchedList.classList.contains('disabl')) {
+// //         addToWatchedList(e);
+// //         watchedList.innerText = "Remove from watched"
+// //         removeFromQueueList(e);
+// //         queueList.innerHTML = " Add to queue"
+// //         queueList.classList.add('disabl')
+
+// //     } else { removeFromWatchedList(e); watchedList.innerText = "Add to watched" }
+// //     watchedList.classList.toggle('disabl')
+// // }
+
+// // function changeQueueStatus(e) {
+// //         if (queueList.classList.contains('disabl')) {
+           
+// //             addToQueueList(e);
+// //             queueList.innerText = "Remove from queue"
+// //             removeFromWatchedList(e);
+// //             watchedList.innerHTML = "Add to watched"
+// //             watchedList.classList.add('disabl')
+
+// //         } else { removeFromQueueList(e); queueList.innerText = "Add to queue"; }
+// //         queueList.classList.toggle('disabl')
+// // }
+
+
+
+
+
 // async function addToWatchedList(e) {
 //     addToWatchedListV(e)
 //     removeFromQueueList(e)
@@ -74,7 +211,7 @@ try {
 //     watchedList.classList.toggle('disabl')
 //     const dis = watchedList.classList.contains('disabl')
 //     serchMove.watched = dis
-//     serchMove.queque = false
+//     serchMove.queue = false
 
 //     if (dis) {
 //         queueList.classList.remove('disabl')
@@ -105,14 +242,14 @@ try {
 //     queueList.classList.toggle('disabl')
 //     const dis = queueList.classList.contains('disabl')
 //     serchMove.watched = false
-//     serchMove.queque = dis
+//     serchMove.queue = dis
 
 //     if (dis) {
 //         watchedList.classList.remove('disabl')
 //         refs.btnW.innerHTML = 'add to watched'
-//         refs.btnQ.innerHTML = 'remove from queque'
+//         refs.btnQ.innerHTML = 'remove from queue'
 //     } else {
-//         refs.btnQ.innerHTML = 'add to queque'
+//         refs.btnQ.innerHTML = 'add to queue'
 
 //     }
 
@@ -125,118 +262,3 @@ try {
 //         saveList('queueList', storageList)
 //     }
 // }
-
-
-// =================== ВАРИАНТ С 1 LOCALSTORAGE =======================
-
-
-async function addToWatchedList(e) {
-    watchedList.classList.toggle('disabl')
-    const dis = watchedList.classList.contains('disabl')
-    if (dis) {
-        addToWatchedListV(e)
-        removeFromQueueList(e)
-    } else {
-        removeFromWatchedList(e)
-    }
-    
-    const queryId = e.currentTarget.id
-    const serchMove = await API.getModifiedSingleMovie(queryId)
-    const storageList = loadList('moveList')
-    const indexOfDublicateObj = storageList.findIndex(option => option.id === parseInt(queryId))
-
-
-    serchMove.watched = dis
-    serchMove.queque = false
-
-    if (dis) {
-        queueList.classList.remove('disabl')
-        refs.btnQ.innerHTML = 'add to queque'
-        refs.btnW.innerHTML = 'remove from watched'
-    } else {
-        refs.btnW.innerHTML = 'add to watched'
-    }
-
-    if (indexOfDublicateObj === -1) {
-        const newlist = storageList
-        newlist.push(serchMove)
-        saveList('moveList', newlist)
-    } else {
-        storageList[indexOfDublicateObj] = serchMove
-        saveList('moveList', storageList)
-    }
-}
-
-async function addToQueueList(e) {
-    queueList.classList.toggle('disabl')
-    const dis = queueList.classList.contains('disabl')
-
-    if (dis) {
-    addToQueueListV(e)
-    removeFromWatchedList(e)
-    } else {
-    removeFromQueueList(e)
-    }
-
-    const queryId = e.currentTarget.id
-    const serchMove = await API.getModifiedSingleMovie(queryId)
-    const storageList = loadList('moveList')
-    const indexOfDublicateObj = storageList.findIndex(option => option.id === parseInt(queryId))
-
-    serchMove.watched = false
-    serchMove.queue = dis
-
-    if (dis) {
-        watchedList.classList.remove('disabl')
-        refs.btnW.innerHTML = 'add to watched'
-        refs.btnQ.innerHTML = 'remove from queque'
-    } else {
-        refs.btnQ.innerHTML = 'add to queue'
-    }
-
-    if (indexOfDublicateObj === -1) {
-        const newlist = storageList
-        newlist.push(serchMove)
-        saveList('moveList', newlist)
-    } else {
-        storageList[indexOfDublicateObj] = serchMove
-        saveList('moveList', storageList)
-    }
-}
-
-
-
-
-
-// ======================= VOVA
-
-// import API from './apiService/movieAPI'
-
-// const watchedList = document.querySelector('.add-btn__watched')
-// const queueList = document.querySelector('.add-btn__queue')
-
-//  function changeWatchedStatus(e) {        
-//     if (watchedList.classList.contains('disabl')) {
-//         addToWatchedList(e);
-//         watchedList.innerText = "Remove from watched"
-//         removeFromQueueList(e);
-//         queueList.innerHTML = " Add to queue"
-//         queueList.classList.add('disabl')
-
-//     } else { removeFromWatchedList(e); watchedList.innerText = "Add to watched" }
-//     watchedList.classList.toggle('disabl')
-// }
-
-// function changeQueueStatus(e) {   
-//         if (queueList.classList.contains('disabl')) {
-           
-//             addToQueueList(e);
-//             queueList.innerText = "Remove from queue"
-//             removeFromWatchedList(e);
-//             watchedList.innerHTML = "Add to watched"
-//             watchedList.classList.add('disabl')
-
-//         } else { removeFromQueueList(e); queueList.innerText = "Add to queue"; }
-//         queueList.classList.toggle('disabl')
-// }
-
