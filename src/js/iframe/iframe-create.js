@@ -5,11 +5,15 @@ const gallery = document.querySelector('.films__list');
 
 gallery.addEventListener('click', getTrailer);
 
+
 async function getTrailer(event) {
-  if(event.target.parentNode.dataset.id) {
-      const idFilm = event.target.parentNode.dataset.id;
+ 
+  if(event.target.parentNode.dataset.id || event.target.parentNode.parentNode.dataset.id) {
+    
+      const idFilm = event.target.parentNode.dataset.id ? event.target.parentNode.dataset.id : event.target.parentNode.parentNode.dataset.id;
+      
       try { 
-          const data = await API. getMovieTrailers(`${idFilm}`);
+          const data = await API. getMovieTrailers(idFilm);
           const checkSite = data[0].site;
           if (checkSite === "YouTube") {
               const filmKey = data[0].key;

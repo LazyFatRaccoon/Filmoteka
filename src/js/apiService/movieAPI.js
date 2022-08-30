@@ -90,7 +90,7 @@ export default {
   async getModifiedSingleMovie(id) {
     try {
       const movie = await this.getMovieById(id)
-      const trailers = await this.getMovieTrailers(id)
+      //const trailers = await this.getMovieTrailers(id)
       const genres = await this.getGenres();  
 
       const watchedList = JSON.parse(localStorage.getItem('watchedList')) || [];
@@ -109,7 +109,7 @@ export default {
         ...movie,
         watched: watchedList ? watchedList.includes(movie.id) ? true : false : false,
         queue: queueList ? queueList.includes(movie.id) ? true : false : false,
-        trailers: trailers,
+        //trailers: trailers,
         genres: movie.genres.map(id => genresObj[id.id]),
       };
       return modifiedData;
