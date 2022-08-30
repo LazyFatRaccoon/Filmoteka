@@ -8,12 +8,13 @@ gallery.addEventListener('click', getTrailer);
 
 async function getTrailer(event) {
  
-  if(event.target.parentNode.dataset.id || event.target.parentNode.parentNode.dataset.id) {
+  if (event.target.parentNode.dataset.id || event.target.parentNode.parentNode.dataset.id) {
     
       const idFilm = event.target.parentNode.dataset.id ? event.target.parentNode.dataset.id : event.target.parentNode.parentNode.dataset.id;
       
       try { 
           const data = await API.getMovieTrailers(idFilm);
+          if (data[0]) {
           const checkSite = data[0].site;
           if (checkSite === "YouTube") {
               const filmKey = data[0].key;
@@ -29,7 +30,7 @@ async function getTrailer(event) {
               [].forEach.call(document.getElementsByClassName("iframe-lightbox-link"), function(el) {
                 el.lightbox = new IframeLightbox(el);
               });
-          }
+          }}
           else {
           Notify.failure('Sorry, but there is no trailer for this film', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
           }

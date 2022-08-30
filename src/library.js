@@ -19,7 +19,7 @@ const emptyGallery = document.querySelector('.empty')
 const pagination = document.querySelector('#pagination')
 const galleryLibrary = document.querySelector('.films__list')
 
-if (document.title === 'Filmoteka-library') {console.log('I here'); galleryRender(queueList);}
+if (document.title === 'Filmoteka-library') galleryRender(queueList);
 
 queueBtn.addEventListener('click', function(){
     if (queueBtn.classList.contains('selected')) return;
@@ -27,7 +27,6 @@ queueBtn.addEventListener('click', function(){
     watchedBtn.classList.remove('selected')
 
     queueList = JSON.parse(localStorage.getItem('queueList')) || []; 
-    console.log(queueList)
     galleryRender(queueList)
 })
 
@@ -36,7 +35,6 @@ watchedBtn.addEventListener('click', function(){
     watchedBtn.classList.add('selected')
     queueBtn.classList.remove('selected')
     watchedList = JSON.parse(localStorage.getItem('watchedList')) || [];
-    console.log(watchedList)
     galleryRender(watchedList)
 })
 
