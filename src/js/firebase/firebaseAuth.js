@@ -99,14 +99,16 @@ function createUser(event) {
       })
       .catch(error => {
         const errorCode = error.code;
-        if (userEmail === "" || userPassword === "") {
-          Notify.failure('Please enter your email and password', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
-          return;
-        } 
-
-        else if (errorCode === 'auth/email-already-in-use') {
-          Notify.failure('Email already in use. Please sign in.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
-          return;
+        if (errorCode) {
+          Notify.failure('Sign up failed. Please enter valid email.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
+          if (userEmail === "" || userPassword === "") {
+            Notify.failure('Sign up failed. Please enter your email and password.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
+            return;
+          } 
+          else if (errorCode === 'auth/email-already-in-use') {
+            Notify.failure('Sign up failed. Email already in use. Please sign in.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
+            return;
+          }
         }
       });
   }
@@ -129,6 +131,7 @@ function createUser(event) {
         const errorCode = error.code;
         if (userEmail === "" || userPassword === ""){
           Notify.failure('Please enter your email and password', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
+          return;
         }
         else if (errorCode === 'auth/wrong-password') {
           Notify.failure('Wrong password. Try again.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
