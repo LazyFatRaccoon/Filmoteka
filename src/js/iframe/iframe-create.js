@@ -19,7 +19,7 @@ async function getTrailer(event) {
             class="iframe-lightbox-link"
             href="https://www.youtube.com/embed/${filmKey}?autoplay=0">
             <svg width="50" height="50">
-                <use href="/Filmoteka/symbol-defs.2e0a9156.svg#icon-youtube"></use>
+                <use href="/Filmoteka/symbol-defs.a103b832.svg#icon-youtube"></use>
             </svg>
             </a>`;
             const modalWindow = document.querySelector('.modal__preview');
