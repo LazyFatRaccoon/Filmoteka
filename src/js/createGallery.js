@@ -7,7 +7,7 @@ if (document.title === 'Filmoteka') consoleModifiedPopular();
 async function consoleModifiedPopular() {
   const data = await API.getModifiedMoviesList(1);
   const { page, results, total_results } = data;
-  console.log(data);
+  
 
   initPagination({
     page,
@@ -55,7 +55,7 @@ const filmsListEl = document.querySelector('.films__list');
 
 export function createGallery(filmsArry) {
   filmsListEl.innerHTML = '';
-  console.log(filmsArry);
+  
   const result = filmsArry.reduce(
     (acc, item) =>
       (acc += `
@@ -85,12 +85,12 @@ export function createGallery(filmsArry) {
 
 function createSvg(w, q) {
   if (w) {
-    console.log((w = true));
+    ;
     return `<svg class="films__svg" width="30" height="30">
                     <use href="/Filmoteka/login-icon.2e0a9156.svg#icon-watched"></use>
                   </svg>`;
   } else if (q) {
-    console.log(q);
+    
     return `<svg class="films__svg" width="30" height="30">
                     <use href="/Filmoteka/login-icon.2e0a9156.svg#icon-queue"></use>
                   </svg>`;
