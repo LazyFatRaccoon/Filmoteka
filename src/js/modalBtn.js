@@ -63,7 +63,7 @@ export async function addToWatchedList(e) {
     }
     // const liItem = e.path.filter(a => a.nodeName === 'LI')[0]
 
-    queryId = watchedList.id
+    const queryId = watchedList.id
     // const queryId = e.currentTarget.id
     console.log(queryId)
 

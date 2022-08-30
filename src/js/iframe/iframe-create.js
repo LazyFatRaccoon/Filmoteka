@@ -9,8 +9,7 @@ gallery.addEventListener('click', getTrailer);
 
 
 async function getTrailer(event) {
-    const liItem = event.path.filter(a => a.nodeName === 'LI')[0]
-    idFilm = liItem.dataset.id
+  const idFilm = event.target.parentNode.dataset.id
     try { 
         const data = await API.getModifiedSingleMovie(`${idFilm}`);
         const checkSite = data.trailers[0].site;

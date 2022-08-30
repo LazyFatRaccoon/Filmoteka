@@ -118,7 +118,7 @@ async function insertMarkup(idForSearch) {
   const markup = `
 <button class="modal__close-btn">
   <svg class="modal__close-btn-svg" width="30" height="30">
-    <use href="/symbol-defs.a8b2e413.svg#icon-close"></use>
+    <use href="/Filmoteka/symbol-defs.a103b832.svg#icon-close"></use>
   </svg>
 </button>
 <div class="modal__preview">
