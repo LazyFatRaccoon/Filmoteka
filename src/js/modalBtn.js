@@ -6,7 +6,6 @@ const removeFromWatchedList = (e) => {
     const newStorageList = storageList.filter((movie) => movie != parseInt(queryId));
     saveList('watchedList', newStorageList);
 }
-
 const addToWatchedListV = (e) => {
     const queryId = e.currentTarget.id
     const storageList = loadList('watchedList')
@@ -25,8 +24,6 @@ const addToWatchedListV = (e) => {
     storageList.push(parseInt(queryId))
     saveList('queueList', storageList)
 }
- //=================================================
-
 
 function saveList (key, value){
 try {
@@ -52,7 +49,6 @@ try {
 export async function addToWatchedList(e) {
     const watchedList = document.querySelector('.add-btn__watched')
     const queueList = document.querySelector('.add-btn__queue')
-    console.log("debug 12", watchedList)
     watchedList.classList.toggle('disabl')
     const dis = watchedList.classList.contains('disabl')
     if (dis) {
@@ -61,14 +57,10 @@ export async function addToWatchedList(e) {
     } else {
         removeFromWatchedList(e)
     }
-    // const liItem = e.path.filter(a => a.nodeName === 'LI')[0]
 
-    const queryId = watchedList.id
-    // const queryId = e.currentTarget.id
-    console.log(queryId)
+    const queryId = e.currentTarget.id
 
     const serchMove = await API.getModifiedSingleMovie(queryId)
-    console.log(serchMove)
 
     const storageList = loadList('moveList')
     const indexOfDublicateObj = storageList.findIndex(option => option.id === parseInt(queryId))
@@ -81,7 +73,6 @@ export async function addToWatchedList(e) {
 
         queueList.innerHTML = 'add to queue'
         watchedList.innerHTML = 'remove from watched'
-
     } else {
         watchedList.innerHTML = 'add to watched'
     }
@@ -96,12 +87,9 @@ export async function addToWatchedList(e) {
     }
 }
 
-
 export async function addToQueueList(e) {
-    
     const watchedList = document.querySelector('.add-btn__watched')
     const queueList = document.querySelector('.add-btn__queue')
-
 
     queueList.classList.toggle('disabl')
     const dis = queueList.classList.contains('disabl')
@@ -115,6 +103,9 @@ export async function addToQueueList(e) {
 
     const queryId = e.currentTarget.id
     const serchMove = await API.getModifiedSingleMovie(queryId)
+
+    console.log(serchMove)
+
     const storageList = loadList('moveList')
     const indexOfDublicateObj = storageList.findIndex(option => option.id === parseInt(queryId))
 
@@ -126,9 +117,7 @@ export async function addToQueueList(e) {
         watchedList.innerHTML = 'add to watched'
         queueList.innerHTML = 'remove from queue'
     } else {
-
         queueList.innerHTML = 'add to queue'
-
     }
 
     if (indexOfDublicateObj === -1) {

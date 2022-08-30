@@ -40,6 +40,7 @@
 
     &__preview {
         width: 240px;
+        min-height: 330px;
         margin-bottom: 20px;
         overflow: hidden;
         border: 1px solid transparent;
@@ -48,17 +49,18 @@
 
         @media screen and (min-width: $tablet) {
             min-width: 264px;
-            // height: 374px;
+            min-height: 374px;
             margin-right: 68px;
             margin-bottom: 0;
         }
 
         @media screen and (min-width: $desktop) {
             min-width: 375px;
-            // height: 478px;
+            min-height: 560px;
             margin-right: 16px;
         }
-        &-img{
+
+        &-img {
             height: 100%;
             object-fit: cover;
         }
@@ -221,14 +223,15 @@ button.disabl {
     overflow: hidden;
 }
 
-body.dark-theme .modal{
+body.dark-theme .modal {
     color: $white;
     background-color: #1b1b1d;
 }
 
 body.dark-theme .modal__close-btn {
     background-color: #1b1b1d;
+
     &-svg {
-            fill: $white;
-        }
+        fill: $white;
+    }
 }
