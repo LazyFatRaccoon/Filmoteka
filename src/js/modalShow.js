@@ -11,6 +11,8 @@ export const refs = {
   backdrop: document.querySelector('.backdrop'),
   body: document.querySelector('body'),
   modal: document.querySelector('.modal'),
+  modal: document.querySelector('.modal'),
+
 };
 
 document.addEventListener('click', modalEventListener);
@@ -58,9 +60,13 @@ function closeModal() {
 
   document.removeEventListener('keydown', onEscClose);
   refs.backdrop.removeEventListener('click', onBackdropCloseModal);
-
   refs.backdrop.classList.add('isHidden');
   refs.body.classList.remove('scroll');
+  const btnW = document.querySelector('.add-btn__watched');
+  const btnQ = document.querySelector('.add-btn__queue');
+
+  btnW.removeEventListener("click", addToWatchedList)
+  btnQ.removeEventListener("click", addToQueueList)
   clearMarkup();
 
 }
@@ -73,13 +79,14 @@ function onBackdropCloseModal(e) {
 
 function createPoster(posterLink) {
   const url = 'https://image.tmdb.org/t/p/w500';
-  const poster = `/filmoteka/camera.29a7bb66.jpg`;
-  const a = posterLink ? url + posterLink : poster;
-  return a;
+
+  const poster = `/Filmoteka/camera.29a7bb66.jpg`;
+  return posterLink ? url + posterLink : poster;
 }
 
 async function insertMarkup(serchId) {
-  const serchMove = await API.getMovieById(serchId);
+  const serchMove = await API.getModifiedSingleMovie(serchId);
+
   const {
     original_title,
     poster_path,
@@ -88,29 +95,29 @@ async function insertMarkup(serchId) {
     popularity,
     overview,
     id,
+    watched,
+    queue,
+    genres,
   } = serchMove;
 
-  const genre = serchMove.genres.reduce((acc, a) => [...acc, a.name], []);
 
   refs.backdrop.classList.remove('isHidden');
 
-  const status = await checkStatus(serchId);
+  const marckupWatchText = watched
 
-  const marckupWatchText = status.watched
     ? 'remove from watched'
     : 'add to watched';
-  const marckupqueueText = status.queue
+  const marckupqueueText = queue
     ? 'remove from queue'
     : 'add to queue';
 
   const markup = `
   <button class="modal__close-btn">
     <svg class="modal__close-btn-svg" width="30" height="30">
-      <use href="/Filmoteka/images/symbol-defs.a103b832.svg#icon-close"></use>
-    </svg>
-      <svg class="modal__close-btn-svg" width="30" height="30">
-      <use href="../images/symbol-defs.svg#icon-close"></use>
-    </svg>
+
+      <use href="/Filmoteka/symbol-defs.a103b832.svg#icon-close"></use>
+
+
   </button>
   <div class="modal__preview">
     <img src="${createPoster(poster_path)}" class="modal__preview-img"/>
@@ -136,16 +143,20 @@ async function insertMarkup(serchId) {
       </li>
       <li class="mvi">
         <p class="mvi__key">Genre</p>
-        <p class="mvi__val mvi__genre">${genre.join(', ')}</p>
+
+        <p class="mvi__val mvi__genre">${genres.join(', ')}</p>
+
       </li>
     </ul>
     <h3 class="discription__about">About</h3>
     <p class="discription__about-text">${overview}</p>
     <div class="button">
-      <button class="button__add add-btn__watched" id=${serchId}>
+
+      <button class="button__add add-btn__watched" id=${id}>
         ${marckupWatchText}
       </button>
-      <button class="button__add add-btn__queue" id=${serchId}>
+      <button class="button__add add-btn__queue" id=${id}>
+
         ${marckupqueueText}
       </button>
     </div>
@@ -155,38 +166,52 @@ async function insertMarkup(serchId) {
   const btnW = document.querySelector('.add-btn__watched');
   const btnQ = document.querySelector('.add-btn__queue');
 
-  const watchStatus = status.watched ? 'disabl' : 'y';
-  const queueStatus = status.queue ? 'disabl' : 'y';
+  const watchStatus = watched ? 'disabl' : 'y';
+  const queueStatus = queue ? 'disabl' : 'y';
 
   btnW.classList.add(watchStatus);
   btnQ.classList.add(queueStatus);
 
-  btnW.addEventListener("click", function(e) {
-      addToWatchedList(e)
-  })
 
-  btnQ.addEventListener("click", function(e) {
-      addToQueueList(e)
-  })
+  btnW.addEventListener("click", addToWatchedList)
+  btnQ.addEventListener("click", addToQueueList)
+
 }
 
 function clearMarkup() {
   refs.modal.innerHTML = '';
 }
 
-async function checkStatus(id) {
-  const move = await API.getModifiedSingleMovie(id)
-  const watchedList = loadList('watchedList');
-  const queueList = loadList('queueList');
 
-  const watchedStatus = watchedList.includes(Number(id))
-  const queueStatus = queueList.includes(Number(id))
 
-  const watched = watchedStatus ? move.watched : false;
-  const queue = queueStatus ? move.queue : false;
 
-  return { watched, queue }
-}
+
+
+
+
+
+
+
+
+
+
+
+// ===========================================================
+
+// async function checkStatus(id) {
+//   const move = await API.getModifiedSingleMovie(id)
+//   const watchedList = loadList('watchedList');
+//   const queueList = loadList('queueList');
+
+//   const watchedStatus = watchedList.includes(Number(id))
+//   const queueStatus = queueList.includes(Number(id))
+
+//   const watched = watchedStatus ? move.watched : false;
+//   const queue = queueStatus ? move.queue : false;
+
+//   return { watched, queue }
+// }
+
 
 // function checkStatus(id) {
 //   const storageList = loadList('moveList');
@@ -205,5 +230,4 @@ async function checkStatus(id) {
 //   const queue = chooseFilm < 0 ? false : storageList[chooseFilm].queue;
 //   return { watched, queue };
 // }
-
 
