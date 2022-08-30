@@ -29,7 +29,7 @@ async function getTrailer(event) {
             });
         }
         else {
-        Notify.failure('Sorry, but there is no trailer for this film');
+        Notify.failure('Sorry, but there is no trailer for this film', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
         }
     }
     catch(error) {

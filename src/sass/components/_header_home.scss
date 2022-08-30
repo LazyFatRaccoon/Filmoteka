@@ -46,7 +46,6 @@
 .header__navigation {
     display: flex;
     align-items: center;
-    justify-content: space-between;
 }
 
 .header__pages {
@@ -137,7 +136,9 @@
 }
 
 .header__logo {
+    display: flex;
     height: 24px;
+    align-items: center;
 
     @media screen and (min-width: $tablet){ 
         height: 35px;
@@ -281,4 +282,13 @@
     top: 230px;
     left: 150px;
     color: $white;
+}
+
+
+.container-navig {
+    margin-left: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

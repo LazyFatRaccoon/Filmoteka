@@ -1,7 +1,4 @@
 .toggle{
-    position: absolute;
-    top: 35px;
-    right: 190px;
     background-color: transparent;
     border-radius: 50%;
     cursor: pointer;
@@ -16,6 +13,10 @@
 .btn-toggle .toogle_sun {
     display: block;
     text-align: center;
+    @media screen and (min-width: $tablet){
+        width: 35px;
+        height: 35px;    
+    }
 }
 
 .btn-toggle .toogle_moon {
@@ -28,11 +29,13 @@
 
 .btn-toggle.btn-toggle--toggle .toogle_moon {
     display: block;
+    @media screen and (min-width: $tablet){
+        width: 35px;
+        height: 35px;    
+    }
 }
 
 .btn-toggle {
-    // width: 20px;
-    // height: 20px;
     border: 0;
     background: transparent;
     padding: 0;
