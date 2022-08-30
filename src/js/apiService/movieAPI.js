@@ -79,7 +79,7 @@ export default {
         ...movie,
         watched: watchedList ? watchedList.includes(movie.id) ? true : false : false,
         queue: queueList ? queueList.includes(movie.id) ? true : false : false,
-        trailers: await this.getMovieTrailers(movie.id),
+        //trailers: await this.getMovieTrailers(movie.id),
         genre_ids: movie.genre_ids.map(id => genresObj[id]),
       })));
       return {...movies, results: dataWithGenres};
