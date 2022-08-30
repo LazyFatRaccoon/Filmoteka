@@ -5,6 +5,9 @@ import './js/modalShow';
 import './js/modal-footer';
 import './js/firebase/firebaseAuth';
 import './js/firebase/dataBase';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './js/firebase/firebaseAuth';
+import { Notify } from 'notiflix';
 
 import API from './js/apiService/movieAPI';
 import { initPagination } from './js/pagination-try';
@@ -21,8 +24,18 @@ const pagination = document.querySelector('#pagination');
 const galleryLibrary = document.querySelector('.films__list');
 
 if (document.title === 'Filmoteka-library') {
-  console.log('I here');
-  // galleryRender(queueList);
+  // ----------------------------------------
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      (async () => {
+        const queueList = await getQueueListFire();
+        galleryRender(queueList);
+      })();
+    } else {
+      Notify.failure('Please sign in to watch your library');
+    }
+  });
+  // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 }
 
 queueBtn.addEventListener('click', async function () {

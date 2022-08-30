@@ -47,15 +47,14 @@ export async function addToWatchedListFire(filmId) {
   } catch (error) {
     console.log('error: ', error);
   }
-  // --- ЭТО ПРОВЕРКА ЧТОБ ВИДЕТЬ В КОНСОЛИ ЧТО ФАЙЛ УШЕЛ. УДАЛИТЬ ПОЗЖЕ -------
+  // --- ЭТО ПРОВЕРКА ЧТОБ ВИДЕТЬ В КОНСОЛИ ЧТО ФАЙЛ УШЕЛ. Возврвщвет массив нужно для изменения статуса кнопок -------
   try {
     const watchedListControl = await getDoc(
       doc(db, auth.currentUser.uid, WATCHED)
     );
-    console.log(
-      'ЗАПРОС УШЕЛ. arrayWatched: ',
-      watchedListControl.data().filmsId
-    );
+    const watchedArr = await watchedListControl.data().filmsId;
+    console.log('ЗАПРОС УШЕЛ. arrayWatched: ', watchedArr);
+    return watchedArr;
   } catch (error) {
     console.log('error: ', error.code, error.message);
   }
@@ -70,6 +69,10 @@ export async function getWatchedListFire() {
     // console.log('watchedArr: ', watchedArr);
     return watchedArr;
   } catch (error) {
+    if (error.code === undefined) {
+      filmsId = [];
+      return filmsId;
+    }
     console.log('error: ', error.code, error.message);
   }
 }
@@ -103,10 +106,12 @@ export async function addToQueueListFire(filmId) {
   } catch (error) {
     console.log('error: ', error);
   }
-  // --- ЭТО ПРОВЕРКА ЧТОБ ВИДЕТЬ В КОНСОЛИ ЧТО ФАЙЛ УШЕЛ. УДАЛИТЬ ПОЗЖЕ -------
+  // --- ЭТО ПРОВЕРКА ЧТОБ ВИДЕТЬ В КОНСОЛИ ЧТО ФАЙЛ УШЕЛ. Возврвщвет массив нужно для изменения статуса кнопок -------
   try {
     const queueListControl = await getDoc(doc(db, auth.currentUser.uid, QUEUE));
-    console.log('ЗАПРОС УШЕЛ. arrayQueue: ', queueListControl.data().filmsId);
+    const quequArr = await queueListControl.data().filmsId;
+    console.log('ЗАПРОС УШЕЛ. arrayQueue: ', quequArr);
+    return quequArr;
   } catch (error) {
     console.log('error: ', error.code, error.message);
   }
@@ -121,6 +126,10 @@ export async function getQueueListFire() {
     // console.log('queueArr: ', queueArr);
     return queueArr;
   } catch (error) {
+    if (error.code === undefined) {
+      filmsId = [];
+      return filmsId;
+    }
     console.log('error: ', error.code, error.message);
   }
 }
@@ -137,28 +146,28 @@ const addToQueueListBtn = document.querySelector('.add-btn__queue');
 
 // ---------- КНОПКИ ПРИ ПЕРВОМ КЛИКЕ ДОБАВЛЯЮТ ПРИ ВТОРОМ УДАЛЯЮТ ---------------
 
-addToWatchedListBtn.addEventListener('click', e => {
+addToWatchedListBtn.addEventListener('click', async e => {
   const moveId = Number(e.currentTarget.id);
-  addToWatchedListFire(moveId);
+  const watchedArr2 = await addToWatchedListFire(moveId);
+  if (watchedArr2.includes(moveId)) {
+    addToWatchedListBtn.textContent = 'remove from watched';
+    addToWatchedListBtn.classList.add('disabl');
+  } else {
+    addToWatchedListBtn.textContent = 'add to watched';
+    addToWatchedListBtn.classList.add('y');
+    addToWatchedListBtn.classList.remove('disabl');
+  }
 });
 
-addToQueueListBtn.addEventListener('click', e => {
+addToQueueListBtn.addEventListener('click', async e => {
   const moveId = Number(e.currentTarget.id);
-  addToQueueListFire(moveId);
+  const queueArr2 = await addToQueueListFire(moveId);
+  if (queueArr2.includes(moveId)) {
+    addToQueueListBtn.textContent = 'remove from queue';
+    addToQueueListBtn.classList.add('disabl');
+  } else {
+    addToQueueListBtn.textContent = 'add to queue';
+    addToQueueListBtn.classList.add('y');
+    addToQueueListBtn.classList.remove('disabl');
+  }
 });
-
-// -------------- ПОЛУЧЕНИЕ МАССИВОВ ------------------
-// ---- ДЛЯ ПРОВЕРКИ СОЗДАЙ КНОПКИ С КЛАССАМИ КАК ВНИЗУ-----
-
-// const showWatchedListFireBtn = document.querySelector('.obj-btn1');
-// const showQueueListFireBtn = document.querySelector('.obj-btn2');
-
-// showWatchedListFireBtn.addEventListener('click', async () => {
-//   const watchedArray = await getWatchedListFire();
-//   console.log('watchedArray: ', watchedArray);
-// });
-
-// showQueueListFireBtn.addEventListener('click', async () => {
-//   const queueArray = await getQueueListFire();
-//   console.log('queueArray: ', queueArray);
-// });
