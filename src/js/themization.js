@@ -6,6 +6,7 @@ const currentTheme = localStorage.getItem("theme");
 if (currentTheme == "dark") {
   // …тогда мы используем класс .dark-theme
   document.body.classList.add("dark-theme");
+  btn.classList.toggle("btn-toggle--toggle");
 }
 
 // Отслеживаем щелчок по кнопке

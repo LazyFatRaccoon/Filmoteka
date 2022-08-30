@@ -90,23 +90,31 @@ function createUser(event) {
   if (event.submitter.value === 'register') {
       createUserWithEmailAndPassword(auth, userEmail, userPassword)
       .then(userCredential => {
+        notiflixLoading();
         Notify.info('Registration is successfull.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
         authRefs.formRegister.classList.toggle('hide-form');
         authRefs.navigationPages.classList.remove('hidden_nav');
         authRefs.isHiddenForm.classList.add('is-hidden');
         authRefs.onAccount.classList.add('account-on');
         authRefs.userAccount.classList.remove('is-hidden-account');
+        notiflixLoadingRemove();
       })
       .catch(error => {
         const errorCode = error.code;
         if (errorCode) {
+          notiflixLoading();
           Notify.failure('Sign up failed. Please enter valid email.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
+          notiflixLoadingRemove();
           if (userEmail === "" || userPassword === "") {
+            notiflixLoading();
             Notify.failure('Sign up failed. Please enter your email and password.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
+            notiflixLoadingRemove();
             return;
           } 
           else if (errorCode === 'auth/email-already-in-use') {
+            notiflixLoading();
             Notify.failure('Sign up failed. Email already in use. Please sign in.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
+            notiflixLoadingRemove();
             return;
           }
         }
@@ -119,6 +127,7 @@ function createUser(event) {
     signInWithEmailAndPassword(auth, userEmail, userPassword)
       .then(userCredential => {
         // Signed in
+        notiflixLoading();
         const user = userCredential.user;
         authRefs.formRegister.classList.toggle('hide-form');
         authRefs.navigationPages.classList.remove('hidden_nav');
@@ -126,19 +135,26 @@ function createUser(event) {
         authRefs.onAccount.classList.add('account-on');
         authRefs.userAccount.classList.remove('is-hidden-account');
         Notify.info('Welcome to your account.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
+        notiflixLoadingRemove();
       })
       .catch(error => {
         const errorCode = error.code;
         if (userEmail === "" || userPassword === ""){
+          notiflixLoading();
           Notify.failure('Please enter your email and password', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
+          notiflixLoadingRemove();
           return;
         }
         else if (errorCode === 'auth/wrong-password') {
+          notiflixLoading();
           Notify.failure('Wrong password. Try again.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
+          notiflixLoadingRemove();
           return;
         }
         else if (errorCode === 'auth/user-not-found') {
+          notiflixLoading();
           Notify.failure('User not found. Check your email.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
+          notiflixLoadingRemove();
           return;  
         }
       });
@@ -158,6 +174,7 @@ function logOut() {
 
   signOut(auth)
     .then(() => {
+      notiflixLoading();
       Notify.info('You are sign out.', {timeout: 5000, position: "center-top", width: 200, showOnlyTheLastOne: true});
       authRefs.btnSignout.classList.add('hide-form');
       authRefs.iconForm.addEventListener('click', showForm);
@@ -167,6 +184,7 @@ function logOut() {
       authRefs.onAccount.classList.remove('account-on');
       authRefs.userAccount.classList.add('is-hidden-account')
       userName.remove();
+      notiflixLoadingRemove();
     })
     .catch(error => {
       console.log('error: ', error);
