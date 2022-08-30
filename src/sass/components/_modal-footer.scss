@@ -10,7 +10,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    gap: 20px;
 
 }
 
@@ -133,7 +132,7 @@
 
         .developer-foto {
             width: 202px;
-            height: 188px;
+            height: 120px;
         }
     
 
@@ -146,9 +145,15 @@
     .list-developer{
         justify-content: space-evenly;
         flex-direction: column;
+        height: 80vh;
+        gap: 0px;
+        font-size: 15px;
+            line-height: 9px;
+            margin: 0;
     }
 
     .modal-footer{
+        height: 90vh;
         width: 320px;
         padding-top: 20px;
         padding-bottom: 20px;
@@ -156,7 +161,9 @@
         justify-content: normal;
         align-items: normal;
         flex-direction: column
+        
     }
+
 }
 
 body.dark-theme .modal-footer{
