@@ -2,8 +2,10 @@ import { limit } from 'firebase/firestore';
 import API from './apiService/movieAPI';
 import { loadList } from './modalBtn';
 import { notiflixLoading, notiflixLoadingRemove } from './loading';
+
 import { addToWatchedList, addToQueueList } from './modalBtn';
 import { cardAddIcon } from './cardAddIcon';
+
 
 export const refs = {
   img: document.querySelector('.modal__preview-img'),
@@ -43,7 +45,9 @@ refs.backdrop.addEventListener('click', onBackdropCloseModal);
 let serchId = 0;
 
 function openCart(e) {
+
   const liItem = e.path.filter(a => a.nodeName === 'LI')[0];
+
 
   notiflixLoading();
   serchId = liItem.dataset.id;
@@ -66,9 +70,11 @@ function onEscClose(e) {
 
 function closeModal() {
     cardAddIcon();
+
   refs.backdrop.classList.add('isHidden');
   refs.body.classList.remove('scroll');
   clearMarkup();
+
 }
 
 function onBackdropCloseModal(e) {

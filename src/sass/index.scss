@@ -8,6 +8,10 @@
 
 @import './components/auth-form';
 @import './components/header_home.scss';
+@import './components/themeButton';
+
+@import './components/iframe';
+
 @import './components/modal';
 @import './components/filmsgallery';
 
@@ -19,3 +23,4 @@
 @import './components/gallery-library';
 @import './utils/hide-form-class';
 @import './components/toogle';
+@import './components/toggle-btn';

@@ -135,3 +135,14 @@
                                     margin-bottom: 10px;
                                 }
 }
+
+body.dark-theme .footer {
+    background-color: #0e0e0f;
+}
+
+body.dark-theme .footer_link{
+    color: $white;
+}
+body.dark-theme .footer_text{
+    color: $white;
+}

@@ -78,8 +78,10 @@ export async function addToWatchedList(e) {
 
     if (dis) {
         queueList.classList.remove('disabl')
+
         queueList.innerHTML = 'add to queue'
         watchedList.innerHTML = 'remove from watched'
+
     } else {
         watchedList.innerHTML = 'add to watched'
     }
@@ -94,10 +96,12 @@ export async function addToWatchedList(e) {
     }
 }
 
+
 export async function addToQueueList(e) {
     
     const watchedList = document.querySelector('.add-btn__watched')
     const queueList = document.querySelector('.add-btn__queue')
+
 
     queueList.classList.toggle('disabl')
     const dis = queueList.classList.contains('disabl')
@@ -122,7 +126,9 @@ export async function addToQueueList(e) {
         watchedList.innerHTML = 'add to watched'
         queueList.innerHTML = 'remove from queue'
     } else {
+
         queueList.innerHTML = 'add to queue'
+
     }
 
     if (indexOfDublicateObj === -1) {
