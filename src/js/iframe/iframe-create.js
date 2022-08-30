@@ -1,12 +1,9 @@
 import API from "../apiService/movieAPI";
 import { Notify } from "notiflix";
 
-
 const gallery = document.querySelector('.films__list');
 
-
 gallery.addEventListener('click', getTrailer);
-
 
 async function getTrailer(event) {
   const idFilm = event.target.parentNode.dataset.id
@@ -18,11 +15,11 @@ async function getTrailer(event) {
             const ref = `<a 
             class="iframe-lightbox-link"
             href="https://www.youtube.com/embed/${filmKey}?autoplay=0">
-            <svg width="50" height="50">
-                <use href="/Filmoteka/symbol-defs.a103b832.svg#icon-youtube"></use>
-            </svg>
+            // <svg width="50" height="50">
+            //     <use href="/Filmoteka/symbol-defs.a103b832.svg#icon-youtube"></use>
+            // </svg>
             </a>`;
-            const modalWindow = document.querySelector('.modal__preview');
+            const modalWindow = document.querySelector('.modal');
             modalWindow.insertAdjacentHTML('beforeend', ref);
             [].forEach.call(document.getElementsByClassName("iframe-lightbox-link"), function(el) {
               el.lightbox = new IframeLightbox(el);

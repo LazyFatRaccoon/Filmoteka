@@ -79,12 +79,14 @@ function onBackdropCloseModal(e) {
 
 function createPoster(posterLink) {
   const url = 'https://image.tmdb.org/t/p/w500';
+
   const poster = `/Filmoteka/camera.29a7bb66.jpg`;
   return posterLink ? url + posterLink : poster;
 }
 
 async function insertMarkup(serchId) {
   const serchMove = await API.getModifiedSingleMovie(serchId);
+
   const {
     original_title,
     poster_path,
@@ -98,9 +100,11 @@ async function insertMarkup(serchId) {
     genres,
   } = serchMove;
 
+
   refs.backdrop.classList.remove('isHidden');
 
   const marckupWatchText = watched
+
     ? 'remove from watched'
     : 'add to watched';
   const marckupqueueText = queue
@@ -110,7 +114,9 @@ async function insertMarkup(serchId) {
   const markup = `
   <button class="modal__close-btn">
     <svg class="modal__close-btn-svg" width="30" height="30">
+
       <use href="/Filmoteka/symbol-defs.a103b832.svg#icon-close"></use>
+
 
   </button>
   <div class="modal__preview">
@@ -137,16 +143,20 @@ async function insertMarkup(serchId) {
       </li>
       <li class="mvi">
         <p class="mvi__key">Genre</p>
+
         <p class="mvi__val mvi__genre">${genres.join(', ')}</p>
+
       </li>
     </ul>
     <h3 class="discription__about">About</h3>
     <p class="discription__about-text">${overview}</p>
     <div class="button">
+
       <button class="button__add add-btn__watched" id=${id}>
         ${marckupWatchText}
       </button>
       <button class="button__add add-btn__queue" id=${id}>
+
         ${marckupqueueText}
       </button>
     </div>
@@ -162,13 +172,16 @@ async function insertMarkup(serchId) {
   btnW.classList.add(watchStatus);
   btnQ.classList.add(queueStatus);
 
+
   btnW.addEventListener("click", addToWatchedList)
   btnQ.addEventListener("click", addToQueueList)
+
 }
 
 function clearMarkup() {
   refs.modal.innerHTML = '';
 }
+
 
 
 
@@ -199,6 +212,7 @@ function clearMarkup() {
 //   return { watched, queue }
 // }
 
+
 // function checkStatus(id) {
 //   const storageList = loadList('moveList');
 
@@ -216,3 +230,4 @@ function clearMarkup() {
 //   const queue = chooseFilm < 0 ? false : storageList[chooseFilm].queue;
 //   return { watched, queue };
 // }
+

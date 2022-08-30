@@ -13,9 +13,21 @@
 .btn-toggle .toogle_sun {
     display: block;
     text-align: center;
+    border-radius: 50%;
+    padding: 3px;
+    width: 24px;
+    height: 24px;
+    background-color: $white;
+    fill: $accent;
     @media screen and (min-width: $tablet){
         width: 35px;
         height: 35px;    
+    }
+
+    &:hover {
+        background-color: $accent;
+        fill: $white;
+            
     }
 }
 
@@ -24,20 +36,28 @@
 }
 
 .btn-toggle.btn-toggle--toggle .toogle_sun {
-    display: none;
+    display: none; 
 }
 
 .btn-toggle.btn-toggle--toggle .toogle_moon {
     display: block;
+    background-color: $accent;
+    border-radius: 50%;
+    padding: 0px;
     @media screen and (min-width: $tablet){
         width: 35px;
         height: 35px;    
+    }
+
+    &:hover {
+        background-color: $white;
+        fill: $accent;
     }
 }
 
 .btn-toggle {
     border: 0;
-    background: transparent;
+    background-color: transparent;
     padding: 0;
     cursor: pointer;
 }

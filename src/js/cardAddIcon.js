@@ -20,6 +20,8 @@ export function cardAddIcon() {
     const watchedIcon ="/Filmoteka/login-icon.2e0a9156.svg#icon-watched"
 
     console.log(watched, queue)
+
+    if (document.title === "Filmoteka") {
     if (watched) {
         svgIcon.style.opacity = "1"; 
         useIcon.setAttribute('href', `${watchedIcon}`);       
@@ -31,6 +33,10 @@ export function cardAddIcon() {
     }
     if ((!queue) && (!watched)) {
         svgIcon.style.opacity = "0"        
+    }}
+    if (document.title === "Filmoteka-library") {
+        if (document.querySelector('#queueBtn').classList.contains('selected') && !queue) card.remove();
+        if (document.querySelector('#watchedBtn').classList.contains('selected') && !watched) card.remove();
     }
 
 }
