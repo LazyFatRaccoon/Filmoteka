@@ -14,7 +14,7 @@ async function getTrailer(event) {
             const filmKey = data.trailers[0].key;
             const ref = `<a 
             class="iframe-lightbox-link"
-            href="https://www.youtube.com/embed/${filmKey}?autoplay=0">
+            href="https://www.youtube.com/embed/${filmKey}?autoplay=true&mute=1">
             // <svg width="50" height="50">
             //     <use href="/Filmoteka/symbol-defs.a103b832.svg#icon-youtube"></use>
             // </svg>
