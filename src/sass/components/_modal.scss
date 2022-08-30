@@ -9,10 +9,15 @@
 
 .modal {
     position: relative;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+    
+
     justify-content: flex-start;
     z-index: 100;
     width: 280px;
-    height: auto;
+    height: 100%;
     padding: 48px 20px 40px 20px;
     background-color: $white;
     border: 1px solid transparent;
@@ -23,10 +28,15 @@
     transform: translate(0, -50%);
 
     @media screen and (min-width: $tablet) {
+
+        overflow-x: hidden;
+        overflow-y: hidden;
+
         display: flex;
         // justify-content: space-between;
         padding: 40px 72px 40px 36px;
         width: 704px;
+        height: auto;
         // height: 552px;
     }
 
@@ -42,6 +52,7 @@
         width: 240px;
         min-height: 330px;
         margin-bottom: 20px;
+        //overflow-y: scroll;
         overflow: hidden;
         border: 1px solid transparent;
         border-radius: 5px;
