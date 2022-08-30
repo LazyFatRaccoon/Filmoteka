@@ -279,9 +279,20 @@
 
 .iframe-lightbox-link {
     position: absolute;
-    top: 230px;
-    left: 150px;
-    color: $white;
+    top: 150px;
+    left: 100px;
+    fill: $white;
+
+    &:hover {
+        fill: $warning;
+    }
+    @media screen and (min-width: $tablet){ 
+        left: 110px;
+    }
+    @media screen and (min-width: $desktop){ 
+        top: 210px;
+        left: 170px;
+    }
 }
 
 
