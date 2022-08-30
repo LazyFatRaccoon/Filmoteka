@@ -279,18 +279,21 @@
 
 .iframe-lightbox-link {
     position: absolute;
-    top: 150px;
-    left: 100px;
     fill: $white;
+    top: 190px;
+    left: 107px;
 
     &:hover {
         fill: $warning;
     }
+
     @media screen and (min-width: $tablet){ 
-        left: 110px;
+        top: 200px;
+        left: 137px;
     }
+
     @media screen and (min-width: $desktop){ 
-        top: 210px;
+        top: 290px;
         left: 170px;
     }
 }
