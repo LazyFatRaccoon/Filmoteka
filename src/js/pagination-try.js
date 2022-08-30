@@ -76,7 +76,7 @@ export const initPagination = async ({ page, itemsPerPage, totalItems, data, que
                     notiflixLoading();
                     const newList =  options.list.slice(0, options.itemsPerPage)
                     const response = await Promise.all(newList.map(async (movie) => (API.getModifiedSingleMovie(movie)))) 
-                    console.log(response)
+                    
                     createGallery(response);
                     options.firstTime = false;
                     notiflixLoadingRemove();
@@ -112,12 +112,10 @@ export const initPagination = async ({ page, itemsPerPage, totalItems, data, que
             try {
                 notiflixLoading();
                 const newList =  options.list.slice((page-1)*options.itemsPerPage, page*options.itemsPerPage)
-                console.log(newList)
-                console.log(options.itemsPerPage)
+
                 const response = await Promise.all(newList.map(async (movie) => (API.getModifiedSingleMovie(movie))))
 
-                console.log(options.list)
-                console.log(page)
+
                 
                 createGallery(response);
                 notiflixLoadingRemove();
