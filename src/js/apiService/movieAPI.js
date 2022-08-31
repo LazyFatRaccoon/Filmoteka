@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {loadListWatch, loadListQueue} from '../modalBtn'
 
 
 const API_KEY = '824846cd36adb0fb9eb759610f56d292';
@@ -115,6 +116,33 @@ export default {
         //trailers: trailers,
         genres: movie.genres.map(id => genresObj[id.id]),
       };
+      return modifiedData;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  async getModifiedSingleMovieFoDataBase(id) {
+    try {
+      const movie = await this.getMovieById(id)
+      const trailers = await this.getMovieTrailers(id)
+      const genres = await this.getGenres();
+
+      const watchedList = await loadListWatch() || [];
+      const queueList = await loadListQueue() || [];
+      const genresObj = genres.genres.reduce(
+        (acc, elem) => ((acc[elem.id] = elem.name), acc),
+        {}
+      );
+
+      const modifiedData = {
+        ...movie,
+        watched: watchedList ? watchedList.includes(movie.id.toString()) ? true : false : false,
+        queue: queueList ? queueList.includes(movie.id.toString()) ? true : false : false,
+        trailers: trailers,
+        genres: movie.genres.map(id => genresObj[id.id]),
+      };
+
+      console.log("kkkkkkk", modifiedData.watched, modifiedData.queue)
       return modifiedData;
     } catch (error) {
       console.error(error);

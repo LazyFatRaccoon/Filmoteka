@@ -4,7 +4,7 @@
   "description": "",
   "homepage": "https://LazyFatRaccoon.github.io/Filmoteka",
   "scripts": {
-    "start": "parcel src/*.html --port 3367",
+    "start": "parcel src/*.html --port 3368",
     "build": "parcel build src/*.html --public-url /Filmoteka/"
   },
   "repository": {
