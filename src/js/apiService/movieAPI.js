@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+
 const API_KEY = '824846cd36adb0fb9eb759610f56d292';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
@@ -66,11 +67,13 @@ export default {
       if (!query) movies = await this.getPopularMovies(page);
       if (query) movies = await this.getSearchMovies(page, query);
       
-      const genres = await this.getGenres();  
+    
+      const genres = (window.sessionStorage && window.sessionStorage.getItem('genres')) ? JSON.parse(window.sessionStorage.getItem('genres')) : await this.getGenres();
+      if (!window.sessionStorage.getItem('genres')) sessionStorage.setItem('genres', JSON.stringify(genres));
       const genresObj = genres.genres.reduce(
-        (acc, elem) => ((acc[elem.id] = elem.name), acc),
-        {}
-      );
+         (acc, elem) => ((acc[elem.id] = elem.name), acc),
+         {}
+       );
 
       const watchedList = JSON.parse(localStorage.getItem('watchedList')) || [];
       const queueList = JSON.parse(localStorage.getItem('queueList')) || [];
@@ -91,7 +94,7 @@ export default {
     try {
       const movie = await this.getMovieById(id)
       //const trailers = await this.getMovieTrailers(id)
-      const genres = await this.getGenres();  
+      const genres = JSON.parse(window.sessionStorage.getItem('genres'))
 
       const watchedList = JSON.parse(localStorage.getItem('watchedList')) || [];
       const queueList = JSON.parse(localStorage.getItem('queueList')) || [];
