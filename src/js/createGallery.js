@@ -60,7 +60,7 @@ export function createGallery(filmsArry) {
     (acc, item) =>
       (acc += `
             <li class="films__item" data-id="${item.id}">
-              <img class="films__img" src="${createPosterFilm(
+              <img class="films__img" loading="lazy" src="${createPosterFilm(
                 item.poster_path
               )}" alt="${item.overview}" />
                 <div class="films__decor">

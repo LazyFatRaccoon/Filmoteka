@@ -120,7 +120,7 @@ async function insertMarkup(serchId) {
 
   </button>
   <div class="modal__preview">
-    <img src="${createPoster(poster_path)}" class="modal__preview-img"/>
+    <img src="${createPoster(poster_path)}" loading="lazy" class="modal__preview-img"/>
   </div>
   <div class="modal__discription">
     <h2 class="discription__title">${original_title}</h2>
