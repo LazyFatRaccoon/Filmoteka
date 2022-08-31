@@ -68,7 +68,7 @@ export function createGallery(filmsArry) {
                   <div class="films__description"> 
                    <p class="films__description-text">${createGenresFilmArray(
                      item.genre_ids ?? item.genres
-                   )} | ${createYearFilm(item.release_date.slice(0, 4))}</p>
+                   )} | ${createYearFilm(String(item.release_date).slice(0, 4))}</p>
                    <p class="films__description-rating">${createRating(
                      item.vote_average
                    )}</p>
