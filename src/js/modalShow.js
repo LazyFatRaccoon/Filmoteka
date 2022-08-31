@@ -85,7 +85,8 @@ function createPoster(posterLink) {
 }
 
 async function insertMarkup(serchId) {
-  const serchMove = await API.getModifiedSingleMovie(serchId);
+  const serchMove = await API.getModifiedSingleMovieFoDataBase(serchId);
+  // const serchMove = await API.getModifiedSingleMovie(serchId);
 
   const {
     original_title,
